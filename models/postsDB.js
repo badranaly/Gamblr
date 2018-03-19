@@ -10,12 +10,27 @@ module.exports = {
                   INNER JOIN users ON users.id = followers.following_id
                   WHERE followers.follower_id = 1`);
   },
-  addLike() {
-    return db.one('INSERT ')
+  addLike(post) {
+    return db.one(`INSERT INTO likes (post_id, user_id)
+                  VALUES ($[post_id], '1') RETURNING *`, post)
   },
-  removeLike() {
+  removeLike(post) {
+    return db.none(`DELETE FROM likes WHERE post_id=$[post_id] and user_id = 1`, post)
+  }
 
-  },
+createPost(post) {
+  return db.one(`INSERT INTO posts (type, content, user_id, likes)
+                VALUES ($[type], $[content], '1', $[likes])
+                RETURNING *`, post)
+}
 
+
+
+//  addNote(post) {
+//    return db.one('')
+//  },
+//  removeNote(post) {
+//
+//  }
 
 }

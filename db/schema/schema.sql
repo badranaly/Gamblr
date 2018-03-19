@@ -23,7 +23,7 @@ CREATE TABLE posts (
   type VARCHAR(255),
   content TEXT,
   user_id INT,
-  likes INT
+  notes INT
 );
 
 CREATE TABLE comments (

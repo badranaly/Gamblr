@@ -6,7 +6,7 @@ INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc) VALUES
   ('User_3', '563', 'fdd', 'lko', 'a', 'b');
 
 
-INSERT INTO posts (type, content, user_id, likes) VALUES
+INSERT INTO posts (type, content, user_id, notes) VALUES
   ('text', 'This is a post', '1', '3'),
   ('audio', 'This is not an audio clip', '2', '2'),
   ('text', 'MY POST', '3', '0');
