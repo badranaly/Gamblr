@@ -20,7 +20,8 @@ CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   type VARCHAR(255),
   content TEXT,
-  user_id INT
+  user_id INT,
+  likes INT
 );
 
 CREATE TABLE comments (
