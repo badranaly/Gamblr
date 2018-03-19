@@ -42,5 +42,5 @@ App will require the following pages:
 6. Styling
 7. Deployment
 
-#Links and Resources
+## Links and Resources
 1. Tumblr App
