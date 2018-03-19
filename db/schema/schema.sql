@@ -13,7 +13,9 @@ CREATE TABLE users (
   user_name VARCHAR(255) UNIQUE,
   password VARCHAR(255),
   pic TEXT,
-  bg TEXT
+  bg TEXT,
+  blog_name TEXT,
+  blog_desc TEXT
 );
 
 CREATE TABLE posts (
