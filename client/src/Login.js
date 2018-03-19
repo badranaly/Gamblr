@@ -1,3 +1,5 @@
+//LetsGetit
+
 import React, {Component} from 'react'
 
 class Login extends Component {
@@ -9,7 +11,7 @@ class Login extends Component {
           <input name='password' type='password' />
           <input type='submit' />
         </form>
-        <a href='/signup'>Sign up here</a>        
+        <a href='/signup'>Sign up here</a>
       </div>
     )
   }

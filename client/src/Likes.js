@@ -2,15 +2,14 @@
 
 import React, {Component} from 'react'
 
-class Header extends Component {
+class Likes extends Component {
   render(){
     return (
       <div>
-        <h1>this is the header</h1>
+        <Postlist />
       </div>
     )
   }
 }
 
-
-export default Header
+export default Likes
