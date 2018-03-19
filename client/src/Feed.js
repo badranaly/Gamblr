@@ -1,3 +1,4 @@
+//Lillian
 import React, {Component} from 'react'
 
 class Feed extends Component {
@@ -14,3 +15,5 @@ class Feed extends Component {
 		)
 	}
 }
+
+export default Feed
