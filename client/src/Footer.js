@@ -4,7 +4,7 @@ class Footer extends Component {
   render(){
     return (
       <div>
-        Made with <3 by TTG
+        Made with LOVE by TTG
       </div>
     )
   }

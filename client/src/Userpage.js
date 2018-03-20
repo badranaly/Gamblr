@@ -1,6 +1,7 @@
 //LetsGetit
 
 import React, {Component} from 'react'
+import PostList from './PostList'
 
 class Userpage extends Component {
   render(){
@@ -8,7 +9,7 @@ class Userpage extends Component {
       <div>
         <img />
         <img />
-        <Postlists />
+        <PostList />
       </div>
     )
   }

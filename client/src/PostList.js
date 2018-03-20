@@ -15,9 +15,10 @@ class PostList extends Component {
 
 	componentDidMount() {
 		services.getAllPosts().then(post => {
+			console.log(post)
 			this.setState({
 				apiDataLoaded: true,
-				apiData: 
+				apiData: post.data.data.posts
 			})
 		}).catch(err => {
 			console.log(err)
