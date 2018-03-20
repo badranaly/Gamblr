@@ -1,4 +1,3 @@
-//Lillian
 import React, {Component} from 'react'
 import services from './services/apiServices'
 
@@ -7,12 +6,8 @@ class Following extends Component {
     super(props)
     this.state = {
       apiDataLoaded: false,
-      apiData: null,
-      fireRedirect: false,
-      user_name: ''
+      apiData: null
     }
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -32,35 +27,19 @@ class Following extends Component {
 		return this.state.apiData.map((el,i) => {
 			return (
         <div>
-        <p><img src={el.pic} alt="Pic"/> {el.user_name}<button>-</button></p>
+        <p>{el.pic} {el.user_name}</p>
       </div>
       )
 		})
 	}
 
-  handleInputChange(e) {
-    let name = e.target.name;
-    let value = e.target.value;
-    console.log(value)
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleFormSubmit(e) {
-    e.preventDefault();
-    console.log('HANDLED')
-  }
 
   render(){
     return (
       <div>
         <h1>Following the following Users:</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
-          <input type='submit' value="Enter User Name"/>
-        </form>
-      {/*  {this.state.fireRedirect ? <Redirect to='/icecream' /> : ''} */}
+        <input type="text" value="Enter User Name"></input>
+        <button>Add New Follower</button>
         {this.state.apiDataLoaded ? this.renderPosts() : ''}
 
       </div>

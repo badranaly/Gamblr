@@ -8,16 +8,18 @@ class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
-      user_name: username,
-      password: password,
+      user_name: '',
+      password: '',
       fireRedirect: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){}
+
   handleSubmit(e){
       e.preventDefault()
-      services.authenticateUser(this.state.user_name, this.state.password)({
+      services.authenticateUser(this.state.user_name, this.state.password)(
         console.log('initiating login procedure..')
         .then(data => {
           if(data.username == this.state.user_name){
@@ -27,7 +29,7 @@ class Login extends Component {
           }
         })
         .catch()
-      })
+      )
   }
   render(){
     return (
