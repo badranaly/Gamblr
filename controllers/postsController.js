@@ -77,6 +77,23 @@ postsController.removeLike = (req, res) => {
         data: { post },
       })
     })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    });
+},
+
+postsController.myPosts = (req, res) => {
+  Posts.myPosts(req.body)
+    .then(posts => {
+      res.json({
+        message: 'ok',
+        data: { posts }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    });
+
 }
 
 

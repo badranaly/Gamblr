@@ -79,6 +79,19 @@ usersController.unfollowUser = (req, res) => {
     .catch(err => {
       res.status(400).json({message: '400', err})
     })
+},
+
+usersController.listFollowers = (req, res) => {
+  Users.listFollowers()
+    .then(users => {
+      res.json({
+        message: 'ok',
+        data: { users }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
 }
 
 ;

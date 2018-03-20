@@ -10,7 +10,7 @@ module.exports = {
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name] AND password = $[password]`, user)
   },
 
-  listFollowing() {
+  listFollowing(user) {
     return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = 1')
   },
 
@@ -28,6 +28,10 @@ module.exports = {
 
   deleteUser(user) {
     return db.none('DELETE FROM users WHERE user_name=$[user_name]', user)
+  },
+
+  listFollowers(user) {
+    return db.any('SELECT user_name, blog_name FROM followers INNER JOIN users on following_id = users.id WHERE following_id = 1')
   }
 
 }
