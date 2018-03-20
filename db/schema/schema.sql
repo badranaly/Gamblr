@@ -18,6 +18,8 @@ CREATE TABLE users (
   blog_desc TEXT
 );
 
+CREATE INDEX ON users (user_name);
+
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   type VARCHAR(255),
