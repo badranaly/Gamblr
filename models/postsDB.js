@@ -33,6 +33,10 @@ module.exports = {
 
   userPage(user) {
     return db.any('SELECT users.user_name, users.pic, users.bg, users.blog_name, users.blog_desc, type, content, notes FROM users INNER JOIN posts on posts.user_id = users.id WHERE users.id = 1', user)
+  },
+
+  myPosts(user) {
+    return db.any('SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.user_id = 1')
   }
 
 
