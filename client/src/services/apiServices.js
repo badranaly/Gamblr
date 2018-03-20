@@ -10,7 +10,7 @@ services.getUser = (username) => {
 services.createUser = (things) => {
 	return axios({
 		method: 'POST',
-		url: 'api/users',
+		url: '/api/users',
 		data: {
 			user_name: things.user_name,
 			password: things.password,
@@ -25,7 +25,7 @@ services.createUser = (things) => {
 services.updateUserInfo = (things,username) => {
 	return axios({
 		method: 'PUT',
-		url: `api/users/${username}`,
+		url: `/api/users/${username}`,
 		data: {
 			password: things.password
 		}
@@ -33,13 +33,13 @@ services.updateUserInfo = (things,username) => {
 }
 
 services.deleteUser = (username) => {
-	return axios.delete(`api/users/${username}`)
+	return axios.delete(`/api/users/${username}`)
 }
 
 services.authenticateUser = (username, password) => {
     return axios.get(`api/users/${username}`)({
         method: 'GET',
-        url: `api/users/${username}`,
+        url: `/api/users/${username}`,
         data: {
             user_name: username,
             password: password
@@ -50,7 +50,7 @@ services.authenticateUser = (username, password) => {
 //post manipulation
 
 services.getAllPosts = () => {
-	return axios.get('api/posts/feed')
+	return axios.get('/api/posts/feed')
 }
 services.createOnePost = (thing) => {
 	return axios({
@@ -64,7 +64,7 @@ services.createOnePost = (thing) => {
 }
 
 services.getFollowing = () => {
-	return axios.get(`api/users/following`)
+	return axios.get(`/api/users/following`)
 }
 
 export default services
