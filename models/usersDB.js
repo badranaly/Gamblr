@@ -10,12 +10,12 @@ module.exports = {
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name] AND password = $[password]`, user)
   },
 
-  listFollowing(user) {
-    return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = $[follower_id]', user)
+  listFollowing() {
+    return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = 1')
   },
 
   followUser(user) {
-    return db.one('INSERT INTO followers (follower_id, following_id) VALUES(`1`, $[following_id]) RETURNING *', user)
+    return db.one('INSERT INTO followers (follower_id, following_id) VALUES($[follower_id ], $[following_id]) RETURNING *', user)
   },
 
   unfollowUser(user) {

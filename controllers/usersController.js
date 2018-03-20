@@ -40,6 +40,45 @@ usersController.create = (req, res) => {
     .catch(err => {
       res.status(400).json({message: '400', err});
     })
+},
+
+usersController.listFollowing = (req, res) => {
+  Users.listFollowing()
+    .then(users => {
+      res.json({
+        message: 'ok',
+        data: { users }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+},
+
+usersController.followUser = (req, res) => {
+  Users.followUser(req.body)
+    .then(user => {
+      res.json({
+        message: 'ok',
+        data: { user }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+},
+
+usersController.unfollowUser = (req, res) => {
+  Users.unfollowUser(req.body)
+    .then(user => {
+      res.json({
+        message: 'ok',
+        data: { user }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
 }
 
 ;
