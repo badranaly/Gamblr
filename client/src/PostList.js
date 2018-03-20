@@ -1,6 +1,8 @@
 //Lillian
 
 import React, {Component} from 'react'
+import services from './services/apiServices'
+import Post from './Post'
 
 class PostList extends Component {
 	constructor(props) {
@@ -9,6 +11,17 @@ class PostList extends Component {
 			apiDataLoaded: false,
 			apiData: null
 		}
+	}
+
+	componentDidMount() {
+		services.getAllPosts().then(post => {
+			this.setState({
+				apiDataLoaded: true,
+				apiData: 
+			})
+		}).catch(err => {
+			console.log(err)
+		})
 	}
 
 	renderPosts() {

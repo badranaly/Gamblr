@@ -2,15 +2,16 @@
 
 import React, {Component} from 'react'
 
-class Header extends Component {
+class Userpage extends Component {
   render(){
     return (
       <div>
-        <h1>this is the header</h1>
+        <img />
+        <img />
+        <Myposts />
       </div>
     )
   }
 }
 
-
-export default Header
+export default Userpage
