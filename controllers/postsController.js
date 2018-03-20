@@ -74,7 +74,7 @@ postsController.removeLike = (req, res) => {
     .then(post => {
       res.json({
         message: 'ok',
-        data: { post }, 
+        data: { post },
       })
     })
 }
