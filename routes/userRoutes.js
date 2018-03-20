@@ -9,7 +9,7 @@ userRoutes.delete('/follower', usersController.unfollowUser)
 userRoutes.post('/follower', usersController.followUser)
 userRoutes.get('/following', usersController.listFollowing)
 userRoutes.post('/', usersController.create);
-userRoutes.put('/:id', usersController.editUser);
-userRoutes.delete('/:id', usersController.deleteUser);
+userRoutes.put('/:un', usersController.editUser);
+userRoutes.delete('/:un', usersController.deleteUser);
 
 module.exports = userRoutes;
