@@ -10,10 +10,16 @@ class Signup extends Component {
     this.state = {
       user_name: '',
       password: '',
+      pic: '' ,
+      bg: '',
+      blog_name: '',
+      blog_desc: '',
       fireRedirect: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleOnChange = this.handleOnChange.bind(this)
   }
+
 
 handleSubmit(e){
   e.preventDefault()
@@ -29,12 +35,20 @@ handleSubmit(e){
 
 }
 
+handleOnChange(e){
+  let name = e.target.name
+  let value = e.target.value
+  this.setState({
+    [name]: value
+  })
+}
+
   render(){
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' placeholder='Username' name='password' />
-          <input type='password' name='password' placeholder='******' />
+          <input type='text' placeholder='Username' name='password' onChange={this.handleOnChange}/>
+          <input type='password' name='password' placeholder='******' onChange={this.handleOnChange}/>
           <input type='submit' />
           <p>Already a user? Sign in </p><a href='/login'>here</a>
         </form>
