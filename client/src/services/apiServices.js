@@ -2,18 +2,15 @@
 import axios from 'axios'
 const services = {}
 
-services.getAllPosts = () => {
-	return axios.get()
-}
-
+//user manipulation
 services.getUser = (username) => {
 	return axios.get()
 }
 
-services.updateUserInfo = (things,username) => {
+services.createUser = (things) => {
 	return axios({
-		method: 'PUT',
-		url: `api/ /${username}`,
+		method: 'POST',
+		url: 'api/users',
 		data: {
 			user_name: things.user_name,
 			password: things.password
@@ -21,6 +18,25 @@ services.updateUserInfo = (things,username) => {
 	})
 }
 
+services.updateUserInfo = (things,username) => {
+	return axios({
+		method: 'PUT',
+		url: `api/users/${username}`,
+		data: {
+			password: things.password
+		}
+	})
+}
+
+services.deleteUser = (username) => {
+	return axios.delete(`api/users/${username}`)
+}
+
+//post manipulation
+
+services.getAllPosts = () => {
+	return axios.get('/api/posts/feed')
+}
 services.createOnePost = (thing) => {
 	return axios({
 		method: 'POST',

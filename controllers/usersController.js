@@ -3,7 +3,7 @@ const Users = require('../models/usersDB');
 const usersController = {};
 
 usersController.editUser = (req, res) => {
-  Users.updateUser(req.body)
+  Users.updateUser(req.params.un)
     .then(user => {
       res.json({
         message: 'ok',
@@ -17,7 +17,7 @@ usersController.editUser = (req, res) => {
 },
 
 usersController.deleteUser = (req, res) => {
-  Users.deleteUser(req.body)
+  Users.deleteUser(req.params.un)
     .then(user => {
       res.json({
         message: 'ok',

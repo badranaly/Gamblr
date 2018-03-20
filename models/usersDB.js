@@ -23,11 +23,11 @@ module.exports = {
   },
 
   updateUser(user) {
-    return db.one('UPDATE users SET user_name = $[user_name], password = $[password] WHERE id=$[id] RETURNING *', user)
+    return db.one('UPDATE users SET password = $[password] WHERE user_name=$[user_name] RETURNING *', user)
   },
 
   deleteUser(user) {
-    return db.none('DELETE FROM users WHERE id=$[id]', id)
+    return db.none('DELETE FROM users WHERE user_name=$[user_name]', user)
   }
 
 }
