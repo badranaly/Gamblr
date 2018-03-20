@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import {Redirect} from 'react-router-dom'
 
 class Signup extends Component {
   constructor(props){
@@ -33,9 +34,11 @@ handleSubmit(e){
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type='text' placeholder='Username' name='password' />
-          <input type='password' name='password' value='password' />
+          <input type='password' name='password' placeholder='******' />
+          <input type='submit' />
           <p>Already a user? Sign in </p><a href='/login'>here</a>
         </form>
+        {this.state.fireRedirect ? <Redirect to={'/login'} /> : ''}
       </div>
     )
   }
