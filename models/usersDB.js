@@ -21,6 +21,14 @@ module.exports = {
 
   unfollowUser(user) {
     return db.none('DELETE FROM followers WHERE follower_id=$[follower_id] and following_id=$[following_id]', user)
+  },
+
+  updateUser(user) {
+    return db.one('UPDATE users SET user_name = $[user_name], password = $[password] WHERE id=$[id] RETURNING *', user)
+  },
+
+  deleteUser(user) {
+    return db.none('DELETE FROM users WHERE id=$[id]', id)
   }
 
 }
