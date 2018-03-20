@@ -1,20 +1,31 @@
+//Lillian
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 import './App.css';
+
+import Login from './Login'
+import SignUp from './Signup'
+import Feed from './Feed'
+import Likes from './Likes'
+import Userpage from './Userpage'
+import Following from './Following'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Router>
+        <div className="App">
+          <Route exact path='/' component={Login} />
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={SignUp} />
+          <Route path='/feed' component={Feed} />
+          {/*<Route path='/post/:id' component={} />*/}
+          <Route path='/user/:username' component={Userpage} />
+          <Route path='/favs' component={Likes} />
+          <Route path='/following' component={Following} />
+        </div>
+      </Router>
+    )
   }
 }
 
