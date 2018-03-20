@@ -1,9 +1,9 @@
 \c gamblr
 
 INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc) VALUES
-  ('User_1', '123', 'abc', 'bca', 'a', 'b'),
-  ('User_2', '124', 'efg', 'jhf', 'a', 'b'),
-  ('User_3', '563', 'fdd', 'lko', 'a', 'b');
+  ('User_1', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'bca', 'a', 'b'),
+  ('User_2', '124', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'jhf', 'a', 'b'),
+  ('User_3', '563', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lko', 'a', 'b');
 
 
 INSERT INTO posts (type, content, user_id, notes) VALUES
