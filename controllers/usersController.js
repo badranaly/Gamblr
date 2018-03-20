@@ -27,6 +27,19 @@ usersController.deleteUser = (req, res) => {
     .catch(err => {
       res.status(400).json({message: '400', err});
     })
+},
+
+usersController.create = (req, res) => {
+  Users.createUser(req.body)
+    .then(user => {
+      res.json({
+        message: 'ok',
+        data: { user },
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err});
+    })
 }
 
 ;

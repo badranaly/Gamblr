@@ -30,7 +30,7 @@ postsController.likes = (req, res) => {
 },
 
 postsController.create = (req, res) => {
-  Posts.createPost(req.body.post)
+  Posts.createPost(req.body)
     .then(post => {
       res.json({
         message: 'ok',
@@ -44,17 +44,40 @@ postsController.create = (req, res) => {
 
 postsController.userPage = (req, res) => {
   Posts.userPage(req.body)
-    .then(user => {
+    .then(info => {
       res.json({
         message: 'ok',
-        data: { user },
+        data: { info },
       });
     })
     .catch(err => {
       console.log(err);
       res.status(400).json({message: '400', err});
     });
+},
+
+postsController.addLike = (req, res) => {
+  Posts.addLike(req.body)
+    .then(post => {
+      res.json({
+        message: 'ok',
+        data: { post }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    });
+},
+
+postsController.removeLike = (req, res) => {
+  Posts.removeLike(req.body)
+    .then(post => {
+      res.json({
+        message: 'ok',
+        data: { post }, 
+      })
+    })
 }
-;
+
 
 module.exports = postsController;

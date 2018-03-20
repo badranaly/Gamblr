@@ -18,16 +18,16 @@ module.exports = {
 
   addLike(post) {
     return db.one(`INSERT INTO likes (post_id, user_id)
-                  VALUES ($[post_id], '1') RETURNING *`, post)
+                  VALUES ($[post_id], $[user_id]) RETURNING *`, post)
   },
 
   removeLike(post) {
-    return db.none(`DELETE FROM likes WHERE post_id=$[post_id] and user_id = 1`, post)
+    return db.none(`DELETE FROM likes WHERE post_id=$[post_id] and user_id =$[user_id]`, post)
   },
 
   createPost(post) {
-  return db.one(`INSERT INTO posts (type, content, user_id, likes)
-                VALUES ($[type], $[content], '1', $[likes])
+  return db.one(`INSERT INTO posts (type, content, user_id, notes)
+                VALUES ($[type], $[content], $[user_id], $[notes])
                 RETURNING *`, post)
   },
 

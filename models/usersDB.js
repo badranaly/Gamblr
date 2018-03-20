@@ -2,7 +2,6 @@ const db = require('../db/config');
 
 module.exports = {
 
-  //return every card in the database
   createUser(user) {
     return db.one(`INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc)
                     VALUES ($[user_name], $[password], $[pic], $[bg], $[blog_name], $[blog_desc]) RETURNING *`, user);
@@ -11,8 +10,8 @@ module.exports = {
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name] AND password = $[password]`, user)
   },
 
-  listFollowing() {
-    return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = 1')
+  listFollowing(user) {
+    return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = $[follower_id]', user)
   },
 
   followUser(user) {
