@@ -8,7 +8,7 @@ import SignUp from './Signup'
 import Feed from './Feed'
 import Likes from './Likes'
 import Userpage from './Userpage'
-//import Following from './Following'
+import Following from './Following'
 
 class App extends Component {
   render() {
@@ -20,9 +20,9 @@ class App extends Component {
           <Route path='/signup' component={SignUp} />
           <Route path='/feed' component={Feed} />
           {/*<Route path='/post/:id' component={} />*/}
-          <Route path='/:username' component={Userpage} />
+          <Route path='/user/:username' component={Userpage} />
           <Route path='/favs' component={Likes} />
-          {/*<Route path='/following' component={Following} />*/}
+          <Route path='/following' component={Following} />
         </div>
       </Router>
     )
