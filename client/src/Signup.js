@@ -10,10 +10,15 @@ class Signup extends Component {
     this.state = {
       user_name: '',
       password: '',
+      pic: '' ,
+      bg: '',
+      blog_name: '',
+      blog_desc: '',
       fireRedirect: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
 
 handleSubmit(e){
   e.preventDefault()
