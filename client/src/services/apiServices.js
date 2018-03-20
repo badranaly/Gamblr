@@ -48,4 +48,8 @@ services.createOnePost = (thing) => {
 	})
 }
 
+services.getFollowing = () => {
+	return axios.get(`api/users/following`)
+}
+
 export default services
