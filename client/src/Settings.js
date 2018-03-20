@@ -8,7 +8,7 @@ constructor(props){
   super(props)
   this.state = {
     apiDataLoaded: false,
-    username: user_name,
+    user_name: user_name,
     password: password
   }
   this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,7 +19,6 @@ componentDidMount() {
   .then((userInfo) => {
     this.setState({
       apiDataLoaded: true,
-      user_name,
       password
     })
   })
@@ -30,7 +29,7 @@ componentDidMount() {
 
 handleSubmit(e){
   e.preventDefault()
-  services.updateUserInfo(this.state, username)
+  services.updateUserInfo(this.state.password)
   .then(userInfo => {
     this.setState({
       fireRedirect: true
@@ -43,6 +42,10 @@ handleSubmit(e){
 
 handleInputChange(e){
   let name = e.target.name
+  let value = e.target.value
+  this.setState({
+    [name]: value
+  })
 }
 
   render(){

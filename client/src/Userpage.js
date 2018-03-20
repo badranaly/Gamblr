@@ -8,7 +8,7 @@ class Userpage extends Component {
       <div>
         <img />
         <img />
-        <Myposts />
+        <Postlists />
       </div>
     )
   }
