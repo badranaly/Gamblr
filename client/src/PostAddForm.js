@@ -7,6 +7,10 @@ class PostAddForm extends Component {
 	constructor() {
 		super()
 		this.state = {
+			type: '',
+			content: '',
+			user_id: 1,
+			notes: 0,
 			fireRedirect: false
 		}
 		this.handleInputChange = this.handleInputChange.bind(this)
@@ -37,8 +41,16 @@ class PostAddForm extends Component {
 		return (
 			<div className='add-form'>
 				<form onSubmit={this.handlFormSubmit}>
-					
+					<select>
+						<option select value='text'>Text</option>
+						<option value='photo'>Image</option>
+						<option value='Link'>Link</option>
+						<option value='Video'>Video</option>
+					</select>
+					<input type='text' name='content' onChange={this.handleInputChange} placeholder='Enter your stuff...' />
+					<input type='submit' value='Add Post!' />
 				</form>
+				{this.state.fireRedirect ? <Redirect to={`/feed`} /> : ''}
 			</div>
 		)
 	}

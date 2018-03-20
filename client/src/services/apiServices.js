@@ -32,10 +32,21 @@ services.deleteUser = (username) => {
 	return axios.delete(`api/users/${username}`)
 }
 
+services.authenticateUser = (username, password) => {
+    return axios.get(`api/users/${username}`)({
+        method: 'GET',
+        url: `api/users/${username}`,
+        data: {
+            user_name: username,
+            password: password
+        }
+    })
+}
+
 //post manipulation
 
 services.getAllPosts = () => {
-	return axios.get('/api/posts/feed')
+	return axios.get('api/posts/feed')
 }
 services.createOnePost = (thing) => {
 	return axios({
