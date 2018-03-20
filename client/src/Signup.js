@@ -49,6 +49,10 @@ handleOnChange(e){
         <form onSubmit={this.handleSubmit}>
           <input type='text' placeholder='Username' name='password' onChange={this.handleOnChange}/>
           <input type='password' name='password' placeholder='******' onChange={this.handleOnChange}/>
+          <input type='text' placeholder='Username' name='password' onChange={this.handleOnChange}/>
+          <input type='password' name='password' placeholder='******' onChange={this.handleOnChange}/>
+          <input type='text' placeholder='Username' name='password' onChange={this.handleOnChange}/>
+          <input type='password' name='password' placeholder='******' onChange={this.handleOnChange}/>
           <input type='submit' />
           <p>Already a user? Sign in </p><a href='/login'>here</a>
         </form>

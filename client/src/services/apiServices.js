@@ -13,7 +13,11 @@ services.createUser = (things) => {
 		url: 'api/users',
 		data: {
 			user_name: things.user_name,
-			password: things.password
+			password: things.password,
+			pic: things.pic,
+			bg: things.bg,
+			blog_name: things.blog_name,
+			blog_desc: things.blog_desc
 		}
 	})
 }
