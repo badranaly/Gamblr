@@ -5,7 +5,7 @@ const userRoutes = express.Router();
 
 //userRoutes.get('/', usersController.index);
 //userRoutes.get('/:id', usersController.show);
-userRoutes.delete('/follower', usersController.unfollowUser);
+userRoutes.delete('/follower/:id', usersController.unfollowUser);
 userRoutes.post('/follower', usersController.followUser);
 userRoutes.get('/following', usersController.listFollowing);
 userRoutes.get('/followers', usersController.listFollowers);

@@ -20,11 +20,11 @@ module.exports = {
   },
 
   followUser(user) {
-    return db.one('INSERT INTO followers (follower_id, following_id) VALUES($[follower_id], $[following_id]) RETURNING *', user)
+    return db.one('INSERT INTO followers (follower_id, following_id) VALUES(1, $[following_id]) RETURNING *', user)
   },
 
-  unfollowUser(user) {
-    return db.none('DELETE FROM followers WHERE follower_id=$[follower_id] and following_id=$[following_id]', user)
+  unfollowUser(id) {
+    return db.none('DELETE FROM followers WHERE follower_id=1 and following_id=$[following_id]', id)
   },
 
   updateUser(user) {
@@ -40,7 +40,7 @@ module.exports = {
   },
 
   returnID(user) {
-    return db.any('SELECT id FROM users where user_name = $[user]', user)
+    return db.any('SELECT id FROM users where user_name = $[user_name]', user)
   }
 
 }

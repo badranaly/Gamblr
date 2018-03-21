@@ -29,8 +29,25 @@ class Following extends Component {
   }
 
 
-  handleRemove(user) {
-    console.log(user)
+  handleRemove(e) {
+    console.log(e.target.name)
+    e.stopPropagation();
+    services.getUserID(e.target.name)
+    .then(user => {
+      console.log(user.data.data.user[0].id)
+      services.removeFollowing(user.data.data.user[0].id)
+      .then(user2 => {
+        console.log(user2)
+        })
+      .catch(err=> {
+        console.log(err)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+
   }
 
   renderUsers() {
@@ -38,7 +55,7 @@ class Following extends Component {
 		return this.state.apiData.map((el,i) => {
 			return (
         <div>
-        <p><img src={el.pic} alt="Pic"/> {el.user_name}<button onClick={this.handleRemove(el.user_name)}>-</button></p>
+        <p><img src={el.pic} alt="Pic"/> {el.user_name}<button name={el.user_name} onClick={this.handleRemove}>-</button></p>
       </div>
       )
 		})
@@ -58,7 +75,14 @@ class Following extends Component {
     console.log('HANDLED', this.state.user_name)
     services.getUserID(this.state.user_name)
     .then(user => {
-      console.log(user)
+      console.log(user.data.data.user)
+      services.addFollowing(user.data.data.user)
+      .then(user2 => {
+        console.log(user2)
+      })
+      .catch(err=> {
+        console.log(err)
+      })
     })
     .catch(err => {
       console.log(err)

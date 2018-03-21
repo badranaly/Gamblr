@@ -69,7 +69,9 @@ usersController.listFollowing = (req, res) => {
 },
 
 usersController.followUser = (req, res) => {
-  Users.followUser(req.body)
+  let sendObj = {}
+  sendObj.following_id = req.body.content[0].id
+  Users.followUser(sendObj)
     .then(user => {
       res.json({
         message: 'ok',
@@ -82,7 +84,9 @@ usersController.followUser = (req, res) => {
 },
 
 usersController.unfollowUser = (req, res) => {
-  Users.unfollowUser(req.body)
+  let sendObj = {}
+  sendObj.following_id = req.params.id
+  Users.unfollowUser(sendObj)
     .then(user => {
       res.json({
         message: 'ok',
@@ -123,7 +127,9 @@ Users.authenticate(req.body)
 },
 
 usersController.getID = (req, res) => {
-  Users.returnID(req.params.un)
+  let sendObj = {}
+  sendObj.user_name = req.params.un
+  Users.returnID(sendObj)
   .then(user => {
     res.json({
       message: 'ok',
@@ -131,7 +137,7 @@ usersController.getID = (req, res) => {
     })
   })
   .catch(err => {
-    console.log(req.params.un)
+    res.status(400).json({message: '400', err})
   })
 }
 

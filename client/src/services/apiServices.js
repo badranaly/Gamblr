@@ -76,15 +76,19 @@ services.getUserID = (user_name) => {
 }
 
 services.addFollowing = (user) => {
-	console.log('adding following')
 	return axios({
 		method: 'POST',
-		url: '/api/users/follower',
+		url: `/api/users/follower/`,
 		data: {
 			content: user,
 
 		}
 	})
+}
+
+services.removeFollowing = (id) => {
+	console.log("remove", id)
+	return axios.delete(`/api/users/follower/${id}`)
 }
 
 
