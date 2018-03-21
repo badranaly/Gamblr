@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import { Redirect } from 'react-router-dom';
 
 class Following extends Component {
   constructor(props){
@@ -32,7 +33,7 @@ class Following extends Component {
     console.log(user)
   }
 
-  renderPosts() {
+  renderUsers() {
 		console.log('loaded data', this.props)
 		return this.state.apiData.map((el,i) => {
 			return (
@@ -54,7 +55,23 @@ class Following extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    console.log('HANDLED')
+    console.log('HANDLED', this.state.user_name)
+    services.getUserID(this.state.user_name)
+    .then(user => {
+      console.log(user)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  /*  services.addFollowing(this.state.user_name)
+      .then(user => {
+        this.setState({
+          user_name: ''
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      }) */
   }
 
   render(){
@@ -65,8 +82,8 @@ class Following extends Component {
           <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
           <input type='submit' value="Enter User Name"/>
         </form>
-      {/*  {this.state.fireRedirect ? <Redirect to='/icecream' /> : ''} */}
-        {this.state.apiDataLoaded ? this.renderPosts() : ''}
+      {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
+        {this.state.apiDataLoaded ? this.renderUsers() : ''}
 
       </div>
     )

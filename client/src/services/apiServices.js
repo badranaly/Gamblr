@@ -67,4 +67,25 @@ services.getFollowing = () => {
 	return axios.get(`/api/users/following`)
 }
 
+services.getFollowers = () => {
+	return axios.get(`/api/users/followers`)
+}
+
+services.getUserID = (user_name) => {
+	return axios.get(`/api/users/lookup/${user_name}`)
+}
+
+services.addFollowing = (user) => {
+	console.log('adding following')
+	return axios({
+		method: 'POST',
+		url: '/api/users/follower',
+		data: {
+			content: user,
+
+		}
+	})
+}
+
+
 export default services

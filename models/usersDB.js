@@ -10,7 +10,7 @@ module.exports = {
   findUser(user){
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name]`, user)
   },
-  
+
   authenticate(user){
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name] AND password = $[password]`, user)
   },
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   followUser(user) {
-    return db.one('INSERT INTO followers (follower_id, following_id) VALUES($[follower_id ], $[following_id]) RETURNING *', user)
+    return db.one('INSERT INTO followers (follower_id, following_id) VALUES($[follower_id], $[following_id]) RETURNING *', user)
   },
 
   unfollowUser(user) {
@@ -36,7 +36,11 @@ module.exports = {
   },
 
   listFollowers(user) {
-    return db.any('SELECT user_name, blog_name FROM followers INNER JOIN users on following_id = users.id WHERE following_id = 1')
+    return db.any('SELECT user_name, blog_name, pic FROM followers INNER JOIN users on follower_id = users.id WHERE following_id = 1')
+  },
+
+  returnID(user) {
+    return db.any('SELECT id FROM users where user_name = $[user]', user)
   }
 
 }

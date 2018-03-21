@@ -120,6 +120,19 @@ Users.authenticate(req.body)
   .catch(err => {
     res.status(400).json({message: '400', err})
   })
+},
+
+usersController.getID = (req, res) => {
+  Users.returnID(req.params.un)
+  .then(user => {
+    res.json({
+      message: 'ok',
+      data: { user }
+    })
+  })
+  .catch(err => {
+    console.log(req.params.un)
+  })
 }
 
 ;

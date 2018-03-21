@@ -10,6 +10,8 @@ import Likes from './Likes'
 import Userpage from './Userpage'
 import Following from './Following'
 import PostAddForm from './PostAddForm'
+import Followers from './Followers'
+import Settings from './Settings'
 
 class App extends Component {
   render() {
@@ -20,11 +22,13 @@ class App extends Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={SignUp} />
           <Route path='/feed' component={Feed} />
+          <Route path='/followers' component={Followers} />
           {/*<Route path='/post/:id' component={} />*/}
           <Route path='/user/:username' component={Userpage} />
           <Route path='/addPost' component={PostAddForm} />
           <Route path='/favs' component={Likes} />
           <Route path='/following' component={Following} />
+          <Route path='/settings' component={Settings} />
         </div>
       </Router>
     )
