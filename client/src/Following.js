@@ -6,8 +6,13 @@ class Following extends Component {
     super(props)
     this.state = {
       apiDataLoaded: false,
-      apiData: null
+      apiData: null,
+      fireRedirect: false,
+      user_name: ''
     }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidMount() {
@@ -22,24 +27,45 @@ class Following extends Component {
     })
   }
 
+
+  handleRemove(user) {
+    console.log(user)
+  }
+
   renderPosts() {
 		console.log('loaded data', this.props)
 		return this.state.apiData.map((el,i) => {
 			return (
         <div>
-        <p>{el.pic} {el.user_name}</p>
+        <p><img src={el.pic} alt="Pic"/> {el.user_name}<button onClick={this.handleRemove(el.user_name)}>-</button></p>
       </div>
       )
 		})
 	}
 
+  handleInputChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    console.log(value)
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+    console.log('HANDLED')
+  }
 
   render(){
     return (
       <div>
-        <h1>Following the following Users:</h1>
-        <input type="text" value="Enter User Name"></input>
-        <button>Add New Follower</button>
+        <h1>Users currently being followed:</h1>
+        <form onSubmit={this.handleFormSubmit}>
+          <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
+          <input type='submit' value="Enter User Name"/>
+        </form>
+      {/*  {this.state.fireRedirect ? <Redirect to='/icecream' /> : ''} */}
         {this.state.apiDataLoaded ? this.renderPosts() : ''}
 
       </div>
