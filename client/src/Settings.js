@@ -8,8 +8,8 @@ constructor(props){
   super(props)
   this.state = {
     apiDataLoaded: false,
-    user_name: user_name,
-    password: password
+    // user_name: username,
+    // password: password
   }
   this.handleSubmit = this.handleSubmit.bind(this)
 }
@@ -19,10 +19,10 @@ componentDidMount() {
   .then((userInfo) => {
     this.setState({
       apiDataLoaded: true,
-      password
+      // password
     })
   })
-  .catch(err = {
+  .catch(err => {
     console.log('fucked up in settings..', err)
   })
 }
@@ -61,9 +61,3 @@ handleInputChange(e){
 }
 
 export default Settings
-
-/*
-Front-end Necessities :
- - Feed
- - Username and password to test Settings page
- -
