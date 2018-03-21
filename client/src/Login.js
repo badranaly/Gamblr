@@ -10,33 +10,39 @@ class Login extends Component {
     this.state = {
       user_name: '',
       password: '',
+      authenticated: false,
       fireRedirect: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  componentDidMount(){}
+handleChange(e){
+  let name = e.target.name
+  let value = e.target.value
+  this.setState({
+    [name]:value
+  })
+}
 
-  handleSubmit(e){
+handleSubmit(e){
       e.preventDefault()
-      services.authenticateUser(this.state.user_name, this.state.password)(
-        console.log('initiating login procedure..')
-        .then(data => {
-          if(data.username == this.state.user_name){
-            this.setState({
-              fireRedirect: true
-            })
-          }
-        })
-        .catch()
-      )
+      let name = e.target.name
+      console.log('username:', this.state.user_name)
+      console.log('password:', this.state.password);
+      services.authenticateUser(this.state)
+      .then(user => {
+        console.log(user)
+      })
+      .catch(err => console.log('loggin is fucked up', err))
   }
+
   render(){
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input name='username' placeholder='Username' type='text' /><br />
-          <input name='password' type='password' />
+          <input name='user_name' placeholder='Username' type='text' onChange={this.handleChange}/><br />
+          <input name='password' type='password' onChange={this.handleChange}/>
           <input type='submit' />
         </form>
         <a href='/signup'>Sign up here</a>

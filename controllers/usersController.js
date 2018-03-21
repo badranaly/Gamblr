@@ -42,6 +42,19 @@ usersController.create = (req, res) => {
     })
 },
 
+usersController.getUser = (req, res) => {
+  Users.findUser(req.body)
+  .then(user => {
+    res.json({
+      message: 'ok',
+      data: {user}
+    })
+  })
+  .catch(err => {
+    res.status(400).json({message: '400', err})
+  })
+}
+
 usersController.listFollowing = (req, res) => {
   Users.listFollowing()
     .then(users => {
@@ -92,6 +105,21 @@ usersController.listFollowers = (req, res) => {
     .catch(err => {
       res.status(400).json({message: '400', err})
     })
+}
+
+usersController.authenticateUser = (req, res) => {
+console.log(req.body)
+Users.authenticate(req.body)
+.then(user => {
+  console.log(user)
+    // res.json({
+    //   message: ok,
+    //   data: {user}
+    // })
+  })
+  .catch(err => {
+    res.status(400).json({message: '400', err})
+  })
 }
 
 ;
