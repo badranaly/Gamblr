@@ -36,14 +36,14 @@ services.deleteUser = (username) => {
 	return axios.delete(`/api/users/${username}`)
 }
 
-services.authenticateUser = (username, password) => {
-    return axios.get(`api/users/${username}`)({
-        method: 'GET',
-        url: `/api/users/${username}`,
+services.authenticateUser = (things) => {
+    return axios({
+        method: 'POST',
+        url: `/api/users/login`,
         data: {
-            user_name: username,
-            password: password
-        }
+					user_name: things.user_name,
+					password: things.password
+				}
     })
 }
 

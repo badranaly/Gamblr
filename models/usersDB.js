@@ -6,6 +6,11 @@ module.exports = {
     return db.one(`INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc)
                     VALUES ($[user_name], $[password], $[pic], $[bg], $[blog_name], $[blog_desc]) RETURNING *`, user);
   },
+
+  findUser(user){
+    return db.one(`SELECT * FROM users WHERE user_name = $[user_name]`, user)
+  },
+  
   authenticate(user){
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name] AND password = $[password]`, user)
   },
