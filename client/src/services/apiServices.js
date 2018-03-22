@@ -137,7 +137,6 @@ services.addFollowing = (user) => {
 }
 
 services.followNew = (id) => {
-	console.log("inservice", id.data.data.user[0].id)
 	return axios({
 		method: 'POST',
 		url: `/api/users/follower/${id.data.data.user[0].id}`,
@@ -161,6 +160,16 @@ services.singlePost = (id) => {
 
 services.getComments = (id) => {
 	return axios.get(`/api/posts/getComments/${id}`)
+}
+
+services.addComment = (id, comment) => {
+	return axios({
+		method: 'POST',
+		url: `/api/posts/comment/${id}`,
+		data: {
+			content: comment
+		}
+	})
 }
 
 

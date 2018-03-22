@@ -52,6 +52,11 @@ module.exports = {
                   INNER JOIN posts ON posts.id = comments.post_id
                   INNER JOIN users ON comments.user_id = users.id
                   WHERE posts.id = $[id]`, id)
+  },
+
+  addComment(input) {
+    return db.any(`INSERT INTO comments (comment, user_id, post_id)
+                   VALUES ($[comment], 1, $[id])`, input)
   }
 
 

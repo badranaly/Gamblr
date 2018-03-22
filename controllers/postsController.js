@@ -126,5 +126,23 @@ postsController.getComments = (req, res) => {
     });
 }
 
+postsController.addComment = (req, res) => {
+  let sendObj = {}
+  console.log("REQ BODY", req.body)
+  sendObj.id = req.params.id
+  sendObj.comment = req.body.content
+  Posts.addComment(sendObj)
+    .then(comment => {
+      res.json({
+        message: 'ok',
+        data: { comment }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+
+}
+
 
 module.exports = postsController;
