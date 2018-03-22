@@ -36,6 +36,7 @@ CREATE TABLE comments (
 );
 
 CREATE TABLE likes (
+  id SERIAL PRIMARY KEY,
   user_id INT,
   post_id INT
 );

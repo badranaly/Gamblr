@@ -98,6 +98,17 @@ services.getAllLikes = () => {
 	return axios.get('/api/posts/like')
 }
 
+services.addLike = (thing) => {
+	return axios({
+		method: 'POST',
+		url: '/api/posts/like',
+		data: {
+			user_id: thing.user_id,
+			post_id: thing.post_id
+		}
+	})
+}
+
 services.getFollowing = () => {
 	return axios.get(`/api/users/following`)
 }
