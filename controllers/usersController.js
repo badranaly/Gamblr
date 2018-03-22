@@ -93,6 +93,19 @@ usersController.followUser = (req, res) => {
     })
 },
 
+usersController.followNew = (req, res) => {
+  console.log("inside usercontroller, follownew", req.params.id)
+  let sendObj = {}
+  sendObj.following_id = req.params.id
+  Users.followUser(sendObj)
+  .then(output => {
+    console.log("output", output)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
 usersController.unfollowUser = (req, res) => {
   let sendObj = {}
   sendObj.following_id = req.params.id
@@ -144,6 +157,22 @@ usersController.getID = (req, res) => {
     res.json({
       message: 'ok',
       data: { user }
+    })
+  })
+  .catch(err => {
+    res.status(400).json({message: '400', err})
+  })
+},
+
+usersController.checkFollowing = (req, res) => {
+  console.log('inside checkfollowing CONTROLLER', req.params.id)
+  let sendObj = {}
+  sendObj.following_id = req.params.id
+  Users.checkFollowing(sendObj)
+  .then(found => {
+    res.json({
+      message: 'ok',
+      data: { found }
     })
   })
   .catch(err => {

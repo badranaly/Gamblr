@@ -117,9 +117,23 @@ services.addFollowing = (user) => {
 	})
 }
 
+services.followNew = (id) => {
+	console.log("inservice", id.data.data.user[0].id)
+	return axios({
+		method: 'POST',
+		url: `/api/users/follower/${id.data.data.user[0].id}`,
+		data: {
+			content: id,
+		}
+	})
+}
+
 services.removeFollowing = (id) => {
-	console.log("remove", id)
 	return axios.delete(`/api/users/follower/${id}`)
+}
+
+services.checkFollowing = (id) => {
+	return axios.get(`api/users/checkFollowing/${id}`)
 }
 
 

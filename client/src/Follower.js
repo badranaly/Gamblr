@@ -15,31 +15,41 @@ class Follower extends Component {
 
   componentDidMount() {
 
-    this.setState({
-      apiDataLoaded: true
-    })
-  /*  services.checkFollowing().then(posts => {
-      console.log("data from post", posts)
-      this.setState({
-        apiDataLoaded: true,
-        apiData: posts.data.data.users
-      })
-    }).catch(err => {
+    services.getUserID(this.props.user_name)
+    .then(id => {
+      services.checkFollowing(id.data.data.user[0].id)
+      .then(posts => {
+        console.log('inside successful check following')
+         this.setState({
+           apiDataLoaded: true,
+           apiData: posts.data.data.users,
+           isFollower: true
+         })
+       }).catch(err => {
+          console.log('inside failed check following')
+          this.setState({
+            apiDataLoaded:true,
+            isFollower: false
+
+          })
+         console.log(err)
+       })
+     })
+    .catch(err => {
       console.log(err)
-    }) */
-    console.log('mounted')
+    })
+
   }
 
 
   handleRemove(e) {
-    console.log(e.target.name)
     e.stopPropagation();
     services.getUserID(e.target.name)
     .then(user => {
-      console.log(user.data.data.user[0].id)
+      console.log("inside handleremove", user.data.data.user[0].id)
       services.removeFollowing(user.data.data.user[0].id)
       .then(user2 => {
-        console.log(user2)
+        console.log("succesfful remove", user2)
         })
       .catch(err=> {
         console.log(err)
@@ -48,12 +58,27 @@ class Follower extends Component {
     .catch(err => {
       console.log(err)
     })
+  }
 
-
+  handleAdd(e) {
+    console.log("adding", e.target.name)
+    e.stopPropagation();
+    services.getUserID(e.target.name)
+    .then(user => {
+      services.followNew(user)
+      .then(user2 => {
+        console.log("result from addFollowing", user2)
+        })
+      .catch(err=> {
+        console.log(err)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   renderUser() {
-		console.log('loaded data', this.props)
       if(this.state.isFollower === true) {
 			     return (
              <div>
@@ -68,8 +93,6 @@ class Follower extends Component {
             </div>
           )
       }
-
-
 	}
 
 

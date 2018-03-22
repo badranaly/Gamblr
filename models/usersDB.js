@@ -53,6 +53,10 @@ module.exports = {
 
   returnID(user) {
     return db.any('SELECT id FROM users where user_name = $[user_name]', user)
+  },
+
+  checkFollowing(id) {
+    return db.one('SELECT following_id FROM followers WHERE following_id=$[following_id] AND follower_id=1', id)
   }
 
 }

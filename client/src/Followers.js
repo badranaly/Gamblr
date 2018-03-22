@@ -15,8 +15,8 @@ class Followers extends Component {
   }
 
   componentDidMount() {
-    services.getFollowers().then(users => {
-      console.log("data from users", users)
+    services.getFollowers()
+    .then(users => {
       this.setState({
         apiDataLoaded: true,
         apiData: users.data.data.users
@@ -27,12 +27,11 @@ class Followers extends Component {
   }
 
 
-  handleRemove(user) {
+  /* handleRemove(user) {
     console.log(user)
-  }
+  } */
 
   renderUsers() {
-		console.log('loaded data', this.props)
 		return this.state.apiData.map((el,i) => {
 			return (
         <div>
@@ -44,10 +43,10 @@ class Followers extends Component {
 	}
 
 
-  handleFormSubmit(e) {
+  /* handleFormSubmit(e) {
     e.preventDefault();
     console.log('HANDLED')
-  }
+  } */
 
   render(){
     return (
