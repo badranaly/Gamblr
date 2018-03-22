@@ -3,7 +3,8 @@ const Users = require('../models/usersDB');
 const usersController = {};
 
 usersController.editUser = (req, res) => {
-  Users.updateUser(req.params.un)
+  console.log('got the infos yo')
+  Users.updateUser(req.body)
     .then(user => {
       res.json({
         message: 'ok',
@@ -16,6 +17,15 @@ usersController.editUser = (req, res) => {
     });
 },
 
+usersController.changePassword = (req, res) => {
+  Users.changePass(req.body)
+  .then(user => {
+    console.log('changing password')
+  })
+  .catch(err => {
+    res.status(400).json({message:'400', err})
+  })
+}
 usersController.deleteUser = (req, res) => {
   Users.deleteUser(req.params.un)
     .then(user => {
