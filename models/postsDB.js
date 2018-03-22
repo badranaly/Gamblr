@@ -18,7 +18,7 @@ module.exports = {
 
   addLike(post) {
     return db.one(`INSERT INTO likes (post_id, user_id)
-                  VALUES ($[post_id], $[user_id]) RETURNING *`, post)
+                  VALUES ($/post_id/, $/user_id/) RETURNING *`, post)
   },
 
   removeLike(input) {

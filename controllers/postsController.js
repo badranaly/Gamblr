@@ -57,6 +57,7 @@ postsController.userPage = (req, res) => {
 },
 
 postsController.addLike = (req, res) => {
+  console.log(req.body,'addLike')
   Posts.addLike(req.body)
     .then(post => {
       res.json({
