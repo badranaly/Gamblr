@@ -8,10 +8,33 @@ class Post extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			likeClicked: props.list === 'favs' ? true : false,
+			likeClicked: false,
 			user_id: props.post.user_id,
 			post_id: props.post.id,
 			fireRedirect: false
+		}
+	}
+
+	componentDidMount() {
+		if (this.props.list === 'favs') {
+			this.setState({
+				likeClicked: true
+			})
+		}
+		else {
+			services.checkLikes(this.state.user_id, this.state.post_id)
+      .then(posts => {
+        console.log('inside successful check following')
+         this.setState({
+           likeClicked: true
+         })
+       }).catch(err => {
+          console.log('inside failed check following')
+          this.setState({
+            likeClicked: false
+          })
+         console.log(err)
+       })
 		}
 	}
 
@@ -32,7 +55,7 @@ class Post extends Component {
 			})
 		}).catch(err => {
 			console.log(err)
-		}) 
+		})
 	}
 
 	render() {

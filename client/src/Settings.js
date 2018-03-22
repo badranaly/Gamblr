@@ -41,13 +41,20 @@ handleInputChange(e){
 
 handleDelete(e){
   //REPLACE THIS WITH USER NAME FROM SESSION
-  services.deleteUser("chris")
+  services.getUserID("chris")
+  .then(id => {
+    console.log("id", id)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+/*  services.deleteUser("chris")
   .then(user => {
     console.log(user)
   })
   .catch(err => {
     console.log(err)
-  })
+  })*/
 }
 
   render(){

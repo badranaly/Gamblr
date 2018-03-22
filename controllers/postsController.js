@@ -148,5 +148,21 @@ postsController.addComment = (req, res) => {
 
 }
 
+postsController.checkLikes = (req, res) => {
+  let sendObj = {}
+  sendObj.user_id = req.params.userId
+  sendObj.post_id = req.params.postId
+  Posts.checkLikes(sendObj)
+    .then(response => {
+      res.json({
+        message: 'ok',
+        data: { response }
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 
 module.exports = postsController;

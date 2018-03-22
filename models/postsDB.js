@@ -57,6 +57,10 @@ module.exports = {
   addComment(input) {
     return db.any(`INSERT INTO comments (comment, user_id, post_id)
                    VALUES ($[comment], 1, $[id])`, input)
+  },
+
+  checkLikes(input) {
+    return db.one(`SELECT * FROM likes WHERE user_id=1 AND post_id=$[post_id]`, input)
   }
 
 

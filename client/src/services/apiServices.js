@@ -156,6 +156,10 @@ services.checkFollowing = (id) => {
 	return axios.get(`/api/users/checkFollowing/${id}`)
 }
 
+services.checkLikes = (id, user) => {
+	return axios.get(`/api/posts/checkLikes/${id}/${user}`)
+}
+
 services.singlePost = (id) => {
 	return axios.get(`/api/posts/singlePost/${id}`)
 }
