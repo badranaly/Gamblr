@@ -148,11 +148,11 @@ services.removeFollowing = (id) => {
 }
 
 services.checkFollowing = (id) => {
-	return axios.get(`api/users/checkFollowing/${id}`)
+	return axios.get(`/api/users/checkFollowing/${id}`)
 }
 
 services.singlePost = (id) => {
-	return axios.get(`api/posts/singlePost/${id}`)
+	return axios.get(`/api/posts/singlePost/${id}`)
 }
 
 

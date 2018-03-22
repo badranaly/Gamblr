@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 
-class Follower extends Component {
+class SinglePost extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -46,4 +46,4 @@ class Follower extends Component {
   }
 }
 
-export default Follower
+export default SinglePost
