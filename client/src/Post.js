@@ -8,8 +8,8 @@ class Post extends Component {
 		super(props)
 		this.state = {
 			likeClicked: false,
-			user_id: this.props.user_id,
-			post_id: this.props.id
+			user_id: props.user_id,
+			post_id: props.id
 		}
 	}
 
@@ -39,7 +39,7 @@ class Post extends Component {
 				<img alt='' src='#' />
 				<h2>{this.props.post.user_name}</h2>
 				<p>{this.props.post.content}</p>
-				<button className='like-button' onClick={this.state.likeClicked ? this.removeLike : this.addLike}>Like</button>
+				<button className='like-button' onClick={this.state.likeClicked ? this.removeLike : this.addLike}>{this.state.likeClicked ? 'Unlike' : 'Like'}</button>
 			</div>
 		)
 	}
