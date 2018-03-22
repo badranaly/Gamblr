@@ -8,7 +8,7 @@ postRoutes.get('/like', postsController.likes);
 postRoutes.get('/user', postsController.userPage);
 postRoutes.post('/', postsController.create);
 postRoutes.post('/like', postsController.addLike);
-postRoutes.delete('/like/:id', postsController.removeLike);
+postRoutes.delete('/like/:postId/:userId', postsController.removeLike);
 postRoutes.get('/myPosts', postsController.myPosts);
 postRoutes.get('/singlePost/:id', postsController.singlePost);
 postRoutes.get('/getComments/:id', postsController.getComments);

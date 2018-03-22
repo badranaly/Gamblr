@@ -109,8 +109,8 @@ services.addLike = (thing) => {
 	})
 }
 
-services.removeLike = (id) => {
-	return axios.delete(`/api/posts/like/${id}`)
+services.removeLike = (postId,userId) => {
+	return axios.delete(`/api/posts/like/${postId}/${userId}`)
 }
 
 services.getFollowing = () => {

@@ -7,9 +7,9 @@ class Post extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			likeClicked: false,
-			user_id: props.user_id,
-			post_id: props.id
+			likeClicked: props.list === 'favs' ? true : false,
+			user_id: props.post.user_id,
+			post_id: props.post.id
 		}
 	}
 
@@ -24,7 +24,7 @@ class Post extends Component {
 	}
 
 	removeLike() {
-		services.removeLike(this.state).then(like => {
+		services.removeLike(this.state.post_id,this.state.user_id).then(like => {
 			this.setState({
 				likeClicked: false
 			})
@@ -39,7 +39,7 @@ class Post extends Component {
 				<img alt='' src='#' />
 				<h2>{this.props.post.user_name}</h2>
 				<p>{this.props.post.content}</p>
-				<button className='like-button' onClick={this.state.likeClicked ? this.removeLike : this.addLike}>{this.state.likeClicked ? 'Unlike' : 'Like'}</button>
+				<button className='like-button' onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</button>
 			</div>
 		)
 	}

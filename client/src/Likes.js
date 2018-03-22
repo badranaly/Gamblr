@@ -30,7 +30,7 @@ class Likes extends Component {
 	renderLikes() {
 		console.log('loaded likes')
 		return this.state.apiData.map((el,i) => {
-			return <Post key={el.id} post={el} />
+			return <Post key={el.id} post={el} list='favs'/>
 		})
 	}
 

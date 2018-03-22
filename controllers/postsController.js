@@ -70,7 +70,11 @@ postsController.addLike = (req, res) => {
 },
 
 postsController.removeLike = (req, res) => {
-  Posts.removeLike(req.body)
+  let sendObj = {}
+  sendObj.postid = req.params.postId
+  sendObj.userid = req.params.userId
+  console.log(req.params)
+  Posts.removeLike(sendObj)
     .then(post => {
       res.json({
         message: 'ok',

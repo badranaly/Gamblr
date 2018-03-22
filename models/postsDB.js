@@ -21,8 +21,8 @@ module.exports = {
                   VALUES ($[post_id], $[user_id]) RETURNING *`, post)
   },
 
-  removeLike(post) {
-    return db.none(`DELETE FROM likes WHERE post_id=$[post_id] and user_id =$[user_id]`, post)
+  removeLike(input) {
+    return db.none(`DELETE FROM likes WHERE post_id=$[postid] and user_id=$[userid]`, input)
   },
 
   createPost(post) {
