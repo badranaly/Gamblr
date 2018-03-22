@@ -6,23 +6,29 @@ class SinglePost extends Component {
     super(props)
     this.state = {
       apiDataLoaded: false,
-      apiData: null,
+      postData: null,
       fireRedirect: false,
+      commentData: null
     }
   }
 
   componentDidMount() {
-    console.log("Mounted")
-    console.log(this.props.match.params.id)
     services.singlePost(this.props.match.params.id)
-    .then(post => {
-      console.log(post)
+    .then(data => {
+      this.setState({
+        apiDataLoaded: true,
+        postData: data.data.data.post[0]
+      })
+      services.getComments(this.props.match.params.id)
+      .then(comments => {
+        console.log(comments)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     })
     .catch(err => {
       console.log(err)
-    })
-    this.setState({
-      apiDataLoaded: true
     })
   }
 
@@ -30,7 +36,11 @@ class SinglePost extends Component {
 
           return (
             <div>
-              <p>Post</p>
+              <h1>Post</h1>
+              <h2>{this.state.postData.user_name}</h2>
+              <p>{this.state.postData.content}</p>
+              <h4>Likes</h4>
+              <p>Comments:</p>
             </div>
           )
 	}

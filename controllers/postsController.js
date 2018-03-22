@@ -101,7 +101,10 @@ postsController.singlePost = (req, res) => {
   sendObj.id = req.params.id
   Posts.singlePost(sendObj)
     .then(post => {
-      console.log(post)
+      res.json({
+        message: 'ok',
+        data: { post }
+      })
     })
     .catch(err => {
       res.status(400).json({message: '400', err})
