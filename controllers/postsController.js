@@ -97,7 +97,9 @@ postsController.myPosts = (req, res) => {
 },
 
 postsController.singlePost = (req, res) => {
-  Posts.singlePost(req.params.id)
+  let sendObj = {}
+  sendObj.id = req.params.id
+  Posts.singlePost(sendObj)
     .then(post => {
       console.log(post)
     })
