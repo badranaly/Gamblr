@@ -80,12 +80,18 @@ services.getAllPosts = () => {
 services.createOnePost = (thing) => {
 	return axios({
 		method: 'POST',
-		url: '/api/post',
+		url: '/api/posts',
 		data: {
+			type: thing.type,
 			content: thing.content,
-
+			user_id: thing.user_id,
+			notes: thing.notes
 		}
 	})
+}
+
+services.getAllMyPosts = () => {
+	return axios.get('/api/posts/myPosts')
 }
 
 services.getFollowing = () => {

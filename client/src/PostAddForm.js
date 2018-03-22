@@ -7,7 +7,7 @@ class PostAddForm extends Component {
 	constructor() {
 		super()
 		this.state = {
-			type: '',
+			type: 'text',
 			content: '',
 			user_id: 1,
 			notes: 0,
@@ -27,6 +27,7 @@ class PostAddForm extends Component {
 
 	handleFormSubmit(e) {
 		e.preventDefault()
+		console.log(this.state)
 		services.createOnePost(this.state).then(post => {
 			console.log('post adding...',post)
 			this.setState({
@@ -41,16 +42,16 @@ class PostAddForm extends Component {
 		return (
 			<div className='add-form'>
 				<form onSubmit={this.handlFormSubmit}>
-					<select>
-						<option select value='text'>Text</option>
+					<select name='type' onChange={this.handleInputChange}>
+						<option value='text'>Text</option>
 						<option value='photo'>Image</option>
-						<option value='Link'>Link</option>
-						<option value='Video'>Video</option>
+						<option value='link'>Link</option>
+						<option value='video'>Video</option>
 					</select>
-					<input type='text' name='content' onChange={this.handleInputChange} placeholder='Enter your stuff...' />
+					<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder='Enter your stuff...'></textarea>
 					<input type='submit' value='Add Post!' />
 				</form>
-				{this.state.fireRedirect ? <Redirect to={`/feed`} /> : ''}
+				{this.state.fireRedirect ? <Redirect to='/feed' /> : ''}
 			</div>
 		)
 	}
