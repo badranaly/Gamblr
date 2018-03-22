@@ -94,6 +94,10 @@ services.getAllMyPosts = () => {
 	return axios.get('/api/posts/myPosts')
 }
 
+services.getAllLikes = () => {
+	return axios.get('/api/posts/like')
+}
+
 services.getFollowing = () => {
 	return axios.get(`/api/users/following`)
 }
