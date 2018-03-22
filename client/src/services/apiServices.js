@@ -58,7 +58,9 @@ services.updateAppearance = (things,username) => {
 }
 
 services.deleteUser = (username) => {
-	return axios.delete(`/api/users/${username}`)
+	console.log("inside delete users")
+	console.log(username)
+	return axios.delete(`/api/users/users/${username}`)
 }
 
 services.authenticateUser = (things) => {

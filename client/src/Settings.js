@@ -13,6 +13,7 @@ constructor(props){
   }
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
+  this.handleDelete = this.handleDelete.bind(this)
 }
 
 handleSubmit(e){
@@ -38,13 +39,30 @@ handleInputChange(e){
   console.log(value)
 }
 
+handleDelete(e){
+  //REPLACE THIS WITH USER NAME FROM SESSION
+  services.deleteUser("chris")
+  .then(user => {
+    console.log(user)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
   render(){
     return (
       <div>
+        <br/>
+        <br/>
+        <br/>
         <form onSubmit={this.handleSubmit}>
         new password: <input type='text' value={this.state.password} name='password' onChange={this.handleInputChange}/>
         <input type='submit' />
         </form>
+        <br/>
+        <br/>
+        <button onClick={this.handleDelete}>Delete Account</button>
       </div>
     )
   }
