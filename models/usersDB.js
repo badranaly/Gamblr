@@ -3,12 +3,12 @@ const db = require('../db/config');
 module.exports = {
 
   createUser(user) {
-    return db.one(`INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc)
-                    VALUES ($[user_name], $[password], $[pic], $[bg], $[blog_name], $[blog_desc]) RETURNING *`, user);
+    return db.one(`INSERT INTO users (user_name, password) VALUES ($[user_name], $[password]) RETURNING *`, [user.user_name, user.passwordDigest, 0]);
   },
 
   findUser(user){
-    return db.one(`SELECT * FROM users WHERE user_name = $[user_name]`, user)
+    console.log('inside db, the user is ---> ', user)
+    return db.one(`SELECT * FROM users WHERE user_name = $1`, user)
   },
 
   authenticate(user){
