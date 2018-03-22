@@ -32,6 +32,31 @@ services.updateUserInfo = (things,username) => {
 	})
 }
 
+services.updatePassword = (obj) => {
+	console.log('inside services for password', obj)
+	return axios({
+		method: 'PUT',
+		url: `/api/users/settings`,
+		data: {
+			password: obj.password,
+		}
+	})
+}
+
+services.updateAppearance = (things,username) => {
+	return axios({
+		method: 'PUT',
+		url: `/api/users/${username}`,
+		data: {
+	    user_name: things.user_name,
+	    pic: things.pic,
+	    bg: things.bg,
+	    blog_name: things.blog_name,
+	    blog_desc: things.blog_desc
+	  },
+	})
+}
+
 services.deleteUser = (username) => {
 	return axios.delete(`/api/users/${username}`)
 }
@@ -55,12 +80,18 @@ services.getAllPosts = () => {
 services.createOnePost = (thing) => {
 	return axios({
 		method: 'POST',
-		url: '/api/post',
+		url: '/api/posts',
 		data: {
+			type: thing.type,
 			content: thing.content,
-
+			user_id: thing.user_id,
+			notes: thing.notes
 		}
 	})
+}
+
+services.getAllMyPosts = () => {
+	return axios.get('/api/posts/myPosts')
 }
 
 services.getFollowing = () => {

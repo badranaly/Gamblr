@@ -18,11 +18,7 @@ class Post extends Component {
 			<div className='post'>
 				<img alt='' src='#' />
 				<h2>{this.props.post.user_name}</h2>
-				//profile pic
-				//username
-				//post content
-				//notes
-				//like button
+				<p>{this.props.post.content}  - Notes: {this.props.post.notes}</p>
 				<button className='like-button' onClick={this.addLike}>Like</button>
 			</div>
 		)

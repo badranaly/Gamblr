@@ -12,6 +12,8 @@ import Following from './Following'
 import PostAddForm from './PostAddForm'
 import Followers from './Followers'
 import Settings from './Settings'
+import Appearance from './Appearance'
+import MyPosts from './MyPosts'
 
 class App extends Component {
   render() {
@@ -29,6 +31,8 @@ class App extends Component {
           <Route path='/favs' component={Likes} />
           <Route path='/following' component={Following} />
           <Route path='/settings' component={Settings} />
+          <Route path='/Appearance' component={Appearance} />
+          <Route path='/myPosts' component={MyPosts} />
         </div>
       </Router>
     )

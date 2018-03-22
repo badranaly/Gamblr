@@ -19,6 +19,10 @@ module.exports = {
     return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = 1')
   },
 
+  changePass(user){
+    return db.none(`UPDATE users SET password=$[password] WHERE user_name='testuser'`, user)
+  },
+
   followUser(user) {
     return db.one('INSERT INTO followers (follower_id, following_id) VALUES(1, $[following_id]) RETURNING *', user)
   },
@@ -28,7 +32,15 @@ module.exports = {
   },
 
   updateUser(user) {
-    return db.one('UPDATE users SET password = $[password] WHERE user_name=$[user_name] RETURNING *', user)
+    console.log(user)
+    return db.one(`UPDATE users SET
+                  user_name = $/user_name/,
+                  pic = $/pic/,
+                  bg = $/bg/,
+                  blog_name = $/blog_name/,
+                  blog_desc = $/blog_desc/
+                  WHERE user_name='testuser'
+                  RETURNING *`, user)
   },
 
   deleteUser(user) {

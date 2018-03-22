@@ -1,12 +1,12 @@
-//Lillian
-
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import Post from './Post'
+import Header from './Header'
+import Footer from './Footer'
 
-class PostList extends Component {
-	constructor(props) {
-		super(props)
+class MyPosts extends Component {
+	constructor() {
+		super()
 		this.state = {
 			apiDataLoaded: false,
 			apiData: null
@@ -14,8 +14,8 @@ class PostList extends Component {
 	}
 
 	componentDidMount() {
-		services.getAllPosts().then(post => {
-			console.log(post,'merp')
+		services.getAllMyPosts().then(post => {
+			console.log(post,'hehe')
 			this.setState({
 				apiDataLoaded: true,
 				apiData: post.data.data.posts
@@ -26,7 +26,6 @@ class PostList extends Component {
 	}
 
 	renderPosts() {
-		console.log('loaded data', this.props)
 		return this.state.apiData.map((el,i) => {
 			return <Post key={el.id} post={el} />
 		})
@@ -34,11 +33,13 @@ class PostList extends Component {
 
 	render() {
 		return (
-			<div className='post-list'>
+			<div className='mypostlist'>
+				<Header />
 				{this.state.apiDataLoaded ? this.renderPosts() : ''}
+				<Footer />
 			</div>
 		)
 	}
 }
 
-export default PostList
+export default MyPosts
