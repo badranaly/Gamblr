@@ -11,7 +11,7 @@ userRoutes.get('/followers', usersController.listFollowers);
 userRoutes.post('/', usersController.create);
 userRoutes.put('/settings', usersController.changePassword);
 userRoutes.put('/:un', usersController.editUser);
-userRoutes.delete('/:un', usersController.deleteUser);
+userRoutes.delete('/users/:un', usersController.deleteUser);
 userRoutes.post('/login', usersController.authenticateUser);
 userRoutes.get('/lookup/:un', usersController.getID);
 userRoutes.get('/checkFollowing/:id', usersController.checkFollowing)

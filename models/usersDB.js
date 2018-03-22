@@ -44,7 +44,7 @@ module.exports = {
   },
 
   deleteUser(user) {
-    return db.none('DELETE FROM users WHERE user_name=$[user_name]', user)
+    return db.none('DELETE FROM users WHERE user_name=$1', user)
   },
 
   listFollowers(user) {
