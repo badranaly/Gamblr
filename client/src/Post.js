@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import services from './services/apiServices'
+import {Redirect} from 'react-router-dom'
 
 class Post extends Component {
 	constructor(props) {
@@ -9,7 +10,8 @@ class Post extends Component {
 		this.state = {
 			likeClicked: props.list === 'favs' ? true : false,
 			user_id: props.post.user_id,
-			post_id: props.post.id
+			post_id: props.post.id,
+			fireRedirect: false
 		}
 	}
 
@@ -26,7 +28,7 @@ class Post extends Component {
 	removeLike() {
 		services.removeLike(this.state.post_id,this.state.user_id).then(like => {
 			this.setState({
-				likeClicked: false
+				likeClicked: false,
 			})
 		}).catch(err => {
 			console.log(err)
