@@ -44,6 +44,14 @@ module.exports = {
                   FROM posts
                   INNER JOIN users ON users.id = posts.user_id
                   WHERE posts.id = $[id]`, id)
+  },
+
+  getComments(id) {
+    return db.any(`SELECT users.user_name, users.pic, comments.comment
+                  FROM comments
+                  INNER JOIN posts ON posts.id = comments.post_id
+                  INNER JOIN users ON comments.user_id = users.id
+                  WHERE posts.id = $[id]`, id)
   }
 
 

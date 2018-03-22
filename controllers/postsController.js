@@ -111,5 +111,20 @@ postsController.singlePost = (req, res) => {
     });
 }
 
+postsController.getComments = (req, res) => {
+  let sendObj = {}
+  sendObj.id = req.params.id
+  Posts.getComments(sendObj)
+    .then(comments => {
+      res.json({
+        message: 'ok',
+        data: { comments }
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    });
+}
+
 
 module.exports = postsController;

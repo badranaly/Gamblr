@@ -159,5 +159,9 @@ services.singlePost = (id) => {
 	return axios.get(`/api/posts/singlePost/${id}`)
 }
 
+services.getComments = (id) => {
+	return axios.get(`/api/posts/getComments/${id}`)
+}
+
 
 export default services
