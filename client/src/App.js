@@ -14,6 +14,7 @@ import Followers from './Followers'
 import Settings from './Settings'
 import Appearance from './Appearance'
 import MyPosts from './MyPosts'
+import SinglePost from './SinglePost'
 
 class App extends Component {
   render() {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route path='/settings' component={Settings} />
           <Route path='/Appearance' component={Appearance} />
           <Route path='/myPosts' component={MyPosts} />
+          <Route path='/post/:id' component={SinglePost} />
         </div>
       </Router>
     )

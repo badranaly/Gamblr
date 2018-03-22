@@ -37,6 +37,13 @@ module.exports = {
 
   myPosts(user) {
     return db.any('SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.user_id = 1')
+  },
+
+  singlePost(id) {
+    return db.any(`SELECT users.user_name, users.blog_name, users.pic, posts.type, posts.content
+                  FROM posts
+                  INNER JOIN users ON users.id = posts.user_id
+                  WHERE posts.id = $[id]`, id)
   }
 
 

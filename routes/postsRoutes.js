@@ -10,6 +10,7 @@ postRoutes.post('/', postsController.create);
 postRoutes.post('/like', postsController.addLike);
 postRoutes.delete('/like', postsController.removeLike);
 postRoutes.get('/myPosts', postsController.myPosts);
+postRoutes.get('/singlePost/:id', postsController.singlePost);
 //postRoutes.put('/:id', postsController.editUser);
 //postRoutes.delete('/:id', postController.deleteUser);
 

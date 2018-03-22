@@ -94,6 +94,16 @@ postsController.myPosts = (req, res) => {
       res.status(400).json({message: '400', err})
     });
 
+},
+
+postsController.singlePost = (req, res) => {
+  Posts.singlePost(req.params.id)
+    .then(post => {
+      console.log(post)
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    });
 }
 
 
