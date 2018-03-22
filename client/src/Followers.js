@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import Follower from './Follower'
 
 class Followers extends Component {
   constructor(props){
@@ -35,7 +36,8 @@ class Followers extends Component {
 		return this.state.apiData.map((el,i) => {
 			return (
         <div>
-        <p><img src={el.pic} alt="Pic"/> {el.user_name}</p>
+          <Follower pic={el.pic} user_name={el.user_name} />
+      {/*  <p><img src={el.pic} alt="Pic"/> {el.user_name}</p> */}
       </div>
       )
 		})
