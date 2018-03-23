@@ -8,7 +8,7 @@ module.exports = {
                   FROM followers
                   INNER JOIN posts ON followers.following_id = posts.user_id
                   INNER JOIN users ON users.id = followers.following_id
-                  WHERE followers.follower_id = 1 OR user_id = 1`);
+                  WHERE followers.follower_id = 1`);
   },
   populateLikes() {
     return db.any(`SELECT likes.user_id, post_id, type, content, notes, user_name, pic  FROM likes
