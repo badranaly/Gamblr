@@ -78,6 +78,7 @@ services.authenticateUser = (things) => {
 services.getAllPosts = () => {
 	return axios.get('/api/posts/feed')
 }
+
 services.createOnePost = (thing) => {
 	return axios({
 		method: 'POST',
