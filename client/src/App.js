@@ -20,7 +20,8 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      username: ''
     }
   }
   // api call for creating a new user
@@ -64,21 +65,12 @@ checkLogin() {
   }).then(resp => {
     console.log('this is the response --> ',resp)
       this.setState({
-      isLoggedIn: resp.data.isLoggedIn
+      isLoggedIn: resp.data.isLoggedIn,
+      username: resp.data.token.username
     })
+    console.log(this.state)
   })
   .catch(err => console.log(err));
-}
-
-checkDecode(){
-  axios('http://localhost:3000/decodeToken', {
-    headers: {
-      Authorization: `Bearer ${TokenService.read()}`
-    },
-  }).then(resp => {
-    console.log('resp of decode ---> ', resp.data.token.username)
-  })
-  .catch(err => console.log(err))
 }
 
   render() {
@@ -86,7 +78,6 @@ checkDecode(){
       <Router>
         <div className="App">
           <button onClick={this.checkLogin.bind(this)}>checkLogin</button>
-          <button onClick={this.checkDecode.bind(this)}>decodeToken</button>
            {/* ? console.log('fuck ya') : console.log('fuck no')} */}
           <Route exact path='/' component={Login} />
           <Route exact path='/login' component={(props) => (

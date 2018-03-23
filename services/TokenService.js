@@ -25,6 +25,7 @@ receiveToken(req, res, next) {
 decode(token) {
   console.log('inside decode --->', jwt.decode(token))
     return jwt.decode(token);
+    next()
 }
 
   // generates a new token

@@ -30,7 +30,10 @@ app.get('/restricted', authService.restrict(), (req, res) => {
 })
 
 app.get('/isLoggedIn', authService.isLoggedIn, (req, res) => {
-  res.json({isLoggedIn: res.locals.isLoggedIn});
+  res.json({
+    isLoggedIn: res.locals.isLoggedIn,
+    token: tokenService.decode(req.authToken)
+  });
 });
 
 app.get('/decodeToken', (req, res) => {
