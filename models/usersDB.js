@@ -7,8 +7,8 @@ module.exports = {
                     VALUES ($[user_name], $[password], $[pic], $[bg], $[blog_name], $[blog_desc]) RETURNING *`, user);
   },
 
-  findUser(user){
-    return db.one(`SELECT * FROM users WHERE user_name = $[user_name]`, user)
+  findUser(username){
+    return db.one(`SELECT * FROM users WHERE user_name = $1`, username)
   },
 
   authenticate(user){

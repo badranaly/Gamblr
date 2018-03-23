@@ -3,7 +3,7 @@ import axios from 'axios'
 const services = {}
 
 services.getUser = (username) => {
-	return axios.get()
+	return axios.get(`/api/users/user/${username}`)
 }
 
 services.createUser = (things) => {
@@ -124,6 +124,10 @@ services.getFollowers = () => {
 
 services.getUserID = (user_name) => {
 	return axios.get(`/api/users/lookup/${user_name}`)
+}
+
+services.getUserPage = (username) => {
+	return axios.get(`/api/posts/user/${username}`)
 }
 
 services.addFollowing = (user) => {
