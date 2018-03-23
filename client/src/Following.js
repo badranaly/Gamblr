@@ -87,7 +87,7 @@ class Following extends Component {
     e.preventDefault();
     services.getUserID(this.state.user_name)
     .then(user => {
-      console.log("user", user.data.data.user)
+      console.log("user ", user.data.data.user)
       if(user.data.data.user.length === 0){
         this.setState({
           noUser: true
