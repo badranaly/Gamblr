@@ -50,14 +50,6 @@ login(data) {
     TokenService.save(resp.data.token);
   })
   .catch(err => console.log(`err: ${err}`));
-}
-
-logout(ev) {
-    ev.preventDefault();
-    TokenService.destroy();
-}
-
-checkLogin() {
   axios('http://localhost:3000/isLoggedIn', {
     headers: {
       Authorization: `Bearer ${TokenService.read()}`,
@@ -68,24 +60,30 @@ checkLogin() {
       isLoggedIn: resp.data.isLoggedIn,
       username: resp.data.token.username
     })
-    console.log(this.state)
   })
   .catch(err => console.log(err));
+}
+
+logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
 }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <button onClick={this.checkLogin.bind(this)}>checkLogin</button>
+          {/* <button onClick={this.checkLogin.bind(this)}>checkLogin</button> */}
            {/* ? console.log('fuck ya') : console.log('fuck no')} */}
           <Route exact path='/' component={Login} />
           <Route exact path='/login' component={(props) => (
-            <Login {...props} loggingout={this.logout.bind(this)} submit={this.login.bind(this)} />
+            <Login {...props} loggingout={this.logout.bind(this)} submit={this.login.bind(this)} check={this.state.isLoggedIn} />
           )} />
           <Route exact path='/signup' component={(props) => (
             <SignUp {...props} submit={this.register.bind(this)} />
           )} />
+          {console.log(this.state)}
+
           <Route path='/feed' component={Feed} />
           <Route path='/followers' component={Followers} />
           {/*<Route path='/post/:id' component={} />*/}
