@@ -53,7 +53,7 @@ usersController.create = (req, res) => {
 },
 
 usersController.getUser = (req, res) => {
-  Users.findUser(req.body)
+  Users.findUser(req.params.username)
   .then(user => {
     res.json({
       message: 'ok',
@@ -99,9 +99,14 @@ usersController.followNew = (req, res) => {
   sendObj.following_id = req.params.id
   Users.followUser(sendObj)
   .then(output => {
+    res.json({
+      message: 'ok',
+      data: { output }
+    })
     console.log("output", output)
   })
   .catch(err => {
+    res.status(400).json({message: '400', err})
     console.log(err)
   })
 }
@@ -176,7 +181,8 @@ usersController.checkFollowing = (req, res) => {
     })
   })
   .catch(err => {
-    res.status(400).json({message: '400', err})
+    console.log('--> not found <--')
+    res.status(400).json({message: 'doesnt find', err})
   })
 }
 

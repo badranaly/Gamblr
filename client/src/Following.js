@@ -38,6 +38,7 @@ class Following extends Component {
       console.log(user.data.data.user[0].id)
       services.removeFollowing(user.data.data.user[0].id)
       .then(user2 => {
+        window.location.reload()
         console.log(user2)
         })
       .catch(err=> {
@@ -53,10 +54,13 @@ class Following extends Component {
 
   renderUsers() {
 		console.log('loaded data', this.props)
+
 		return this.state.apiData.map((el,i) => {
+      let link = "/user/" + el.user_name
+      console.log("link", link)
 			return (
         <div>
-        <p><img src={el.pic} alt="Pic"/> {el.user_name}<button name={el.user_name} onClick={this.handleRemove}>-</button></p>
+        <p><img src={el.pic} alt="Pic"/> <a href={link}>{el.user_name}</a><button name={el.user_name} onClick={this.handleRemove}>-</button></p>
       </div>
       )
 		})
@@ -98,6 +102,7 @@ class Following extends Component {
         services.addFollowing(user.data.data.user)
         .then(user2 => {
           console.log(user2)
+          window.location.reload()
         })
         .catch(err=> {
           console.log(err)

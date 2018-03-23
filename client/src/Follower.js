@@ -11,45 +11,46 @@ class Follower extends Component {
       isFollower: false
     }
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.getUserData = this.getUserData.bind(this);
   }
 
-  componentDidMount() {
-
+  getUserData() {
+    console.log('--getUserData--')
     services.getUserID(this.props.user_name)
     .then(id => {
       services.checkFollowing(id.data.data.user[0].id)
       .then(posts => {
-        console.log('inside successful check following')
          this.setState({
            apiDataLoaded: true,
            apiData: posts.data.data.users,
            isFollower: true
          })
        }).catch(err => {
-          console.log('inside failed check following')
           this.setState({
             apiDataLoaded:true,
             isFollower: false
-
           })
-         console.log(err)
        })
      })
     .catch(err => {
       console.log(err)
     })
-
   }
 
+  componentDidMount() {
+    this.getUserData();
+  }
 
+// UNFOLLOW
   handleRemove(e) {
     e.stopPropagation();
     services.getUserID(e.target.name)
     .then(user => {
-      console.log("inside handleremove", user.data.data.user[0].id)
       services.removeFollowing(user.data.data.user[0].id)
       .then(user2 => {
-        console.log("succesfful remove", user2)
+        // window.location.reload()
+        this.getUserData();
         })
       .catch(err=> {
         console.log(err)
@@ -60,36 +61,37 @@ class Follower extends Component {
     })
   }
 
+// ADD THIS DOESNT WORK
   handleAdd(e) {
-    console.log("adding", e.target.name)
     e.stopPropagation();
     services.getUserID(e.target.name)
-    .then(user => {
-      services.followNew(user)
-      .then(user2 => {
-        console.log("result from addFollowing", user2)
-        })
-      .catch(err=> {
-        console.log(err)
+      .then(user => {
+        services.followNew(user)
+          .then(user2 => {
+              this.getUserData();
+            })
+          .catch(err=> {
+            console.log(err)
+          });
       })
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   renderUser() {
+    let link = "/user/" + this.props.user_name
       if(this.state.isFollower === true) {
 			     return (
              <div>
-               <p><img src={this.props.pic} alt="Pic"/> {this.props.user_name}<button name={this.props.user_name} onClick={this.handleRemove}>Unfollow</button></p>
+               <p><img src={this.props.pic} alt="Pic"/><a href={link}>{this.props.user_name}</a><button name={this.props.user_name} onClick={this.handleRemove}>Unfollow</button></p>
              </div>
            )
       }
       else {
           return (
             <div>
-              <p><img src={this.props.pic} alt="Pic"/> {this.props.user_name}<button name={this.props.user_name} onClick={this.handleAdd}>Follow</button></p>
+              <p><img src={this.props.pic} alt="Pic"/><a href={link}>{this.props.user_name}</a><button name={this.props.user_name} onClick={this.handleAdd}>Follow</button></p>
             </div>
           )
       }
@@ -98,9 +100,9 @@ class Follower extends Component {
 
 
   render(){
+    console.log('render triggered in FOLLOWER')
     return (
       <div>
-      {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
         {this.state.apiDataLoaded ? this.renderUser() : ''}
 
       </div>
