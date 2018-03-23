@@ -23,7 +23,7 @@ class Header extends Component {
 		  <div>
 		    <h1>this is the header</h1>
 		    <button onClick={this.handleButtonClick}>New Post</button>
-		    {this.state.fireRedirect ? <Redirect to={'/addPost'} /> : ''}
+		    {this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
 		  </div>
 		)
 	}

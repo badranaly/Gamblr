@@ -27,7 +27,7 @@ class MyPosts extends Component {
 
 	renderPosts() {
 		return this.state.apiData.map((el,i) => {
-			return <Post key={el.id} post={el} />
+			return <Post key={el.id} post={el} list='myposts'/>
 		})
 	}
 

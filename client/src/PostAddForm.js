@@ -41,7 +41,7 @@ class PostAddForm extends Component {
 	render() {
 		return (
 			<div className='add-form'>
-				<form onSubmit={this.handlFormSubmit}>
+				<form>
 					<select name='type' onChange={this.handleInputChange}>
 						<option value='text'>Text</option>
 						<option value='photo'>Image</option>
@@ -49,9 +49,9 @@ class PostAddForm extends Component {
 						<option value='video'>Video</option>
 					</select>
 					<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder='Enter your stuff...'></textarea>
-					<input type='submit' value='Add Post!' />
+					<button onClick={this.handleFormSubmit}>Add Post!</button>
 				</form>
-				{this.state.fireRedirect ? <Redirect to='/feed' /> : ''}
+				{this.state.fireRedirect ? <Redirect to={'/feed'} /> : ''}
 			</div>
 		)
 	}
