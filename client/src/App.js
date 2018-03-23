@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 import './App.css';
 import './Chris.css'
+import './index.css';
 
 import Login from './Login'
 import SignUp from './Signup'
