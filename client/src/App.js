@@ -45,13 +45,27 @@ login(data) {
   .catch(err => console.log(`err: ${err}`));
 }
 
+logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
+}
+
+checkLogin() {
+  axios('http://localhost:3000/isLoggedIn', {
+    headers: {
+      Authorization: `Bearer ${TokenService.read()}`,
+    },
+  }).then(resp => console.log(resp))
+  .catch(err => console.log(err));
+}
+
   render() {
     return (
       <Router>
         <div className="App">
           <Route exact path='/' component={Login} />
           <Route exact path='/login' component={(props) => (
-            <Login {...props} submit={this.login.bind(this)} />
+            <Login {...props} loggingout={this.logout.bind(this)} submit={this.login.bind(this)} />
           )} />
           <Route exact path='/signup' component={(props) => (
             <SignUp {...props} submit={this.register.bind(this)} />
