@@ -9,7 +9,8 @@ class Following extends Component {
       apiDataLoaded: false,
       apiData: null,
       fireRedirect: false,
-      user_name: ''
+      user_name: '',
+      noUser: false
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -61,7 +62,19 @@ class Following extends Component {
 		})
 	}
 
+  renderError() {
+    return(
+    <div className="alert">
+      <span className="closebtn"></span>
+      Invalid User, please try again!
+    </div>
+    )
+  }
+
   handleInputChange(e) {
+    this.setState({
+      noUser: false
+    })
     let name = e.target.name;
     let value = e.target.value;
     console.log(value)
@@ -72,17 +85,25 @@ class Following extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    console.log('HANDLED', this.state.user_name)
     services.getUserID(this.state.user_name)
     .then(user => {
-      console.log(user.data.data.user)
-      services.addFollowing(user.data.data.user)
-      .then(user2 => {
-        console.log(user2)
-      })
-      .catch(err=> {
-        console.log(err)
-      })
+      console.log("user", user.data.data.user)
+      if(user.data.data.user.length === 0){
+        this.setState({
+          noUser: true
+        })
+        console.log("not a valid user")
+      }
+      else{
+        services.addFollowing(user.data.data.user)
+        .then(user2 => {
+          console.log(user2)
+        })
+        .catch(err=> {
+          console.log(err)
+        })
+      }
+
     })
     .catch(err => {
       console.log(err)
@@ -107,8 +128,8 @@ class Following extends Component {
           <input type='submit' value="Enter User Name"/>
         </form>
       {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
+      {this.state.noUser ? this.renderError(): ''}
         {this.state.apiDataLoaded ? this.renderUsers() : ''}
-
       </div>
     )
   }
