@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import services from './services/apiServices'
 import {Redirect} from 'react-router-dom'
+import {Button} from 'react-bootstrap';
 
 class Post extends Component {
 	constructor(props) {
@@ -58,10 +59,9 @@ class Post extends Component {
 				<img alt='' src={this.props.post.pic} />
 				<h2>{this.props.post.user_name}</h2>
 				<p>{this.props.post.content}</p>
-				{this.props.list !== 'myposts' ? <button className='like-button' onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</button> : ''}
+				{this.props.list !== 'myposts' ? <Button className='like' bsStyle="info" onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</Button> : ''}
 			</div>
 		)
 	}
 }
-
 export default Post

@@ -43,8 +43,10 @@ postsController.create = (req, res) => {
 },
 
 postsController.userPage = (req, res) => {
-  Posts.userPage(req.body)
+  console.log(req.params.username)
+  Posts.userPage(req.params.username)
     .then(info => {
+      console.log(info)
       res.json({
         message: 'ok',
         data: { info },
