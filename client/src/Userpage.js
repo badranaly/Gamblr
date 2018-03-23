@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import Post from './Post'
+import Header from './Header'
+import Footer from './Footer'
 
 class UserPage extends Component {
   constructor(props){
@@ -55,7 +57,9 @@ class UserPage extends Component {
   render(){
     return (
       <div>
+        <Header />
         {this.state.userDataLoaded && this.state.postDataLoaded ? this.renderPage() : ''}
+        <Footer />
       </div>
     )
   }
