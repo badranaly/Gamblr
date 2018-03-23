@@ -1,8 +1,6 @@
 //LetsGetit
 
 import React, {Component} from 'react'
-import services from './services/apiServices'
-import {Redirect} from 'react-router-dom'
 import Userform from './Userform'
 
 class Signup extends Component {

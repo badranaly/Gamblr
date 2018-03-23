@@ -1,6 +1,6 @@
 //Lillian
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import Login from './Login'
@@ -17,6 +17,12 @@ import MyPosts from './MyPosts'
 import TokenService from './services/TokenService'
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoggedIn: false
+    }
+  }
   // api call for creating a new user
 // note that TokenService.save with the token is called
 // may also want to setState with the user data and
@@ -55,14 +61,23 @@ checkLogin() {
     headers: {
       Authorization: `Bearer ${TokenService.read()}`,
     },
-  }).then(resp => console.log(resp))
+  }).then(resp => {
+    console.log('this is the response --> ',resp)
+      this.setState({
+      isLoggedIn: resp.data.isLoggedIn
+    })
+  })
   .catch(err => console.log(err));
+
 }
 
   render() {
     return (
       <Router>
         <div className="App">
+          <button onClick={this.checkLogin.bind(this)}>checkLogin</button>
+          {console.log('testin check login bool', this.state.isLoggedIn ? console.log('im logged in') : console.log('logged out'))}
+           {/* ? console.log('fuck ya') : console.log('fuck no')} */}
           <Route exact path='/' component={Login} />
           <Route exact path='/login' component={(props) => (
             <Login {...props} loggingout={this.logout.bind(this)} submit={this.login.bind(this)} />
