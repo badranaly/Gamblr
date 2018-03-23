@@ -68,7 +68,17 @@ checkLogin() {
     })
   })
   .catch(err => console.log(err));
+}
 
+checkDecode(){
+  axios('http://localhost:3000/decodeToken', {
+    headers: {
+      Authorization: `Bearer ${TokenService.read()}`
+    },
+  }).then(resp => {
+    console.log('resp of decode ---> ', resp.data.token.username)
+  })
+  .catch(err => console.log(err))
 }
 
   render() {
@@ -76,7 +86,7 @@ checkLogin() {
       <Router>
         <div className="App">
           <button onClick={this.checkLogin.bind(this)}>checkLogin</button>
-          {console.log('testin check login bool', this.state.isLoggedIn ? console.log('im logged in') : console.log('logged out'))}
+          <button onClick={this.checkDecode.bind(this)}>decodeToken</button>
            {/* ? console.log('fuck ya') : console.log('fuck no')} */}
           <Route exact path='/' component={Login} />
           <Route exact path='/login' component={(props) => (
