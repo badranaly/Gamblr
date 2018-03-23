@@ -2,7 +2,6 @@
 import axios from 'axios'
 const services = {}
 
-//user manipulation
 services.getUser = (username) => {
 	return axios.get()
 }
@@ -176,6 +175,22 @@ services.addComment = (id, comment) => {
 			content: comment
 		}
 	})
+}
+
+services.removeLikesByUser = (id) => {
+	return axios.delete(`/api/users/users/likes/${id}`)
+}
+
+services.removeFollowByUser = (id) => {
+	return axios.delete(`/api/users/users/follower/${id}`)
+}
+
+services.removePostsByUser = (id) => {
+	return axios.delete(`/api/users/users/posts/${id}`)
+}
+
+services.removeCommentsByUser = (id) => {
+	return axios.delete(`/api/users/users/comments/${id}`)
 }
 
 

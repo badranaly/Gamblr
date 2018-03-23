@@ -11,6 +11,11 @@ userRoutes.get('/followers', usersController.listFollowers);
 userRoutes.post('/', usersController.create);
 userRoutes.put('/settings', usersController.changePassword);
 userRoutes.put('/:un', usersController.editUser);
+userRoutes.delete('/users/follower/:id', usersController.removeFollowerByUser)
+userRoutes.delete('/users/comments/:id', usersController.removeCommentsByUser)
+userRoutes.delete('/users/likes/:id', usersController.removeLikesByUser)
+userRoutes.delete('/users/posts/:id', usersController.removePostsByUser)
+
 userRoutes.delete('/users/:un', usersController.deleteUser);
 userRoutes.post('/login', usersController.authenticateUser);
 userRoutes.get('/lookup/:un', usersController.getID);

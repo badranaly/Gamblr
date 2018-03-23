@@ -57,6 +57,22 @@ module.exports = {
 
   checkFollowing(id) {
     return db.one('SELECT following_id FROM followers WHERE following_id=$[following_id] AND follower_id=1', id)
+  },
+
+  removePostsByUser(id) {
+    return db.none(`DELETE FROM posts WHERE user_id=$1 `, id)
+  },
+
+  removeLikesByUser(id) {
+    return db.none(`DELETE FROM likes WHERE user_id=$1`, id)
+  },
+
+  removeCommentsByUser(id) {
+    return db.none(`DELETE FROM comments WHERE user_id=$1`, id)
+  },
+
+  removeFollowerByUser(id) {
+    return db.none(`DELETE FROM followers WHERE following_id=$1 or follower_id=$1`, id)
   }
 
 }

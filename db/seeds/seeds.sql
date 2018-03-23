@@ -17,17 +17,20 @@ INSERT INTO comments (comment, user_id, post_id) VALUES
   ('This is a comment', '2', '1'),
   ('This is a second comment', '3', '1'),
   ('Nice audio', '1', '2'),
-  ('Nice text', '1', '4');
+  ('Nice text', '1', '4'),
+  ('Delete me', '4', '4');
 
 INSERT INTO likes (user_id, post_id) VALUES
   ('2', '1'),
   ('3', '2'),
   ('1', '2'),
-  ('1', '3');
+  ('1', '3'),
+  ('4', '3');
 
 INSERT INTO followers (follower_id, following_id) VALUES
   ('2', '1'),
   ('1', '3'),
   ('3', '1'),
+  ('4', '1'),
   ('1', '2'),
   ('1', '4');

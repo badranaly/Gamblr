@@ -26,7 +26,7 @@ handleSubmit(e){
     })
   })
   .catch(err => {
-    console.log('handlesubmit is fucked up', err)
+    console.log(err)
   })
 }
 
@@ -43,18 +43,46 @@ handleDelete(e){
   //REPLACE THIS WITH USER NAME FROM SESSION
   services.getUserID("chris")
   .then(id => {
-    console.log("id", id)
+    services.removeLikesByUser(id.data.data.user[0].id)
+    .then(likes => {
+      console.log(likes)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    services.removeFollowByUser(id.data.data.user[0].id)
+    .then(follow => {
+      console.log(follow)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    services.removePostsByUser(id.data.data.user[0].id)
+    .then(post => {
+      console.log(post)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    services.removeCommentsByUser(id.data.data.user[0].id)
+    .then(comment => {
+      console.log(comment)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   })
   .catch(err => {
     console.log(err)
   })
-/*  services.deleteUser("chris")
+  services.deleteUser("chris")
   .then(user => {
     console.log(user)
   })
   .catch(err => {
     console.log(err)
-  })*/
+  })
+
 }
 
   render(){

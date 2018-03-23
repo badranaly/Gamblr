@@ -180,6 +180,58 @@ usersController.checkFollowing = (req, res) => {
   })
 }
 
+usersController.removeLikesByUser = (req, res) => {
+  Users.removeLikesByUser(req.params.id)
+    .then(likes => {
+      res.json({
+        message: 'ok',
+        data: {likes}
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+}
+
+usersController.removeFollowerByUser = (req, res) => {
+  Users.removeFollowerByUser(req.params.id)
+    .then(follower => {
+      res.json({
+        message: 'ok',
+        data: {follower}
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+}
+
+usersController.removePostsByUser = (req, res) => {
+  Users.removePostsByUser(req.params.id)
+    .then(posts => {
+      res.json({
+        message: 'ok',
+        data: {posts}
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+}
+
+usersController.removeCommentsByUser = (req, res) => {
+  Users.removeCommentsByUser(req.params.id)
+    .then(comments => {
+      res.json({
+        message: 'ok',
+        data: {comments}
+      })
+    })
+    .catch(err => {
+      res.status(400).json({message: '400', err})
+    })
+}
+
 ;
 
 module.exports = usersController;
