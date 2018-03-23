@@ -42,9 +42,10 @@ class SinglePost extends Component {
 
   renderComments() {
     return this.state.commentData.map((el,i) => {
+      let link = "/user/" + el.user_name
       return (
         <div>
-        <p><img src={el.pic} alt="Pic"/> {el.user_name} {el.comment}</p>
+        <p><img src={el.pic} alt="Pic"/><a href={link}>{el.user_name}</a> {el.comment}</p>
       </div>
       )
     })
