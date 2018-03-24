@@ -119,6 +119,10 @@ services.removeLike = (postId,userId) => {
 	return axios.delete(`/api/posts/like/${postId}/${userId}`)
 }
 
+services.subtractLike = (postId) => {
+	return axios.delete(`/api/posts/subtractLike/${postId}`)
+}
+
 services.getFollowing = () => {
 	return axios.get(`/api/users/following`)
 }

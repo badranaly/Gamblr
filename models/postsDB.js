@@ -26,9 +26,12 @@ module.exports = {
   },
 
   removeLike(input) {
-    return db.none(`DELETE FROM likes WHERE post_id=$[postid] and user_id=$[userid]`, input).then(like => {
-      return db.none(`UPDATE posts SET notes=notes-1 WHERE id=$1`,like.post_id)
-    })
+    return db.none(`DELETE FROM likes WHERE post_id=$[postid] and user_id=$[userid]`, input)
+  },
+
+  subtractLike(input) {
+    console.log("input", input)
+    return db.none(`UPDATE posts SET notes=notes-1 WHERE id=$1`,input)
   },
 
   getPost(id) {

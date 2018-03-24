@@ -178,5 +178,18 @@ postsController.checkLikes = (req, res) => {
     })
 }
 
+postsController.subtractLike = (req, res) => {
+  Posts.subtractLike(req.params.id)
+    .then(response => {
+      res.json({
+        message: 'ok',
+        data: { response }
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 
 module.exports = postsController;

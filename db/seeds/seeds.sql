@@ -9,10 +9,10 @@ INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc) VALUES
 
 
 INSERT INTO posts (type, content, user_id, notes) VALUES
-  ('text', 'My name is Taka, and this is my first post!', '2', '0'),
-  ('text', 'I <3 Ruby!', '3', '0'),
-  ('text', 'It`s in a British Accent...', '1', '0'),
-  ('text', 'Another post??', '2', '0'),
+  ('text', 'My name is Taka, and this is my first post!', '2', '2'),
+  ('text', 'I <3 Ruby!', '3', '2'),
+  ('text', 'It`s in a British Accent...', '1', '1'),
+  ('text', 'Another post??', '2', '1'),
   ('text', 'español es lo mío', '2', '0'),
   ('text', 'And rails!', '3','0' );
 

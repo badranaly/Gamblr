@@ -17,17 +17,18 @@ class Post extends Component {
 		}
 	}
 
+
 	componentDidMount() {
 		services.checkLikes(this.state.user_id, this.state.post_id).then(posts => {
-         	this.setState({
-           		likeClicked: true
-         	})
-        }).catch(err => {
-          	this.setState({
-            	likeClicked: false
-          	})
-         	console.log(err)
-       	})
+					this.setState({
+							likeClicked: true
+					})
+				}).catch(err => {
+						this.setState({
+							likeClicked: false
+						})
+					console.log(err)
+				})
 	}
 
 	addLike() {
@@ -49,6 +50,11 @@ class Post extends Component {
 		services.removeLike(this.state.post_id,this.state.user_id).then(like => {
 			this.setState({
 				likeClicked: false,
+			})
+			services.subtractLike(this.state.post_id).then(like2 => {
+			})
+			.catch(err=> {
+				console.log(err)
 			})
 		}).catch(err => {
 			console.log(err)
