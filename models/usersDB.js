@@ -11,6 +11,10 @@ module.exports = {
     return db.one(`SELECT * FROM users WHERE user_name = $1`, username)
   },
 
+  userLogin(input){
+    return db.one(`SELECT * FROM users WHERE user_name=$[user_name] AND password=$[password]`, input)
+  },
+
   authenticate(user){
     return db.one(`SELECT * FROM users WHERE user_name = $[user_name] AND password = $[password]`, user)
   },

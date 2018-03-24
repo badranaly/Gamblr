@@ -15,7 +15,23 @@ usersController.editUser = (req, res) => {
       console.log(err);
       res.status(400).json({message: '400', err});
     });
-},
+}
+
+usersController.userLogin = (req, res) => {
+  let sendObj = {}
+  sendObj.user_name = req.params.user
+  sendObj.password = req.params.pass
+  Users.userLogin(sendObj)
+  .then(response => {
+    res.json({
+      message: 'ok',
+      data: {response}
+    })
+  })
+  .catch(err => {
+    res.status(400).json({message: '400', err});
+  })
+}
 
 usersController.changePassword = (req, res) => {
   Users.changePass(req.body)
@@ -26,6 +42,7 @@ usersController.changePassword = (req, res) => {
     res.status(400).json({message:'400', err})
   })
 }
+
 usersController.deleteUser = (req, res) => {
   Users.deleteUser(req.params.un)
     .then(user => {

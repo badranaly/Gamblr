@@ -7,7 +7,7 @@ services.getUser = (username) => {
 }
 
 services.getPost = (id) => {
-	return axios.get(`api/posts/post/${id}`)
+	return axios.get(`/api/posts/post/${id}`)
 }
 
 services.createUser = (things) => {
@@ -33,6 +33,10 @@ services.updateUserInfo = (things,username) => {
 			password: things.password
 		}
 	})
+}
+
+services.userLogin = (user, pass) => {
+	return axios.get(`/api/users/login/${user}/${pass}`)
 }
 
 services.updatePassword = (obj) => {

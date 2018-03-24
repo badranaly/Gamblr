@@ -8,7 +8,8 @@ userRoutes.post('/follower', usersController.followUser);
 userRoutes.post('/follower/:id', usersController.followNew);
 userRoutes.get('/following', usersController.listFollowing);
 userRoutes.get('/followers', usersController.listFollowers);
-userRoutes.get('/user/:username', usersController.getUser)
+userRoutes.get('/user/:username', usersController.getUser);
+userRoutes.get('/login/:user/:pass', usersController.userLogin);
 userRoutes.post('/', usersController.create);
 userRoutes.put('/settings', usersController.changePassword);
 userRoutes.put('/:un', usersController.editUser);
