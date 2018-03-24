@@ -19,12 +19,10 @@ class Post extends Component {
 
 	componentDidMount() {
 		services.checkLikes(this.state.user_id, this.state.post_id).then(posts => {
-        	console.log('inside successful check following' + this.state.user_id + " " + this.state.post_id)
          	this.setState({
            		likeClicked: true
          	})
         }).catch(err => {
-          	console.log('inside failed check following')
           	this.setState({
             	likeClicked: false
           	})
@@ -33,7 +31,6 @@ class Post extends Component {
 	}
 
 	addLike() {
-		console.log(this.props.post)
 		services.addLike(this.state).then(like => {
 			this.setState({
 				likeClicked: true,
@@ -42,7 +39,6 @@ class Post extends Component {
 			console.log(err)
 		})
 		services.getPost(this.state.post_id).then(post => {
-			console.log(post,'posts')
 			this.setState({
 				likes: post.data.data.post.notes
 			})
@@ -58,7 +54,6 @@ class Post extends Component {
 			console.log(err)
 		})
 		services.getPost(this.state.post_id).then(post => {
-			console.log(post,'posts')
 			this.setState({
 				likes: post.data.data.post.notes
 			})
@@ -66,7 +61,6 @@ class Post extends Component {
 	}
 
 	render() {
-		console.log(this.props.post,'favesprops')
 		return (
 			<div className='post'>
 				<img alt='' src={this.props.post.pic} />

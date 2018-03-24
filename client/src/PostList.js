@@ -15,7 +15,6 @@ class PostList extends Component {
 
 	componentDidMount() {
 		services.getAllPosts().then(post => {
-			console.log(post,'merp')
 			this.setState({
 				apiDataLoaded: true,
 				apiData: post.data.data.posts
@@ -26,9 +25,7 @@ class PostList extends Component {
 	}
 
 	renderPosts() {
-		console.log('loaded data', this.props)
 		return this.state.apiData.map((el,i) => {
-			console.log("getting post, ", el)
 			return <Post key={el.id} post={el} />
 		})
 	}

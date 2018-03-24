@@ -19,9 +19,10 @@ module.exports = {
 
   addLike(post) {
     return db.one(`INSERT INTO likes (post_id, user_id)
-                  VALUES ($/post_id/, $/user_id/) RETURNING *`, post).then(like => {
+                  VALUES ($/post_id/, $/user_id/) RETURNING *`, post)
+              .then(like => {
                     return db.none(`UPDATE posts SET notes=notes+1 WHERE id=$1`,like.post_id)
-                  })
+              })
   },
 
   removeLike(input) {
