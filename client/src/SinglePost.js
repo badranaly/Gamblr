@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import Header from './Header'
+import Footer from './Footer'
 
 class SinglePost extends Component {
   constructor(props){
@@ -19,6 +21,7 @@ class SinglePost extends Component {
   componentDidMount() {
     services.singlePost(this.props.match.params.id)
     .then(data => {
+      console.log('postdata',data.data.data.post[0])
       this.setState({
         postDataLoaded: true,
         postData: data.data.data.post[0]
@@ -80,7 +83,7 @@ class SinglePost extends Component {
               <h1>Post</h1>
               <h2>{this.state.postData.user_name}</h2>
               <p>{this.state.postData.content}</p>
-              <h4>Likes</h4>
+              <h4>Likes: {this.state.postData.notes}</h4>
               <p>Add Comment:</p>
               <form onSubmit={this.handleFormSubmit}>
               <textarea name="comment" onChange={this.handleInputChange} placeholder="Enter Comment"></textarea>
@@ -98,7 +101,9 @@ class SinglePost extends Component {
   render(){
     return (
       <div>
+        <Header />
         {this.state.postDataLoaded ? this.renderPage() : ''}
+        <Footer />
       </div>
     )
   }

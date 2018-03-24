@@ -6,6 +6,10 @@ services.getUser = (username) => {
 	return axios.get(`/api/users/user/${username}`)
 }
 
+services.getPost = (id) => {
+	return axios.get(`api/posts/post/${id}`)
+}
+
 services.createUser = (things) => {
 	return axios({
 		method: 'POST',

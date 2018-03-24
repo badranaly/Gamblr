@@ -103,6 +103,17 @@ postsController.myPosts = (req, res) => {
 
 },
 
+postsController.getPost = (req,res) => {
+  Posts.getPost(req.params.id).then(post => {
+    res.json({
+      message: 'ok',
+      data: {post}
+    })
+  }).catch(err => {
+    res.status(400).json({message: '400', err})
+  })
+}
+
 postsController.singlePost = (req, res) => {
   let sendObj = {}
   sendObj.id = req.params.id

@@ -17,13 +17,19 @@ class PostAddForm extends Component {
 		}
 		this.handleInputChange = this.handleInputChange.bind(this)
 		this.handleFormSubmit = this.handleFormSubmit.bind(this)
+		this.handleTypeChange = this.handleTypeChange.bind(this)
 	}
 
 	handleInputChange(e) {
-		let name = e.target.name
-		let value = e.target.value
+		console.log(e.target.value)
 		this.setState({
-			[name]: value
+			content: e.target.value
+		})
+	}
+
+	handleTypeChange(e) {
+		this.setState({
+			type: e.target.value
 		})
 	}
 
@@ -49,18 +55,18 @@ class PostAddForm extends Component {
 							<Modal.Title>New Post</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-					<select name='type' onChange={this.handleInputChange}>
+					<select name='type' onChange={this.handleTypeChange}>
 						<option value='text'>Text</option>
 						<option value='photo'>Image</option>
 						<option value='link'>Link</option>
 						<option value='video'>Video</option>
 					</select>
-					<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder='Enter post here...'></textarea>
+					<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder={this.state.type === 'text' ? 'Enter post here...' : this.state.type === 'video' ? 'Enter Youtube Link here...' : 'Enter Link here...'}></textarea>
 					<Button onClick={this.handleFormSubmit} bsStyle='danger' bsSize='small'>Add Post!</Button>
 				</Modal.Body>
 					</Modal.Dialog>
 				</form>
-				{this.state.fireRedirect ? <Redirect to={'/feed'} /> : ''}
+				{this.state.fireRedirect ? <Redirect to={'/myPosts'} /> : ''}
 			</div>
 		)
 	}

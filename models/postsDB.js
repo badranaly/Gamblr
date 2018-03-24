@@ -8,7 +8,7 @@ module.exports = {
                   FROM followers
                   INNER JOIN posts ON followers.following_id = posts.user_id
                   INNER JOIN users ON users.id = followers.following_id
-                  WHERE followers.follower_id = 1`);
+                  WHERE followers.follower_id = 1 ORDER BY posts.id DESC`);
   },
   populateLikes() {
     return db.any(`SELECT likes.user_id, post_id, type, content, notes, user_name, pic  FROM likes
@@ -19,11 +19,19 @@ module.exports = {
 
   addLike(post) {
     return db.one(`INSERT INTO likes (post_id, user_id)
-                  VALUES ($/post_id/, $/user_id/) RETURNING *`, post)
+                  VALUES ($/post_id/, $/user_id/) RETURNING *`, post).then(like => {
+                    return db.none(`UPDATE posts SET notes=notes+1 WHERE id=$1`,like.post_id)
+                  })
   },
 
   removeLike(input) {
-    return db.none(`DELETE FROM likes WHERE post_id=$[postid] and user_id=$[userid]`, input)
+    return db.none(`DELETE FROM likes WHERE post_id=$[postid] and user_id=$[userid]`, input).then(like => {
+      return db.none(`UPDATE posts SET notes=notes-1 WHERE id=$1`,like.post_id)
+    })
+  },
+
+  getPost(id) {
+    return db.one(`SELECT * FROM posts WHERE id=$1`,id)
   },
 
   createPost(post) {
@@ -33,19 +41,17 @@ module.exports = {
   },
 
   userPage(username) {
-    return db.any(`SELECT * FROM posts
-                    JOIN likes ON post_id=posts.id
-                    JOIN users ON likes.user_id=users.id
-                    WHERE user_name=$1`, username)
+    return db.any(`SELECT posts.id, type, content, user_id, notes, user_name, pic FROM posts
+                    JOIN users ON posts.user_id=users.id
+                    WHERE user_name=$1 ORDER BY posts.id DESC`, username)
   },
-  //SELECT users.user_name, users.pic, users.bg, users.blog_name, users.blog_desc, type, content, notes FROM users INNER JOIN posts on posts.user_id = users.id WHERE user_name = $1
 
   myPosts(user) {
-    return db.any('SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.user_id = 1')
+    return db.any('SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.user_id = 1 ORDER BY posts.id DESC')
   },
 
   singlePost(id) {
-    return db.any(`SELECT users.user_name, users.blog_name, users.pic, posts.type, posts.content
+    return db.any(`SELECT users.user_name, users.blog_name, users.pic, posts.type, posts.content, posts.notes
                   FROM posts
                   INNER JOIN users ON users.id = posts.user_id
                   WHERE posts.id = $[id]`, id)
@@ -56,7 +62,7 @@ module.exports = {
                   FROM comments
                   INNER JOIN posts ON posts.id = comments.post_id
                   INNER JOIN users ON comments.user_id = users.id
-                  WHERE posts.id = $[id]`, id)
+                  WHERE posts.id = $[id] ORDER BY comments.id`, id)
   },
 
   addComment(input) {

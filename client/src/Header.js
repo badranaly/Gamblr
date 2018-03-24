@@ -31,8 +31,12 @@ class Header extends Component {
 							<a className="navbar-brand" href="#"><span className="GA">GA</span>mblr</a>
 						</div>
 						<ul className="nav navbar-nav">
-							<li className="active"><a href="#">Home</a></li>
-							<li className="active2"><a href="#">Account</a></li>
+							<li className="active"><a href="/feed">Home</a></li>
+							<li className="active2"><a href="#">Account</a>
+								<ul className='dropdown'>
+
+								</ul>
+							</li>
 							  <Button onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
 							 {this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
 						</ul>
