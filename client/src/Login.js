@@ -44,7 +44,7 @@ handleSubmit(e){
           <div class="wrapper">
             <form class="form-signin">
               <h2 class="form-signin-heading">Please login</h2>
-              <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" onChange={this.handleChange}/><br/>
+              <input type="text" class="form-control" name="user_name" placeholder="Username" required="" autofocus="" onChange={this.handleChange}/><br/>
               <input type="password" onChange={this.handleChange} class="form-control" name="password" placeholder="Password" required=""/>
               <button class="btn btn-lg btn-danger btn-block" type="submit">Login</button>
             </form>
