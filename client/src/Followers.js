@@ -4,6 +4,8 @@ import Follower from './Follower'
 import Header from './Header'
 import Footer from './Footer'
 
+// Followers.js is a container that holds elements for each follower
+
 class Followers extends Component {
   constructor(props){
     super(props)
@@ -16,6 +18,8 @@ class Followers extends Component {
 
   }
 
+
+//fuction to get a list of all users who follow a given logged in user
   componentDidMount() {
     services.getFollowers()
     .then(users => {
@@ -28,11 +32,7 @@ class Followers extends Component {
     })
   }
 
-
-  /* handleRemove(user) {
-    console.log(user)
-  } */
-
+// uses the data retrieved from above to create an individual component rendered for each user who follows
   renderUsers() {
 		return this.state.apiData.map((el,i) => {
 			return (
@@ -42,12 +42,6 @@ class Followers extends Component {
       )
 		})
 	}
-
-
-  /* handleFormSubmit(e) {
-    e.preventDefault();
-    console.log('HANDLED')
-  } */
 
   render(){
     return (

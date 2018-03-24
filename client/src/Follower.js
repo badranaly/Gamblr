@@ -16,7 +16,6 @@ class Follower extends Component {
   }
 
   getUserData() {
-    console.log('--getUserData--')
     services.getUserID(this.props.user_name)
     .then(id => {
       services.checkFollowing(id.data.data.user[0].id)
@@ -42,14 +41,13 @@ class Follower extends Component {
     this.getUserData();
   }
 
-// UNFOLLOW
+// functionality to unfollow a user you currently follow who follows you
   handleRemove(e) {
     e.stopPropagation();
     services.getUserID(e.target.name)
     .then(user => {
       services.removeFollowing(user.data.data.user[0].id)
       .then(user2 => {
-        // window.location.reload()
         this.getUserData();
         })
       .catch(err=> {
@@ -61,7 +59,7 @@ class Follower extends Component {
     })
   }
 
-// ADD THIS DOESNT WORK
+// functionality to follow a user who you do not yet follow
   handleAdd(e) {
     e.stopPropagation();
     services.getUserID(e.target.name)
@@ -79,6 +77,7 @@ class Follower extends Component {
       });
   }
 
+  // render the user, with it showing follow / unfollow depending on if you follow the user, depending on if isFollower in state is true
   renderUser() {
     let link = "/user/" + this.props.user_name
       if(this.state.isFollower === true) {
@@ -100,7 +99,6 @@ class Follower extends Component {
 
 
   render(){
-    console.log('render triggered in FOLLOWER')
     return (
       <div>
         {this.state.apiDataLoaded ? this.renderUser() : ''}

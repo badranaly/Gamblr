@@ -22,7 +22,8 @@ class Following extends Component {
   componentDidMount() {
     this.updateData()
   }
-
+  // functionality that is called when component mounts
+  // also called by component methods to trigger a reload of the page as needed
   updateData() {
     services.getFollowing().then(posts => {
       this.setState({
@@ -34,7 +35,7 @@ class Following extends Component {
     })
   }
 
-
+  // removes a user from the list of users that you follow
   handleRemove(e) {
     console.log(e.target.name)
     e.stopPropagation();
@@ -77,6 +78,7 @@ class Following extends Component {
     )
   }
 
+  // captures what user is entering into the add new user to follow field
   handleInputChange(e) {
     this.setState({
       noUser: false
@@ -89,16 +91,15 @@ class Following extends Component {
     })
   }
 
+  // process the user add
   handleFormSubmit(e) {
     e.preventDefault();
     services.getUserID(this.state.user_name)
     .then(user => {
-      console.log("user ", user.data.data.user)
       if(user.data.data.user.length === 0){
         this.setState({
           noUser: true
         })
-        console.log("not a valid user")
       }
       else{
         services.addFollowing(user.data.data.user)
@@ -115,15 +116,7 @@ class Following extends Component {
     .catch(err => {
       console.log(err)
     })
-  /*  services.addFollowing(this.state.user_name)
-      .then(user => {
-        this.setState({
-          user_name: ''
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      }) */
+
   }
 
   render(){
@@ -135,7 +128,6 @@ class Following extends Component {
           <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
           <input type='submit' value="Enter User Name"/>
         </form>
-      {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
       {this.state.noUser ? this.renderError(): ''}
         {this.state.apiDataLoaded ? this.renderUsers() : ''}
         <Footer />
