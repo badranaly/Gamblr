@@ -69,7 +69,7 @@ class Post extends Component {
 	render() {
 		let link = "/post/" + this.state.post_id
 		return (
-			<div className='post'>
+			<div className='post mainPost'>
 				<img className="profilePic" alt='' src={this.props.post.pic} />
 				<h2 className="userPost" className='post'><a className="userLink" href={`/user/${this.props.post.user_name}`}>{this.props.post.user_name}</a></h2>
 				<div className="posts">{this.props.post.type === 'video' ? <ReactPlayer url={this.props.post.content} /> : this.props.post.type === 'photo' ? <img alt='' src={this.props.post.content} /> : this.props.post.type === 'link' ? <a href={this.props.post.content}>{this.props.post.content}</a> : this.props.post.content}</div>
