@@ -27,7 +27,8 @@ INSERT INTO likes (user_id, post_id) VALUES
   ('2', '1'),
   ('3', '2'),
   ('1', '2'),
-  ('1', '3'),
+  ('1', '1'),
+  ('1', '4'),
   ('4', '3');
 
 INSERT INTO followers (follower_id, following_id) VALUES

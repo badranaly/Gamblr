@@ -17,7 +17,6 @@ class Likes extends Component {
 
 	componentDidMount() {
 		services.getAllLikes().then(like => {
-			console.log(like,'likes')
 			this.setState({
 				apiDataLoaded: true,
 				apiData: like.data.data.posts
@@ -28,7 +27,6 @@ class Likes extends Component {
 	}
 
 	renderLikes() {
-		console.log('loaded likes')
 		return this.state.apiData.map((el,i) => {
 			return <Post key={el.id} post={el} list='favs'/>
 		})

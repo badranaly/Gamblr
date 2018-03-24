@@ -71,7 +71,7 @@ module.exports = {
   },
 
   checkLikes(input) {
-    return db.one(`SELECT * FROM likes WHERE user_id=1 AND post_id=$[post_id]`, input)
+    return db.any(`SELECT * FROM likes WHERE user_id=1 AND post_id=$[post_id]`, input)
   }
 
 
