@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react'
 import services from './services/apiServices'
-import Redirect from 'react-router-dom'
 
 class Settings extends Component {
 constructor(props){

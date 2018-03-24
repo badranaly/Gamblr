@@ -1,7 +1,6 @@
 //LetsGetit
 
 import React, {Component} from 'react'
-import Redirect from 'react-router-dom'
 import services from './services/apiServices'
 import './Login.css'
 
@@ -28,7 +27,7 @@ handleChange(e){
 
 handleSubmit(e){
       e.preventDefault()
-      let name = e.target.name
+  //    let name = e.target.name
       console.log('username:', this.state.user_name)
       console.log('password:', this.state.password);
       services.authenticateUser(this.state)

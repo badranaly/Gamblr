@@ -5,9 +5,6 @@ import PostList from './PostList'
 import Footer from './Footer'
 
 class Feed extends Component {
-	constructor(props) {
-		super(props)
-	}
 
 	render() {
 		return (

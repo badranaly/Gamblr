@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import {Navbar} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import './index.css';
 
