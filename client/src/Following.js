@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import { Redirect } from 'react-router-dom';
+import Header from './Header'
+import Footer from './Footer'
 
 class Following extends Component {
   constructor(props){
@@ -24,7 +26,6 @@ class Following extends Component {
 
   updateData() {
     services.getFollowing().then(posts => {
-      console.log("data from post", posts)
       this.setState({
         apiDataLoaded: true,
         apiData: posts.data.data.users
@@ -40,7 +41,6 @@ class Following extends Component {
     e.stopPropagation();
     services.getUserID(e.target.name)
     .then(user => {
-      console.log(user.data.data.user[0].id)
       services.removeFollowing(user.data.data.user[0].id)
       .then(user2 => {
         this.updateData();
@@ -58,11 +58,9 @@ class Following extends Component {
   }
 
   renderUsers() {
-		console.log('loaded data', this.props)
 
 		return this.state.apiData.map((el,i) => {
       let link = "/user/" + el.user_name
-      console.log("link", link)
 			return (
         <div>
         <p><img src={el.pic} alt="Pic"/> <a href={link}>{el.user_name}</a><button name={el.user_name} onClick={this.handleRemove}>-</button></p>
@@ -132,6 +130,7 @@ class Following extends Component {
   render(){
     return (
       <div>
+        <Header />
         <h1>Users currently being followed:</h1>
         <form onSubmit={this.handleFormSubmit}>
           <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
@@ -140,6 +139,7 @@ class Following extends Component {
       {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
       {this.state.noUser ? this.renderError(): ''}
         {this.state.apiDataLoaded ? this.renderUsers() : ''}
+        <Footer />
       </div>
     )
   }

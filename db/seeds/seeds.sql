@@ -1,17 +1,20 @@
 \c gamblr
 
 INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc) VALUES
-  ('User_1', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'bca', 'a', 'b'),
-  ('User_2', '124', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'jhf', 'a', 'b'),
-  ('User_3', '563', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lko', 'a', 'b'),
-  ('chris', '125', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lasd', 'a', 'b');
+  ('jace', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'bca', 'Ace Blog', 'Tennis and life'),
+  ('taka', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'jhf', 'Take Pensamiento', 'Stepping through the array'),
+  ('bell', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lko', 'The Hog Pit', 'PBR? Yes please!'),
+  ('aly', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lko', 'Stuck on a bus', 'No, seriously...'),
+  ('chris', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lasd', 'Chris Blog', 'The house of disrespect');
 
 
 INSERT INTO posts (type, content, user_id, notes) VALUES
-  ('text', 'This is a post', '1', '3'),
-  ('audio', 'This is not an audio clip', '2', '2'),
-  ('text', 'MY POST', '3', '0'),
-  ('text', 'Another post??', '4', '1');
+  ('text', 'My name is Taka, and this is my first post!', '2', '0'),
+  ('text', 'I <3 Ruby!', '3', '0'),
+  ('text', 'It`s in a British Accent...', '1', '0'),
+  ('text', 'Another post??', '2', '0'),
+  ('text', 'español es lo mío', '2', '0'),
+  ('text', 'And rails!', '3','0' );
 
 INSERT INTO comments (comment, user_id, post_id) VALUES
   ('This is a comment', '2', '1'),

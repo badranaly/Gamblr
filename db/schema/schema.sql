@@ -43,5 +43,6 @@ CREATE TABLE likes (
 
 CREATE TABLE followers (
   follower_id INT,
-  following_id INT
+  following_id INT,
+  UNIQUE (follower_id, following_id)
 );

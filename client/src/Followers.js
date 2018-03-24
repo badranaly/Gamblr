@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import Follower from './Follower'
+import Header from './Header'
+import Footer from './Footer'
 
 class Followers extends Component {
   constructor(props){
@@ -36,7 +38,6 @@ class Followers extends Component {
 			return (
         <div>
           <Follower pic={el.pic} user_name={el.user_name} />
-      {/*  <p><img src={el.pic} alt="Pic"/> {el.user_name}</p> */}
       </div>
       )
 		})
@@ -51,8 +52,10 @@ class Followers extends Component {
   render(){
     return (
       <div>
+        <Header />
         <h1>Currently followed by:</h1>
         {this.state.apiDataLoaded ? this.renderUsers() : ''}
+        <Footer />
 
       </div>
     )
