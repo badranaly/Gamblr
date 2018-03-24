@@ -15,19 +15,11 @@ body {
   font-size: 50px;
 }
 
-.post {
-  background-color: white;
-}
+
 
 .GA {
   color: red;
   font-weight: bold;
-}
-
-.posts {
-  font-size: 20px;
-  background-color: white;
-
 }
 
 .wrapper {
@@ -46,14 +38,6 @@ body {
 	.checkbox {
 	  margin-bottom: 30px;
 	}
-
-  .rightAdj {
-    text-align: right
-  }
-
-  .leftAdj {
-    text-align: left
-  }
 
 	.checkbox {
 	  font-weight: normal;
@@ -91,3 +75,56 @@ body {
 h2 {
   background-color: #F5F5F5;
 }
+
+
+
+  .rightAdj {
+    float: right
+  }
+
+  .profilePic {
+    float: left
+  }
+
+  .leftAdj {
+    float: left
+  }
+
+  .post {
+    background-color: white;
+    text-align: left;
+  }
+
+  .posts {
+    font-size: 20px;
+    background-color: white;
+      border: 2px solid red;
+      border-radius: 5px;
+      padding: 5px 0px 100px 10px;
+      margin: 25px;
+      text-align: left;
+  }
+
+  .like {
+    text-align: right;
+    float: right;
+  }
+
+  .userPost {
+    float: left;
+  }
+  .likes {
+    margin: 10px 20px 0 0;
+  }
+
+  .viewPost {
+    margin: 10px 0 0 0;
+  }
+
+  .userLink {
+    font-size: 48px;
+  }
+
+  .btn {
+    float: right;
+  }
