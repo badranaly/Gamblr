@@ -1,9 +1,10 @@
 //Lillian
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Route} from 'react-router-dom'
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
-import Login from './Login'
+import Userform from './Userform'
 import SignUp from './Signup'
 import Feed from './Feed'
 import Likes from './Likes'
@@ -15,15 +16,19 @@ import Settings from './Settings'
 import Appearance from './Appearance'
 import MyPosts from './MyPosts'
 import TokenService from './services/TokenService'
+import createHistory from 'history/createBrowserHistory'
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
       isLoggedIn: false,
-      username: ''
+      username: '',
+      fireRedirect: true,
+
     }
   }
+
   // api call for creating a new user
 // note that TokenService.save with the token is called
 // may also want to setState with the user data and
@@ -42,58 +47,36 @@ register(data) {
 // same as above except route is login
 // as above, we are saving the token locally using
 // the TokenService
-login(data) {
-  axios('http://localhost:3000/api/users/login', {
-    method: "POST",
-    data
-  }).then(resp => {
-    TokenService.save(resp.data.token);
-  })
-  .catch(err => console.log(`err: ${err}`));
-  axios('http://localhost:3000/isLoggedIn', {
-    headers: {
-      Authorization: `Bearer ${TokenService.read()}`,
-    },
-  }).then(resp => {
-    console.log('this is the response --> ',resp)
-      this.setState({
-      isLoggedIn: resp.data.isLoggedIn,
-      username: resp.data.token.username
-    })
-  })
-  .catch(err => console.log(err));
-}
 
-logout(ev) {
-    ev.preventDefault();
+logout() {
     TokenService.destroy();
+    console.log('this is tokenservice of logout', TokenService)
 }
 
-  render() {
+
+render(){
     return (
       <Router>
         <div className="App">
-          {/* <button onClick={this.checkLogin.bind(this)}>checkLogin</button> */}
-           {/* ? console.log('fuck ya') : console.log('fuck no')} */}
-          <Route exact path='/' component={Login} />
-          <Route exact path='/login' component={(props) => (
-            <Login {...props} loggingout={this.logout.bind(this)} submit={this.login.bind(this)} check={this.state.isLoggedIn} />
-          )} />
-          <Route exact path='/signup' component={(props) => (
-            <SignUp {...props} submit={this.register.bind(this)} />
-          )} />
-          {console.log(this.state)}
+          <a href='/login'><button onClick={this.logout.bind(this)}>Logout</button></a>
+          <Route exact path='/' component={Feed} />
+          <Route exact path='/login' component={Userform} check={this.state.isLoggedIn} user={this.state.username}/>
+          <Route exact path='/signup' component={SignUp} user={this.state.isLoggedIn} />
+          {console.log('this is current state --> ', this.state)}
 
           <Route path='/feed' component={Feed} />
           <Route path='/followers' component={Followers} />
           {/*<Route path='/post/:id' component={} />*/}
-          <Route path='/user/:username' component={Userpage} />
-          <Route path='/addPost' component={PostAddForm} />
-          <Route path='/favs' component={Likes} />
-          <Route path='/following' component={Following} />
-          <Route path='/settings' component={Settings} />
-          <Route path='/Appearance' component={Appearance} />
-          <Route path='/myPosts' component={MyPosts} />
+            <Route path='/user/:username' component={Userpage} />
+            <Route path='/addPost' component={PostAddForm} />
+            <Route path='/favs' component={Likes} />
+            <Route path='/following' component={Following} />
+            <Route path='/settings' component={Settings} />
+            <Route path='/Appearance' component={Appearance} />
+            <Route path='/myPosts' component={MyPosts} />
+          <div>
+
+          </div>
         </div>
       </Router>
     )

@@ -3,6 +3,7 @@ import services from './services/apiServices'
 import Post from './Post'
 import Header from './Header'
 import Footer from './Footer'
+import TokenService from './services/TokenService'
 
 class MyPosts extends Component {
 	constructor() {
@@ -14,7 +15,9 @@ class MyPosts extends Component {
 	}
 
 	componentDidMount() {
-		services.getAllMyPosts().then(post => {
+		services.checkLogin(TokenService.read())
+		.then(resp => {
+			services.getAllMyPosts().then(post => {
 			console.log(post,'hehe')
 			this.setState({
 				apiDataLoaded: true,
@@ -23,7 +26,7 @@ class MyPosts extends Component {
 		}).catch(err => {
 			console.log(err)
 		})
-	}
+	}).catch(err => {console.log(err)})}
 
 	renderPosts() {
 		return this.state.apiData.map((el,i) => {

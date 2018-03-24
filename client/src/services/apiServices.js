@@ -1,11 +1,29 @@
 //Lillian
 import axios from 'axios'
+import TokenService from './TokenService'
+
 const services = {}
 
 //user manipulation
 services.getUser = (username) => {
 	return axios.get()
 }
+
+services.login = (things) => {
+	return axios('http://localhost:3000/api/users/login', {
+    method: "POST",
+    data : things
+  })
+}
+
+services.checkLogin = (token) => {
+	return axios('http://localhost:3000/isLoggedIn', {
+    headers: {
+      Authorization: `Bearer ${TokenService.read()}`
+			}
+    })
+}
+
 
 services.createUser = (things) => {
 	return axios({

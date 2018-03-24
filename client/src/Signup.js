@@ -2,24 +2,22 @@
 
 import React, {Component} from 'react'
 import Userform from './Userform'
+import {Link} from 'react-router-dom'
 
 class Signup extends Component {
 constructor(props){
   super(props)
-  this.onSubmit = this.onSubmit.bind(this)
+  this.state = {
+    isLoggedIn: this.props.user
+  }
 }
-
-
-onSubmit(data){
-  this.props.submit(data)
-}
-
 
   render(){
     return (
       <div>
-        <Userform submit={this.onSubmit} />
-        <p>Already a user? Sign in </p><a href='/login'>here</a>
+        {console.log('this is signup prop', this.state)}
+        <Userform  user={this.props.user}/>
+        <Link to='/login'><p>Already a user?</p></Link>
       </div>
     )
   }
