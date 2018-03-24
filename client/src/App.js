@@ -17,6 +17,7 @@ import Appearance from './Appearance'
 import MyPosts from './MyPosts'
 import TokenService from './services/TokenService'
 import createHistory from 'history/createBrowserHistory'
+import services from './services/apiServices'
 
 class App extends Component {
   constructor(props){
@@ -28,11 +29,6 @@ class App extends Component {
 
     }
   }
-
-  // api call for creating a new user
-// note that TokenService.save with the token is called
-// may also want to setState with the user data and
-// whether or not the user is logged in
 
 register(data) {
   axios('http://localhost:3000/api/users/', {
@@ -63,9 +59,11 @@ render(){
           <Route exact path='/login' component={() => {
             return <Userform check={this.state.isLoggedIn} user={this.state.user_name} />
           }} />
-          <Route exact path='/signup' component={SignUp} user={this.state.isLoggedIn} />
+          <Route exact path='/signup' component={SignUp} check={this.state.isLoggedIn} />
           <Route path='/feed' component={Feed} />
-          <Route path='/followers' component={Followers} />
+          <Route path='/followers' component={() => {
+            return <Followers check={this.state.isLoggedIn} />
+          }} />
             <Route path='/user/:username' component={Userpage} />
             <Route path='/addPost' component={PostAddForm} />
             <Route path='/favs' component={Likes} />
