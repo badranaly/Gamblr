@@ -7,12 +7,14 @@ import services from './services/apiServices'
 import TokenService from './services/TokenService'
 import Login from './Login'
 import {Redirect} from 'react-router-dom'
+import Userform from './Userform'
 
 class Feed extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			isLoggedIn: false,
+			isLoggedIn: props.check,
+			username: props.user,
 			fireRedirect: false
 		}
 		// this.checkLogin = this.checkLogin.bind(this)
@@ -23,8 +25,11 @@ componentDidMount(){
 	services.checkLogin(TokenService.read())
 	.then(resp => {
 		console.log('inside component did mount ', resp.data.isLoggedIn)
+		console.log('inside component did mount ', resp.data.token.username)
+
 		this.setState({
-			isLoggedIn: resp.data.isLoggedIn
+			isLoggedIn: resp.data.isLoggedIn,
+			username: resp.data.token.username
 		})
 	})
 	.catch(err => console.log(err));
@@ -34,17 +39,16 @@ componentDidMount(){
 	render() {
 		return (
 			<div className='feed'>
-				{console.log('below is the response for check logn data')}
 
 				{
 				this.state.isLoggedIn ?
 				<div>
 					<Header />
-					<PostList />
+					<PostList user={this.state.username}/>
 					<Footer />
 				</div>
 				:
-				<Redirect to='/login' />
+				<Userform />
 			}
 			</div>
 		)

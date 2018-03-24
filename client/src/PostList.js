@@ -9,7 +9,8 @@ class PostList extends Component {
 		super(props)
 		this.state = {
 			apiDataLoaded: false,
-			apiData: null
+			apiData: null,
+			username: props.user
 		}
 	}
 
@@ -26,9 +27,9 @@ class PostList extends Component {
 	}
 
 	renderPosts() {
-		console.log('loaded data', this.props)
+		console.log('loaded data', this.state.username)
 		return this.state.apiData.map((el,i) => {
-			return <Post key={el.id} post={el} />
+			return <Post key={el.id} post={el} user={this.state.username}/>
 		})
 	}
 

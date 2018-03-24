@@ -23,7 +23,7 @@ class App extends Component {
     super(props)
     this.state = {
       isLoggedIn: false,
-      username: '',
+      user_name: '',
       fireRedirect: true,
 
     }
@@ -60,13 +60,12 @@ render(){
         <div className="App">
           <a href='/login'><button onClick={this.logout.bind(this)}>Logout</button></a>
           <Route exact path='/' component={Feed} />
-          <Route exact path='/login' component={Userform} check={this.state.isLoggedIn} user={this.state.username}/>
+          <Route exact path='/login' component={() => {
+            return <Userform check={this.state.isLoggedIn} user={this.state.user_name} />
+          }} />
           <Route exact path='/signup' component={SignUp} user={this.state.isLoggedIn} />
-          {console.log('this is current state --> ', this.state)}
-
           <Route path='/feed' component={Feed} />
           <Route path='/followers' component={Followers} />
-          {/*<Route path='/post/:id' component={} />*/}
             <Route path='/user/:username' component={Userpage} />
             <Route path='/addPost' component={PostAddForm} />
             <Route path='/favs' component={Likes} />
