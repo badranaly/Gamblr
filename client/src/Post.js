@@ -67,13 +67,17 @@ class Post extends Component {
 	}
 
 	render() {
+		let link = "/post/" + this.state.post_id
 		return (
 			<div className='post'>
 				<img alt='' src={this.props.post.pic} />
-				<h2><i className="glyphicon glyphicon-user"></i><a href={`/user/${this.props.post.user_name}`}>{this.props.post.user_name}</a></h2>
+				<h2 className='post'><a href={`/user/${this.props.post.user_name}`}>{this.props.post.user_name}</a></h2>
 				<p className="posts">{this.props.post.type === 'video' ? <ReactPlayer url={this.props.post.content} /> : this.props.post.type === 'photo' ? <img alt='' src={this.props.post.content} /> : this.props.post.type === 'link' ? <a href={this.props.post.content}>{this.props.post.content}</a> : this.props.post.content}</p>
 				{this.props.list !== 'myposts' ? <Button className='like' bsSize="large" bsStyle="info" onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</Button> : ''}
-				<p>Likes: {this.state.likes}</p>
+				<p className="rightAdj">Likes: {this.state.likes}</p>
+				<p className="leftAdj"><a href={link}>View Post</a></p>
+
+
 			</div>
 		)
 	}

@@ -4,6 +4,8 @@ import services from './services/apiServices'
 import {Redirect} from 'react-router-dom'
 import {Modal} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
+import Header from './Header'
+import Footer from './Footer'
 
 class PostAddForm extends Component {
 	constructor() {
@@ -49,6 +51,8 @@ class PostAddForm extends Component {
 	render() {
 		return (
 			<div className='add-form'>
+				<Header />
+
 				<form>
 					<Modal.Dialog>
 						<Modal.Header>
@@ -67,6 +71,7 @@ class PostAddForm extends Component {
 					</Modal.Dialog>
 				</form>
 				{this.state.fireRedirect ? <Redirect to={'/myPosts'} /> : ''}
+				<Footer />
 			</div>
 		)
 	}

@@ -15,6 +15,10 @@ body {
   font-size: 50px;
 }
 
+.post {
+  background-color: white;
+}
+
 .GA {
   color: red;
   font-weight: bold;
@@ -43,9 +47,21 @@ body {
 	  margin-bottom: 30px;
 	}
 
+  .rightAdj {
+    text-align: right
+  }
+
+  .leftAdj {
+    text-align: left
+  }
+
 	.checkbox {
 	  font-weight: normal;
 	}
+
+  .whiteback {
+    background-color: white
+  }
 
 	.form-control {
 	  position: relative;

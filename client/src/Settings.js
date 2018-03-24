@@ -2,6 +2,8 @@
 
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import Header from './Header'
+import Footer from './Footer'
 
 class Settings extends Component {
 constructor(props){
@@ -87,6 +89,7 @@ handleDelete(e){
   render(){
     return (
       <div>
+        <Header />
         <br/>
         <br/>
         <br/>
@@ -97,6 +100,7 @@ handleDelete(e){
         <br/>
         <br/>
         <button onClick={this.handleDelete}>Delete Account</button>
+        <Footer />
       </div>
     )
   }

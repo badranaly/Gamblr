@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import Header from './Header'
+import Footer from './Footer'
 
 class Appearance extends Component {
 constructor(props){
@@ -37,6 +39,7 @@ handleSubmit(e){
   render(){
     return (
       <div>
+        <Header />
         <form onSubmit={this.handleSubmit}><br />
           <p>username: </p><input type='text' name='user_name' onChange={this.handleInputChange} />
           <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />
@@ -45,6 +48,7 @@ handleSubmit(e){
           <p>blog description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
           <input type='submit'/>
         </form>
+        <Footer />
       </div>
     )
   }

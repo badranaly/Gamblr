@@ -27,7 +27,7 @@ class Header extends Component {
 				<nav className="navbar navbar-inverse">
 					<div className="container-fluid">
 						<div className="navbar-header">
-							<a className="navbar-brand" href="#"><span className="GA">GA</span>mblr</a>
+							<a className="navbar-brand" href="/feed"><span className="GA">GA</span>mblr</a>
 						</div>
 						<ul className="nav navbar-nav">
 							<li className="active"><a href="/feed">Home</a></li>

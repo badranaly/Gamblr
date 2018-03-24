@@ -23,15 +23,22 @@ class Signup extends Component {
 
 handleSubmit(e){
   e.preventDefault()
-  services.createUser(this.state)
-  .then(info => {
-    this.setState({
-      fireRedirect: true
-    })
+  services.checkExistingUser(this.state.user_name)
+  .then(response => {
+    console.log("User Name already exists")
   })
   .catch(err => {
-    console.log('signup not working', err)
+    services.createUser(this.state)
+    .then(info => {
+      this.setState({
+        fireRedirect: true
+      })
+    })
+    .catch(err => {
+      console.log('signup not working', err)
+    })
   })
+
 
 }
 
@@ -54,9 +61,9 @@ handleOnChange(e){
           <input type='hidden'  name='blog_name' onChange={this.handleOnChange}/>
           <input type='hidden' name='blog_desc'  onChange={this.handleOnChange}/>
           <input type='submit' />
-          <p>Already a user? Sign in </p><a href='/login'>here</a>
+          <p>Already a user? Sign in <a href='/login'>here</a></p>
         </form>
-        {this.state.fireRedirect ? <Redirect to={'/login'} /> : ''}
+        {this.state.fireRedirect ? <Redirect to={'/appearance'} /> : ''}
       </div>
     )
   }

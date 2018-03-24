@@ -72,7 +72,9 @@ handleSubmit(e){
               <input type="text" class="form-control" name="user_name" placeholder="Username" required="" autofocus="" onChange={this.handleChange}/><br/>
               <input type="password" onChange={this.handleChange} class="form-control" name="password" placeholder="Password" required=""/>
               <button class="btn btn-lg btn-danger btn-block" type="submit">Login</button>
+              <p>Don't have an account?  Sign up <a href="/signup">here</a></p>
             </form>
+
             {this.state.failedLogin ? this.renderError(): ''}
           </div>
         </form>
