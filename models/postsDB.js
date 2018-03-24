@@ -4,7 +4,7 @@ module.exports = {
 
   //return every card in the database
   populateFeed() {
-    return db.any(`SELECT *
+    return db.any(`SELECT followers.follower_id, followers.following_id, posts.id AS postid, users.id as id, users.pic, posts.type, posts.user_id, users.user_name, posts.notes, posts.content
                   FROM followers
                   INNER JOIN posts ON followers.following_id = posts.user_id
                   INNER JOIN users ON users.id = followers.following_id
@@ -71,7 +71,7 @@ module.exports = {
   },
 
   checkLikes(input) {
-    return db.any(`SELECT * FROM likes WHERE user_id=1 AND post_id=$[post_id]`, input)
+    return db.one(`SELECT * FROM likes WHERE user_id=1 AND post_id=$[post_id]`, input)
   }
 
 

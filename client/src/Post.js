@@ -13,7 +13,7 @@ class Post extends Component {
 		this.state = {
 			likeClicked: false,
 			user_id: (props.list === 'favs' || props.list === 'userposts') ? props.post.user_id : props.post.follower_id,
-			post_id: props.list === 'favs' ? props.post.post_id : props.post.id,
+			post_id: props.list === 'favs' ? props.post.post_id : props.post.postid,
 			fireRedirect: false,
 			likes: parseInt(props.post.notes)
 		}
@@ -21,7 +21,7 @@ class Post extends Component {
 
 	componentDidMount() {
 		services.checkLikes(this.state.user_id, this.state.post_id).then(posts => {
-        	console.log('inside successful check following')
+        	console.log('inside successful check following' + this.state.user_id + " " + this.state.post_id)
          	this.setState({
            		likeClicked: true
          	})

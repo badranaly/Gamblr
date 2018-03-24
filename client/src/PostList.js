@@ -28,6 +28,7 @@ class PostList extends Component {
 	renderPosts() {
 		console.log('loaded data', this.props)
 		return this.state.apiData.map((el,i) => {
+			console.log("getting post, ", el)
 			return <Post key={el.id} post={el} />
 		})
 	}
