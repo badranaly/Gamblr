@@ -40,7 +40,10 @@ usersController.changePassword = (req, res) => {
   const passwordDigest = bcrypt.hashSync(req.body.password, 10)
   Users.changePass(req.body, passwordDigest)
   .then(user => {
-    console.log('changing password')
+    res.json({
+      message: 'ok',
+      data: { user },
+    })
   })
   .catch(err => {
     res.status(400).json({message:'400', err})
