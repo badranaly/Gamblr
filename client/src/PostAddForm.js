@@ -69,13 +69,12 @@ componentDidMount(){
 				{
 					this.state.isLoggedIn ?
 					<div>
+					<div>
 						<Header />
+					</div>
 						<form>
-							<Modal.Dialog>
-								<Modal.Header>
-									<Modal.Title>New Post</Modal.Title>
-								</Modal.Header>
-								<Modal.Body>
+							<div>
+							<h1 className="GA ">New Post</h1>
 									<select className="selectType" name='type' onChange={this.handleTypeChange}>
 										<option value='text'>Text</option>
 										<option value='photo'>Image</option>
@@ -90,8 +89,7 @@ componentDidMount(){
 									<Button onClick={this.handleFormSubmit} className="centerAddButton" bsStyle='danger' bsSize='small'>Add Post!</Button>
 									<br/>
 									<br/>
-								</Modal.Body>
-							</Modal.Dialog>
+						</div>
 						</form>
 						{this.state.fireRedirect ? <Redirect to={'/myPosts'} /> : ''}
 						<br/>
@@ -118,7 +116,8 @@ componentDidMount(){
 						<br/>
 						<Footer />
 					</div>
-				 : <Userform />
+				 :
+				 <Userform />
 			 	}
 			</div>
 		)

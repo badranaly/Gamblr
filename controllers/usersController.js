@@ -36,7 +36,9 @@ usersController.userLogin = (req, res) => {
 }
 
 usersController.changePassword = (req, res) => {
-  Users.changePass(req.body)
+  console.log('inside change pass -->', req.body);
+  const passwordDigest = bcrypt.hashSync(req.body.password, 10)
+  Users.changePass(req.body, passwordDigest)
   .then(user => {
     console.log('changing password')
   })

@@ -76,6 +76,7 @@ services.updatePassword = (obj) => {
 		url: `/api/users/settings`,
 		data: {
 			password: obj.password,
+			username: obj.username
 		}
 	})
 }
