@@ -4,6 +4,9 @@ import Header from './Header'
 import Footer from './Footer'
 import Post from './Post'
 
+import TokenService from './services/TokenService'
+
+
 class SinglePost extends Component {
   constructor(props){
     super(props)
@@ -13,7 +16,11 @@ class SinglePost extends Component {
       fireRedirect: false,
       commentData: null,
       commentDataLoaded: false,
-      comment: ''
+      comment: '',
+      postId: null,
+      isLoggedIn: props.check,
+      username: props.user,
+      loggedUserId: null
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -22,18 +29,45 @@ class SinglePost extends Component {
   }
 
   componentDidMount() {
-    this.getData()
-  }
+    services.checkLogin(TokenService.read())
+    .then(resp => {
+      console.log('inside component did mount ', resp.data.isLoggedIn)
+      console.log('inside component did mount ', resp.data.token.username)
+      this.setState({
+        isLoggedIn: resp.data.isLoggedIn,
+        username: resp.data.token.username
+      })
+
+      services.getUserID(this.state.username)
+        .then(response => {
+          this.setState({
+            loggedUserId: response.data.data.user[0].id
+          })
+              this.getData()
+        })
+        .catch(err => {
+        console.log(err)
+        })
+    })
+    .catch(err => console.log(err));
+    }
+
+
 
   getData() {
-    console.log("props?", this.props.match.params.id)
-    services.singlePost(this.props.match.params.id)
+    let curr = window.location.href
+    let curr2 = curr.length
+    let curr3 = curr.substring(27, curr2)
+    this.setState({
+      postId: curr3
+    })
+    services.singlePost(curr3)
     .then(data => {
       this.setState({
         postDataLoaded: true,
         postData: data.data.data.post[0]
       })
-      services.getComments(this.props.match.params.id)
+      services.getComments(curr3)
       .then(comments => {
         this.setState({
           commentDataLoaded: true,
@@ -71,7 +105,7 @@ class SinglePost extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    services.addComment(this.props.match.params.id, this.state.comment)
+    services.addComment(this.state.postId, this.state.comment, this.state.loggedUserId)
     .then(comment => {
       this.getData()
     })
@@ -82,7 +116,6 @@ class SinglePost extends Component {
   }
 
   renderPage() {
-          console.log("rendering pages")
           return (
             <div>
               <Post post={this.state.postData} list='singlepost' />

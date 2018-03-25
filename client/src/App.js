@@ -18,7 +18,7 @@ import Followers from './Followers'
 import Settings from './Settings'
 import Appearance from './Appearance'
 import MyPosts from './MyPosts'
-// import SinglePost from './SinglePost'
+import SinglePost from './SinglePost'
 // import TokenService from './services/TokenService'
 // import services from './services/apiServices'
 import Logout from './Logout'
@@ -78,6 +78,12 @@ render(){
             <Route path='/myPosts' component={() => {
               return <MyPosts check={this.state.isLoggedIn} user={this.state.user_name} />
             }} />
+            <Route path='/post/:id' component={() => {
+              return <SinglePost check={this.state.isLoggedIn} user={this.state.user_name} />
+            }} />
+
+
+
           <div>
 
           </div>

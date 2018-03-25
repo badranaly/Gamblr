@@ -71,7 +71,7 @@ module.exports = {
 
   addComment(input) {
     return db.any(`INSERT INTO comments (comment, user_id, post_id)
-                   VALUES ($[comment], 1, $[id])`, input)
+                   VALUES ($[comment], $[user], $[id])`, input)
   },
 
   checkLikes(input) {

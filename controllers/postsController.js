@@ -149,6 +149,7 @@ postsController.addComment = (req, res) => {
   console.log("REQ BODY", req.body)
   sendObj.id = req.params.id
   sendObj.comment = req.body.content
+  sendObj.user = req.params.id2
   Posts.addComment(sendObj)
     .then(comment => {
       res.json({
