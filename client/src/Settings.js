@@ -6,6 +6,7 @@ import Header from './Header'
 import Footer from './Footer'
 import TokenService from './services/TokenService'
 import Userform from './Userform'
+import {Redirect} from 'react-router-dom'
 
 class Settings extends Component {
 constructor(props){
@@ -35,8 +36,8 @@ componentDidMount(){
 handleSubmit(e){
   e.preventDefault()
   services.updatePassword(this.state)
-  // console.log('inside handle submit ', this.state.password)
   .then(userInfo => {
+    console.log('change pass was successful ', this.state.fireRedirect)
     this.setState({
       fireRedirect: true
     })
@@ -123,6 +124,7 @@ handleDelete(e){
         :
         <Userform />
       }
+      {this.state.fireRedirect ? <Redirect to='/feed' /> : ''}
       </div>
     )
   }
