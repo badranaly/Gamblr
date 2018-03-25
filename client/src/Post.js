@@ -11,7 +11,6 @@ class Post extends Component {
 		super(props)
 		this.state = {
 			likeClicked: false,
-			user_id: null,
 			post_id: props.list === 'favs' ? props.post.post_id : (props.list === 'myposts' || props.list === 'userposts' || props.list === 'singlepost') ? props.post.id : props.post.postid,
 			fireRedirect: false,
 			likes: parseInt(props.post.notes),
@@ -27,21 +26,14 @@ componentDidMount() {
 			username: resp.data.token.username,
 			isLoggedIn: resp.data.isLoggedIn
 		})
-		services.getUserID(this.state.username)
-			.then(response => {
-				this.setState({
-					user_id: response.data.data.user[0].id
-				})
-			})
-			.catch(err => {
-			console.log(err)
-			})
+
+
 	}, this.checkAllLikes())
 	.catch(err => {console.log(err)})
 }
 
 checkAllLikes(){
-	services.checkLikes(this.state.user_id, this.state.post_id).then(posts => {
+	services.checkLikes(this.props.id, this.state.post_id).then(posts => {
 				this.setState({
 						likeClicked: true
 				})
@@ -70,7 +62,7 @@ addLike() {
 	}
 
 	removeLike() {
-		services.removeLike(this.state.post_id,this.state.user_id).then(like => {
+		services.removeLike(this.state.post_id,this.props.id).then(like => {
 			this.setState({
 				likeClicked: false,
 			})

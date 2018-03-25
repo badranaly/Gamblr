@@ -17,7 +17,7 @@ postsController.feed = (req, res) => {
 },
 
 postsController.likes = (req, res) => {
-  Posts.populateLikes()
+  Posts.populateLikes(req.params.id)
     .then(posts => {
       res.json({
         message: 'ok',

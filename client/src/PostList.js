@@ -25,7 +25,6 @@ componentDidMount() {
 
 		services.getUserID(this.state.username)
 			.then(response => {
-				console.log("user id back", response.data.data.user[0].id)
 				this.getPosts(response.data.data.user[0].id)
 			})
 			.catch(err => {
@@ -50,11 +49,7 @@ componentDidMount() {
 
 
 	renderPosts() {
-
-		console.log('loaded data of PostList comp -->', this.state.username)
-
 		return this.state.apiData.map((el,i) => {
-			console.log("inside postList", el)
 			return <Post key={i} post={el} user={this.state.username}/>
 		})
 	}
@@ -62,7 +57,6 @@ componentDidMount() {
 	render() {
 		return (
 			<div className='post-list'>
-				{console.log('inside post list comp', this.state)}
 				{this.state.apiDataLoaded ? this.renderPosts() : ''}
 			</div>
 		)
