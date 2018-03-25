@@ -20,8 +20,8 @@ services.register = (things) => {
   })
 }
 
-services.getAllLikes = () => {
-	return axios.get('/api/posts/like')
+services.getAllLikes = (user) => {
+	return axios.get(`/api/posts/like/${user}`)
 }
 
 services.login = (things) => {
@@ -133,9 +133,9 @@ services.getAllMyPosts = () => {
 	return axios.get('/api/posts/myPosts')
 }
 
-services.getAllLikes = () => {
-	return axios.get('/api/posts/like')
-}
+//services.getAllLikes = () => {
+//	return axios.get('/api/posts/like')
+//}
 
 services.addLike = (thing) => {
 	return axios({
@@ -164,8 +164,8 @@ services.subtractLike = (postId) => {
 	})
 }
 
-services.getFollowing = () => {
-	return axios.get(`/api/users/following`)
+services.getFollowing = (input) => {
+	return axios.get(`/api/users/following/${input}`)
 }
 
 services.getFollowers = () => {
@@ -180,12 +180,15 @@ services.getUserPage = (username) => {
 	return axios.get(`/api/posts/user/${username}`)
 }
 
-services.addFollowing = (user) => {
+services.addFollowing = (user, logged) => {
+	let helpObj = {}
+	helpObj.user = user
+	helpObj.logged = logged
 	return axios({
 		method: 'POST',
-		url: `/api/users/follower/`,
+		url: `/api/users/follower`,
 		data: {
-			content: user,
+			content: helpObj
 
 		}
 	})
@@ -201,8 +204,8 @@ services.followNew = (id) => {
 	})
 }
 
-services.removeFollowing = (id) => {
-	return axios.delete(`/api/users/follower/${id}`)
+services.removeFollowing = (id, logged) => {
+	return axios.delete(`/api/users/follower/${id}/${logged}`)
 }
 
 services.checkFollowing = (id) => {
@@ -210,6 +213,7 @@ services.checkFollowing = (id) => {
 }
 
 services.checkLikes = (user,id) => {
+	console.log("checking likes in services", user)
 	return axios.get(`/api/posts/checkLikes/${id}/${user}`)
 }
 

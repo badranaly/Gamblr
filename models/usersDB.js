@@ -19,7 +19,7 @@ module.exports = {
   },
 
   listFollowing(user) {
-    return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = 1')
+    return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = $1', user)
   },
 
   changePass(user){
@@ -27,11 +27,11 @@ module.exports = {
   },
 
   followUser(user) {
-    return db.one('INSERT INTO followers (follower_id, following_id) VALUES(1, $[following_id]) RETURNING *', user)
+    return db.one('INSERT INTO followers (follower_id, following_id) VALUES($[follower_id], $[following_id]) RETURNING *', user)
   },
 
   unfollowUser(id) {
-    return db.none('DELETE FROM followers WHERE follower_id=1 and following_id=$[following_id]', id)
+    return db.none('DELETE FROM followers WHERE follower_id=$[follower_id] and following_id=$[following_id]', id)
   },
 
   updateUser(user) {

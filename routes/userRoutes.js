@@ -4,10 +4,10 @@ const TokenService = require('../services/TokenService');
 
 const userRoutes = express.Router();
 
-userRoutes.delete('/follower/:id', usersController.unfollowUser);
-userRoutes.post('/follower', usersController.followUser);
+userRoutes.delete('/follower/:id/:id2', usersController.unfollowUser);
+userRoutes.post('/follower/', usersController.followUser);
 userRoutes.post('/follower/:id', usersController.followNew);
-userRoutes.get('/following', usersController.listFollowing);
+userRoutes.get('/following/:id', usersController.listFollowing);
 userRoutes.get('/followers', usersController.listFollowers);
 userRoutes.get('/user/:username', usersController.getUser);
 userRoutes.get('/login/:user/:pass', usersController.userLogin);

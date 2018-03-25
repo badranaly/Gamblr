@@ -23,6 +23,7 @@ componentDidMount() {
         isLoggedIn: resp.data.isLoggedIn,
         username: resp.data.token.username
       })
+      this.getUserData();
     }, this.getUserData())
     .catch(err => {console.log(err)})
   }
@@ -48,11 +49,6 @@ getUserData() {
       console.log(err)
     })
 }
-
-
-  componentDidMount() {
-    this.getUserData();
-  }
 
 // functionality to unfollow a user you currently follow who follows you
   handleRemove(e) {

@@ -4,7 +4,7 @@ const postsController = require('../controllers/postsController');
 const postRoutes = express.Router();
 
 postRoutes.get('/feed/:id', postsController.feed);
-postRoutes.get('/like', postsController.likes);
+postRoutes.get('/like/:id', postsController.likes);
 postRoutes.put('/subtractLike/:id', postsController.subtractLike)
 postRoutes.get('/user/:username', postsController.userPage);
 postRoutes.get('/post/:id', postsController.getPost)

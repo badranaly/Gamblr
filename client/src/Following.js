@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import services from './services/apiServices'
 import Header from './Header'
 import Footer from './Footer'
-import { Redirect } from 'react-router-dom';
 import TokenService from './services/TokenService'
 import Userform from './Userform'
 
@@ -17,7 +16,8 @@ class Following extends Component {
       user_name: '',
       noUser: false,
       username: props.user,
-      isLoggedIn: props.check
+      isLoggedIn: props.check,
+      loggedUserId: null
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -32,13 +32,25 @@ class Following extends Component {
         username: resp.data.token.username,
         isLoggedIn: resp.data.isLoggedIn
       })
+
+      services.getUserID(this.state.username)
+        .then(response => {
+          this.setState({
+            loggedUserId: response.data.data.user[0].id
+          })
+          this.updateData(response.data.data.user[0].id)
+        })
+        .catch(err => {
+        console.log(err)
+        })
+
     }, this.updateData())
     .catch(err => {console.log(err)})
     }
   // functionality that is called when component mounts
   // also called by component methods to trigger a reload of the page as needed
-updateData() {
-    services.getFollowing().then(posts => {
+updateData(input) {
+    services.getFollowing(input).then(posts => {
       this.setState({
         apiDataLoaded: true,
         apiData: posts.data.data.users
@@ -54,7 +66,7 @@ updateData() {
     e.stopPropagation();
     services.getUserID(e.target.name)
     .then(user => {
-      services.removeFollowing(user.data.data.user[0].id)
+      services.removeFollowing(user.data.data.user[0].id, this.state.loggedUserId)
       .then(user2 => {
         this.updateData();
         console.log(user2)
@@ -115,10 +127,10 @@ updateData() {
         })
       }
       else{
-        services.addFollowing(user.data.data.user)
+        services.addFollowing(user.data.data.user, this.state.loggedUserId)
         .then(user2 => {
           console.log(user2)
-          this.updateData();
+      //    this.updateData();
         })
         .catch(err=> {
           console.log(err)

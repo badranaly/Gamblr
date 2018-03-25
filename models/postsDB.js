@@ -10,11 +10,11 @@ module.exports = {
                   INNER JOIN users ON users.id = followers.following_id
                   WHERE followers.follower_id = $1 ORDER BY posts.id DESC`, input);
   },
-  populateLikes() {
+  populateLikes(input) {
     return db.any(`SELECT posts.user_id, post_id, type, content, notes, user_name, pic  FROM likes
                   JOIN posts ON posts.id = likes.post_id
                   JOIN users ON users.id = posts.user_id
-                  WHERE likes.user_id = 1`)
+                  WHERE likes.user_id = $1`,input)
   },
 
   addLike(post) {
@@ -75,7 +75,7 @@ module.exports = {
   },
 
   checkLikes(input) {
-    return db.one(`SELECT * FROM likes WHERE user_id=1 AND post_id=$[post_id]`, input)
+    return db.one(`SELECT * FROM likes WHERE user_id=$[user_id] AND post_id=$[post_id]`, input)
   }
 
 

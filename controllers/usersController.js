@@ -134,7 +134,7 @@ usersController.login = function(req, res, next) {
 }
 
 usersController.listFollowing = (req, res) => {
-  Users.listFollowing()
+  Users.listFollowing(req.params.id)
     .then(users => {
       res.json({
         message: 'ok',
@@ -147,8 +147,10 @@ usersController.listFollowing = (req, res) => {
 },
 
 usersController.followUser = (req, res) => {
+  console.log("req", req.body.content.logged)
   let sendObj = {}
-  sendObj.following_id = req.body.content[0].id
+  sendObj.following_id = req.body.content.user[0].id
+  sendObj.follower_id = req.body.content.logged
   Users.followUser(sendObj)
     .then(user => {
       res.json({
@@ -182,6 +184,7 @@ usersController.followNew = (req, res) => {
 usersController.unfollowUser = (req, res) => {
   let sendObj = {}
   sendObj.following_id = req.params.id
+  sendObj.follower_id = req.params.id2
   Users.unfollowUser(sendObj)
     .then(user => {
       res.json({
