@@ -17,7 +17,8 @@ class SignupForm extends Component {
       password: '',
       fireRedirect: false,
       success: null,
-      failure: false
+      failure: false,
+      defaultPic: "https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg"
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)

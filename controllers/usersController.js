@@ -63,7 +63,7 @@ usersController.create = (req, res, next) => {
   console.log('inside create function ->', req.body);
   const passwordDigest = bcrypt.hashSync(user.password, 10);
   db.one(
-    'INSERT INTO users (user_name, password) VALUES ($1, $2) RETURNING *;', [user.user_name, passwordDigest, 0]
+    'INSERT INTO users (user_name, password, pic) VALUES ($1, $2, $3) RETURNING *;', [user.user_name, passwordDigest, user.defaultPic, 0]
   )
   .then(data => {
     // remove the password_digest since it's sensitive
