@@ -13,7 +13,8 @@ class MyPosts extends Component {
 			apiDataLoaded: false,
 			apiData: null,
 			isLoggedIn: props.check,
-			username: props.user
+			username: props.user,
+			loggedUserId: null
 		}
 	}
 
@@ -24,12 +25,25 @@ componentDidMount() {
 			isLoggedIn: resp.data.isLoggedIn,
 			username: resp.data.token.username
 		})
-	}, this.getAllPosts())
+
+		services.getUserID(this.state.username)
+			.then(response => {
+				this.setState({
+					loggedUserId: response.data.data.user[0].id
+				})
+				this.getAllPosts(this.state.loggedUserId)
+			})
+			.catch(err => {
+			console.log(err)
+			})
+
+
+	})
 	.catch(err => {console.log(err)})
 	}
 
-	getAllPosts(){
-		services.getAllMyPosts().then(post => {
+	getAllPosts(input){
+		services.getAllMyPosts(input).then(post => {
 			console.log(post,'hehe')
 			this.setState({
 				apiDataLoaded: true,

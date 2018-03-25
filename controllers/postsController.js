@@ -43,7 +43,7 @@ postsController.create = (req, res) => {
 },
 
 postsController.userPage = (req, res) => {
-  console.log(req.params.username)
+  console.log("REQ PARAMS", req.params)
   Posts.userPage(req.params.username)
     .then(info => {
       console.log(info)
@@ -90,7 +90,7 @@ postsController.removeLike = (req, res) => {
 },
 
 postsController.myPosts = (req, res) => {
-  Posts.myPosts(req.body)
+  Posts.myPosts(req.params.id)
     .then(posts => {
       res.json({
         message: 'ok',

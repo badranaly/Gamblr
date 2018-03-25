@@ -17,8 +17,12 @@ class UserPage extends Component {
       postData: null,
       fireRedirect: false,
       username: props.user,
-      isLoggedIn: props.check
+      isLoggedIn: props.check,
+      user_id: null,
+      loggedUserId: null
     }
+    this.getStuff = this.getStuff.bind(this);
+
   }
 
   componentDidMount(){
@@ -28,22 +32,40 @@ class UserPage extends Component {
         username: resp.data.token.username,
         isLoggedIn: resp.data.isLoggedIn
       })
-    }, this.getStuff())
+
+      services.getUserID(this.state.username)
+        .then(response => {
+          this.setState({
+            loggedUserId: response.data.data.user[0].id
+          })
+        })
+        .catch(err => {
+        console.log(err)
+        })
+
+      this.getStuff()
+
+
+
+    })
     .catch(err => {console.log(err)})
   }
 
   getStuff() {
-      console.log("giddy up",this.props)
-      services.getUser(this.props.match.params.username).then(user => {
+      let curr = window.location.href
+      let curr2 = curr.length
+      let curr3 = curr.substring(27, curr2)
+      services.getUser(curr3).then(user => {
         console.log('userdata',user)
         this.setState({
           userDataLoaded: true,
-          userData: user.data.data.user
+          userData: user.data.data.user,
+          user_id: user.data.data.user.id
         })
       }).catch(err => {
         console.log(err)
       })
-      services.getUserPage(this.props.match.params.username).then(data => {
+      services.getUserPage(curr3).then(data => {
         console.log(data,'userpagestuff')
         this.setState({
           postDataLoaded: true,
@@ -63,7 +85,7 @@ class UserPage extends Component {
         <h2>{this.state.userData.blog_desc}</h2>
         {this.state.postData.map((el,i) => {
           console.log('singleuser',el)
-          return <Post key={el.id} post={el} list='userposts' />
+          return <Post key={el.id} post={el} id={this.state.loggedUserId} list='userposts' />
         })}
       </div>
     )

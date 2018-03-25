@@ -40,7 +40,7 @@ module.exports = {
                   pic = $/pic/,
                   blog_name = $/blog_name/,
                   blog_desc = $/blog_desc/
-                  WHERE user_name='chris'
+                  WHERE user_name=$/username/
                   RETURNING *`, user)
   },
 
@@ -49,7 +49,7 @@ module.exports = {
   },
 
   listFollowers(user) {
-    return db.any('SELECT user_name, blog_name, pic FROM followers INNER JOIN users on follower_id = users.id WHERE following_id = 1')
+    return db.any('SELECT user_name, blog_name, pic FROM followers INNER JOIN users on follower_id = users.id WHERE following_id = $1',user)
   },
 
   returnID(user) {
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   checkFollowing(id) {
-    return db.one('SELECT following_id FROM followers WHERE following_id=$[following_id] AND follower_id=1', id)
+    return db.one('SELECT following_id FROM followers WHERE following_id=$[following_id] AND follower_id=$[follower_id]', id)
   },
 
   removePostsByUser(id) {

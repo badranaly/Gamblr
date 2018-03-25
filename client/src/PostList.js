@@ -50,7 +50,8 @@ componentDidMount() {
 
 	renderPosts() {
 		return this.state.apiData.map((el,i) => {
-			return <Post key={i} post={el} user={this.state.username}/>
+			console.log('el', el)
+			return <Post key={i} post={el} id={el.follower_id} user={this.state.username}/>
 		})
 	}
 

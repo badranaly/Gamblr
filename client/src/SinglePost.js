@@ -26,6 +26,7 @@ class SinglePost extends Component {
   }
 
   getData() {
+    console.log("props?", this.props.match.params.id)
     services.singlePost(this.props.match.params.id)
     .then(data => {
       this.setState({
@@ -81,7 +82,7 @@ class SinglePost extends Component {
   }
 
   renderPage() {
-
+          console.log("rendering pages")
           return (
             <div>
               <Post post={this.state.postData} list='singlepost' />
