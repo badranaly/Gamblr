@@ -7,6 +7,9 @@ import Footer from './Footer'
 import TokenService from './services/TokenService'
 import Userform from './Userform'
 
+import {Redirect} from 'react-router-dom'
+
+
 class Settings extends Component {
 constructor(props){
   super(props)
@@ -93,6 +96,10 @@ handleDelete(e){
   })
   services.deleteUser(this.state.username)
   .then(user => {
+    TokenService.destroy();
+    this.setState({
+      fireRedirect: true
+    })
     console.log(user)
   })
   .catch(err => {
@@ -119,6 +126,7 @@ handleDelete(e){
           <br/>
           <button onClick={this.handleDelete}>Delete Account</button>
           <Footer />
+          {this.state.fireRedirect ? <Redirect to={'/login'} /> : ''}
         </div>
         :
         <Userform />

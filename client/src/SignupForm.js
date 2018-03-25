@@ -16,10 +16,12 @@ class SignupForm extends Component {
       user_name: '',
       password: '',
       fireRedirect: false,
-      success: false
+      success: null,
+      failure: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.renderError = this.renderError.bind(this)
   }
 
   componentDidMount(){
@@ -54,17 +56,30 @@ class SignupForm extends Component {
     .catch(err => {
       console.log('user already exists -- msg from submit ', err)
       this.setState({
-        success: false
+        success: false,
+        failure: true
       })
     })
 }
 
 onChange(e){
+  this.setState({
+    failure: false
+  })
   let name = e.target.name
   let value = e.target.value
   this.setState({
     [name] : value
   })
+}
+
+renderError() {
+  return(
+  <div className="alert">
+    <span className="closebtn"></span>
+    Invalid Credentials -- please try again.
+  </div>
+  )
 }
 
   render(){
@@ -95,6 +110,9 @@ onChange(e){
         </div>
         }
         {this.state.success ? <Redirect to='/appearance' /> : ''}
+        {this.state.failure ? this.renderError() : ''}
+
+
       </div>
     )
   }

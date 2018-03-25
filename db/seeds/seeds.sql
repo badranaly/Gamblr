@@ -2,7 +2,7 @@
 
 INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc) VALUES
   ('jace', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'bca', 'Ace Blog', 'Tennis and life'),
-  ('taka', '123', 'https://d30y9cdsu7xlg0.cloudfront.net/png/37047-200.png', 'jhf', 'Take Pensamiento', 'Stepping through the array'),
+  ('taka', '123', 'https://d30y9cdsu7xlg0.cloudfront.net/png/37047-200.png', 'jhf', 'Taka Pensamiento', 'Stepping through the array'),
   ('bell', '123', 'https://cdn2.iconfinder.com/data/icons/social-media-8/512/bell.png', 'lko', 'The Hog Pit', 'PBR? Yes please!'),
   ('aly', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lko', 'Stuck on a bus', 'No, seriously...'),
   ('chris', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lasd', 'Chris Blog', 'The house of disrespect');
@@ -40,5 +40,4 @@ INSERT INTO followers (follower_id, following_id) VALUES
   ('1', '4'),
   ('1', '6'),
   ('2', '6'),
-  ('3', '6'),
-  ('6', '3');
+  ('3', '6');
