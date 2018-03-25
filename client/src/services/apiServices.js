@@ -230,10 +230,10 @@ services.getComments = (id) => {
 	return axios.get(`/api/posts/getComments/${id}`)
 }
 
-services.addComment = (id, comment) => {
+services.addComment = (id, comment, user) => {
 	return axios({
 		method: 'POST',
-		url: `/api/posts/comment/${id}`,
+		url: `/api/posts/comment/${id}/${user}`,
 		data: {
 			content: comment
 		}

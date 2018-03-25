@@ -15,7 +15,7 @@ postRoutes.get('/checkLikes/:postId/:userId', postsController.checkLikes)
 postRoutes.get('/myPosts/:id', postsController.myPosts);
 postRoutes.get('/singlePost/:id', postsController.singlePost);
 postRoutes.get('/getComments/:id', postsController.getComments);
-postRoutes.post('/comment/:id', postsController.addComment);
+postRoutes.post('/comment/:id/:id2', postsController.addComment);
 //postRoutes.put('/:id', postsController.editUser);
 //postRoutes.delete('/:id', postController.deleteUser);
 
