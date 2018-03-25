@@ -16,7 +16,6 @@ body {
 }
 
 
-
 .GA {
   color: red;
   font-weight: bold;
@@ -153,4 +152,12 @@ h2 {
 
 .centerAddButton {
   margin: 0 245px 0 0;
+}
+
+.loginForm{
+  background-color: rgb(192,192,192);
+}
+
+.loginbtn {
+  margin: 0px;
 }

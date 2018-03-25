@@ -46,7 +46,6 @@ class Post extends Component {
 				likes: post.data.data.post.notes
 			})
 		})
-		window.location.reload()
 	}
 
 	removeLike() {
@@ -67,7 +66,6 @@ class Post extends Component {
 				likes: post.data.data.post.notes
 			})
 		})
-		window.location.reload()
 	}
 
 	render() {

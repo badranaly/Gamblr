@@ -40,6 +40,7 @@ handleSubmit(e){
     return (
       <div>
         <Header />
+        <h1> Profile Settings </h1>
         <form onSubmit={this.handleSubmit}><br />
           <p>username: </p><input type='text' name='user_name' onChange={this.handleInputChange} />
           <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />

@@ -65,19 +65,24 @@ handleSubmit(e){
   render(){
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <div class="wrapper">
-            <form class="form-signin">
-              <h2 class="form-signin-heading">Please login</h2>
-              <input type="text" class="form-control" name="user_name" placeholder="Username" required="" autofocus="" onChange={this.handleChange}/><br/>
-              <input type="password" onChange={this.handleChange} class="form-control" name="password" placeholder="Password" required=""/>
-              <button class="btn btn-lg btn-danger btn-block" type="submit">Login</button>
+        <br/>
+        <br/>
+
+        <h1><span className="GA GAlogin">GA</span><span className="mblr">mblr</span></h1>
+
+        <form className="form-signin loginForm" onSubmit={this.handleSubmit}>
+          <div className="wrapper">
+              <h2 className="loginForm form-signin-heading">Login</h2>
+              <input type="text" className="form-control" name="user_name" placeholder="Username" required="" autoFocus="" onChange={this.handleChange}/><br/>
+              <input type="password" onChange={this.handleChange} className="form-control" name="password" placeholder="Password" required=""/>
+              <br/>
+              <button className="loginbtn btn btn-lg btn-danger btn-block" type="submit">Login</button>
               <p>Don't have an account?  Sign up <a href="/signup">here</a></p>
+            </div>
+
             </form>
 
             {this.state.failedLogin ? this.renderError(): ''}
-          </div>
-        </form>
         {this.state.fireRedirect ? <Redirect to={'/feed'} /> : ''}
       </div>
     )

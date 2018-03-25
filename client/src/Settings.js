@@ -90,6 +90,7 @@ handleDelete(e){
     return (
       <div>
         <Header />
+        <h1> Account Settings </h1>
         <br/>
         <br/>
         <br/>
