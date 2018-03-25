@@ -135,3 +135,22 @@ h2 {
     margin: 0 25px 0 0;
     float: right;
   }
+
+  .modal-dialog {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
+
+.selectType {
+  width: 372px;
+}
+
+.centerAddButton {
+  margin: 0 245px 0 0;
+}

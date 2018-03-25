@@ -59,18 +59,47 @@ class PostAddForm extends Component {
 							<Modal.Title>New Post</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-					<select name='type' onChange={this.handleTypeChange}>
+					<select className="selectType" name='type' onChange={this.handleTypeChange}>
 						<option value='text'>Text</option>
 						<option value='photo'>Image</option>
 						<option value='link'>Link</option>
 						<option value='video'>Video</option>
 					</select>
-					<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder={this.state.type === 'text' ? 'Enter post here...' : this.state.type === 'video' ? 'Enter Youtube Link here...' : 'Enter Link here...'}></textarea>
-					<Button onClick={this.handleFormSubmit} bsStyle='danger' bsSize='small'>Add Post!</Button>
+					<br/>
+					<br/>
+					<textarea name='content' rows='10' cols='50' onChange={this.handleInputChange} placeholder={this.state.type === 'text' ? 'Enter post here...' : this.state.type === 'video' ? 'Enter Youtube Link here...' : 'Enter Link here...'}></textarea>
+					<br/>
+					<br/>
+					<Button onClick={this.handleFormSubmit} className="centerAddButton" bsStyle='danger' bsSize='small'>Add Post!</Button>
+					<br/>
+					<br/>
 				</Modal.Body>
 					</Modal.Dialog>
 				</form>
 				{this.state.fireRedirect ? <Redirect to={'/myPosts'} /> : ''}
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+
 				<Footer />
 			</div>
 		)
