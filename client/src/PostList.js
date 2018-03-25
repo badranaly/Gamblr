@@ -43,7 +43,7 @@ componentDidMount() {
 		console.log('loaded data of PostList comp -->', this.state.username)
 
 		return this.state.apiData.map((el,i) => {
-			return <Post key={el.id} post={el} user={this.state.username}/>
+			return <Post key={i} post={el} user={this.state.username}/>
 		})
 	}
 

@@ -37,12 +37,10 @@ module.exports = {
   updateUser(user) {
     console.log(user)
     return db.one(`UPDATE users SET
-                  user_name = $/user_name/,
                   pic = $/pic/,
-                  bg = $/bg/,
                   blog_name = $/blog_name/,
                   blog_desc = $/blog_desc/
-                  WHERE user_name='testuser'
+                  WHERE user_name='chris'
                   RETURNING *`, user)
   },
 

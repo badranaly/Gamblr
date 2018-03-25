@@ -17,12 +17,17 @@ class SinglePost extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.getData = this.getData.bind(this);
+
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  getData() {
     services.singlePost(this.props.match.params.id)
     .then(data => {
-      console.log('postdata',data.data.data.post)
       this.setState({
         postDataLoaded: true,
         postData: data.data.data.post[0]
@@ -43,7 +48,6 @@ class SinglePost extends Component {
     })
   }
 
-
   renderComments() {
     return this.state.commentData.map((el,i) => {
       let link = "/user/" + el.user_name
@@ -59,7 +63,6 @@ class SinglePost extends Component {
   handleInputChange(e) {
     let name = e.target.name;
     let value = e.target.value;
-    console.log(value)
     this.setState({
       [name]: value
     })
@@ -67,15 +70,14 @@ class SinglePost extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    console.log('HANDLED form submit')
     services.addComment(this.props.match.params.id, this.state.comment)
     .then(comment => {
-      console.log(comment)
+      this.getData()
     })
     .catch(err => {
       console.log(err)
     })
-    window.location.reload()
+
   }
 
   renderPage() {
@@ -109,7 +111,3 @@ class SinglePost extends Component {
 }
 
 export default SinglePost
-              // <h1>Post</h1>
-              // <h2>{this.state.postData.user_name}</h2>
-              // <p>{this.state.postData.content}</p>
-              // <h4>Likes: {this.state.postData.notes}</h4>

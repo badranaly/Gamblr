@@ -6,7 +6,6 @@ const db = require('../db/config')
 const usersController = {};
 
 usersController.editUser = (req, res) => {
-  console.log('got the infos yo')
   Users.updateUser(req.body)
     .then(user => {
       res.json({

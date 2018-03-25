@@ -4,6 +4,8 @@ import Header from './Header'
 import Footer from './Footer'
 import TokenService from './services/TokenService'
 import Userform from './Userform'
+import {Redirect} from 'react-router-dom'
+
 
 class Appearance extends Component {
 constructor(props){
@@ -14,7 +16,8 @@ constructor(props){
     pic: '',
     bg: '',
     blog_name: '',
-    blog_desc: ''
+    blog_desc: '',
+    fireRedirect: false
   }
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
@@ -44,10 +47,13 @@ handleSubmit(e){
   e.preventDefault()
   services.updateAppearance(this.state, this.state.username)
   .then(info => {
+    this.setState({
+      fireRedirect: true
+    })
     console.log('info updated')
   })
   .catch(err => {
-    console.log('appearance got fucked up', err)
+    console.log(err)
     })
 }
   render(){
@@ -57,14 +63,14 @@ handleSubmit(e){
           this.state.isLoggedIn ?
           <div>
             <Header />
+            <h1> Profile Settings </h1>
             <form onSubmit={this.handleSubmit}><br />
-            <p>username: </p><input type='text' name='username' onChange={this.handleInputChange} placeholder={this.state.username} />
-            <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />
-            <p>background: </p><input type='text' name='bg' onChange={this.handleInputChange} />
-            <p>blog name: </p><input type='text' name='blog_name' onChange={this.handleInputChange} />
-            <p>blog description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
-            <input type='submit'/>
-          </form>
+              <p>Profile Picture (link): </p><input type='text' name='pic' onChange={this.handleInputChange} />
+              <p>Blog Title: </p><input type='text' name='blog_name' onChange={this.handleInputChange} />
+              <p>Blog Description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
+              <input type='submit'/>
+            </form>
+            {this.state.fireRedirect ? <Redirect to={`/user/`+this.state.username} /> : ''}
           <Footer />
         </div>
         : <Userform />

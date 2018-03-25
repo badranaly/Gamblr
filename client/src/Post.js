@@ -49,15 +49,15 @@ addLike() {
 			this.setState({
 				likeClicked: true,
 			})
+			services.getPost(this.state.post_id).then(post => {
+				this.setState({
+					likes: post.data.data.post.notes
+				})
+			})
 		}).catch(err => {
 			console.log(err)
 		})
-		services.getPost(this.state.post_id).then(post => {
-			this.setState({
-				likes: post.data.data.post.notes
-			})
-		})
-		window.location.reload()
+
 	}
 
 	removeLike() {
@@ -66,6 +66,11 @@ addLike() {
 				likeClicked: false,
 			})
 			services.subtractLike(this.state.post_id).then(like2 => {
+				services.getPost(this.state.post_id).then(post => {
+					this.setState({
+						likes: post.data.data.post.notes
+					})
+				})
 			})
 			.catch(err=> {
 				console.log(err)
@@ -73,12 +78,6 @@ addLike() {
 		}).catch(err => {
 			console.log(err)
 		})
-		services.getPost(this.state.post_id).then(post => {
-			this.setState({
-				likes: post.data.data.post.notes
-			})
-		})
-		window.location.reload()
 	}
 
 	render() {

@@ -106,6 +106,7 @@ handleDelete(e){
       <div>
         {this.state.isLoggedIn ?
         <div>
+          <h1> Account Settings </h1>
           <Header />
           <br/>
           <br/>
