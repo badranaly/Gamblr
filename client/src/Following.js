@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import { Redirect } from 'react-router-dom';
+import TokenService from './services/TokenService'
+import Userform from './Userform'
 
 class Following extends Component {
   constructor(props){
@@ -9,7 +11,8 @@ class Following extends Component {
       apiDataLoaded: false,
       apiData: null,
       fireRedirect: false,
-      user_name: ''
+      username: props.user,
+      isLoggedIn: props.check
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -17,17 +20,27 @@ class Following extends Component {
   }
 
   componentDidMount() {
-    services.getFollowing().then(posts => {
-      console.log("data from post", posts)
+    services.checkLogin(TokenService.read())
+    .then(resp => {
       this.setState({
-        apiDataLoaded: true,
-        apiData: posts.data.data.users
+        username: resp.data.token.username,
+        isLoggedIn: resp.data.isLoggedIn
       })
-    }).catch(err => {
-      console.log(err)
-    })
+    }, this.getFollowingUsers())
+    .catch(err => {console.log(err)})
   }
 
+getFollowingUsers(){
+  services.getFollowing().then(posts => {
+    console.log("data from post", posts)
+    this.setState({
+      apiDataLoaded: true,
+      apiData: posts.data.data.users
+    })
+  }).catch(err => {
+    console.log(err)
+  })
+}
 
   handleRemove(e) {
     console.log(e.target.name)
@@ -101,14 +114,20 @@ class Following extends Component {
   render(){
     return (
       <div>
-        <h1>Users currently being followed:</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
-          <input type='submit' value="Enter User Name"/>
-        </form>
-      {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
-        {this.state.apiDataLoaded ? this.renderUsers() : ''}
-
+        {
+          this.state.isLoggedIn ?
+          <div>
+            {console.log('inside following comp', this.state)}
+            <h1>Users currently being followed:</h1>
+            <form onSubmit={this.handleFormSubmit}>
+              <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
+              <input type='submit' value="Enter User Name"/>
+            </form>
+            {this.state.apiDataLoaded ? this.renderUsers() : ''}
+          </div>
+         :
+        <Userform />
+        }
       </div>
     )
   }

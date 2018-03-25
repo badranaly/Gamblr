@@ -9,6 +9,10 @@ services.getUser = (username) => {
 	return axios.get()
 }
 
+services.getAllLikes = () => {
+	return axios.get('/api/posts/like')
+}
+
 services.login = (things) => {
 	return axios('http://localhost:3000/api/users/login', {
     method: "POST",

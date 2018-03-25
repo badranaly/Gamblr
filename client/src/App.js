@@ -72,13 +72,23 @@ render(){
               return <Userpage check={this.state.isLoggedIn} user={this.state.user_name} />
             }} />
             <Route path='/addPost' component={() => {
-              return <PostAddForm check={this.state.isLoggedIn} user={this.state.user_name} /> 
+              return <PostAddForm check={this.state.isLoggedIn} user={this.state.user_name} />
             }} />
-            <Route path='/favs' component={Likes} />
-            <Route path='/following' component={Following} />
-            <Route path='/settings' component={Settings} />
-            <Route path='/Appearance' component={Appearance} />
-            <Route path='/myPosts' component={MyPosts} />
+            <Route path='/favs' component={() => {
+              return <Likes check={this.state.isLoggedIn} user={this.state.user_name} />
+            }} />
+            <Route path='/following' component={() => {
+              return <Following user={this.state.user_name} check={this.state.isLoggedIn} />
+            }} />
+            <Route path='/settings' component={() => {
+              return <Settings user={this.state.user_name} check={this.state.isLoggedIn} />
+            }} />
+            <Route path='/Appearance' component={() => {
+              return <Appearance check={this.state.isLoggedIn} user={this.state.user_name} />
+            }} />
+            <Route path='/myPosts' component={() => {
+              return <MyPosts check={this.state.isLoggedIn} user={this.state.user_name} />
+            }} />
           <div>
 
           </div>
