@@ -21,19 +21,15 @@ class Post extends Component {
 
 	componentDidMount() {
 		services.checkLikes(this.state.user_id, this.state.post_id).then(posts => {
-					console.log("inside mount, like found")
 					this.setState({
 							likeClicked: true
 					})
-					console.log(this.state.likeClicked)
 				}).catch(err => {
 						this.setState({
 							likeClicked: false
 						})
 					console.log(err)
 				})
-				console.log(this.state.user_id)
-				console.log("props follower", this.props.post.follower_id)
 	}
 
 	addLike() {
@@ -52,7 +48,6 @@ class Post extends Component {
 	}
 
 	removeLike() {
-		console.log("removing like", this.state.user_id)
 		services.removeLike(this.state.post_id,this.state.user_id).then(like => {
 			this.setState({
 				likeClicked: false,
