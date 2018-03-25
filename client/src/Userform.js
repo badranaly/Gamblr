@@ -22,6 +22,7 @@ class Userform extends Component {
 
 handleSubmit(data){
   data.preventDefault()
+    console.log("handle state", this.state)
     services.login(this.state)
     .then(resp => {
       TokenService.save(resp.data.token);
@@ -39,6 +40,7 @@ handleSubmit(data){
   }
 
 onChange(e){
+  console.log("inside onchange")
   let name = e.target.name
   let value = e.target.value
   this.setState({
@@ -56,6 +58,7 @@ renderError() {
 }
 
 render(){
+  console.log("this state", this.state)
   return(
     <div>
       {console.log('this is props for isLoggedIn inside userform', this.state.isLoggedIn)}
@@ -66,8 +69,8 @@ render(){
         <form className="form-signin loginForm" onSubmit={this.handleSubmit}>
           <div className="wrapper">
               <h2 className="loginForm form-signin-heading">Login</h2>
-              <input type="text" className="form-control" name="user_name" placeholder="Username" required="" autoFocus="" onChange={this.handleChange}/><br/>
-              <input type="password" onChange={this.handleChange} className="form-control" name="password" placeholder="Password" required=""/>
+              <input type="text" className="form-control" name="user_name" placeholder="Username" required="" autoFocus="" onChange={this.onChange}/><br/>
+              <input type="password" onChange={this.onChange} className="form-control" name="password" placeholder="Password" required=""/>
               <br/>
               <button className="loginbtn btn btn-lg btn-danger btn-block" type="submit">Login</button>
               <p>Don't have an account?  Sign up <a href="/signup">here</a></p>

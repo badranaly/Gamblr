@@ -90,7 +90,7 @@ onChange(e){
           {/* {this.state.success ? '' : this.renderError()} */}
         </div>
         }
-        {this.state.success ? <Redirect to='/appearance' /> : ''}
+        {this.state.success ? <Redirect to='/login' /> : ''}
       </div>
     )
   }

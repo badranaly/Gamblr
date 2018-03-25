@@ -33,7 +33,7 @@ class UserPage extends Component {
   }
 
   getStuff() {
-      console.log("giddy up",this.props.match)
+      console.log("giddy up",this.props)
       services.getUser(this.props.match.params.username).then(user => {
         console.log('userdata',user)
         this.setState({

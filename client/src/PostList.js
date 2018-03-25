@@ -22,12 +22,23 @@ componentDidMount() {
 		this.setState({
 			username: resp.data.token.username
 		})
-	}, this.getPosts())
-	.catch(err => {console.log(err)})
+
+		services.getUserID(this.state.username)
+			.then(response => {
+				console.log("user id back", response.data.data.user[0].id)
+				this.getPosts(response.data.data.user[0].id)
+			})
+			.catch(err => {
+			console.log(err)
+			})
+		})
+	.catch(err => {
+		console.log(err)
+	})
 	}
 
-	getPosts(){
-		services.getAllPosts().then(post => {
+	getPosts(input){
+		services.getAllPosts(input).then(post => {
 			this.setState({
 				apiDataLoaded: true,
 				apiData: post.data.data.posts
@@ -43,6 +54,7 @@ componentDidMount() {
 		console.log('loaded data of PostList comp -->', this.state.username)
 
 		return this.state.apiData.map((el,i) => {
+			console.log("inside postList", el)
 			return <Post key={i} post={el} user={this.state.username}/>
 		})
 	}

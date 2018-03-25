@@ -112,8 +112,8 @@ services.authenticateUser = (things) => {
 
 //post manipulation
 
-services.getAllPosts = () => {
-	return axios.get('/api/posts/feed')
+services.getAllPosts = (input) => {
+	return axios.get(`/api/posts/feed/${input}`)
 }
 
 services.createOnePost = (thing) => {

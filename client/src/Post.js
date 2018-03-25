@@ -11,11 +11,11 @@ class Post extends Component {
 		super(props)
 		this.state = {
 			likeClicked: false,
-			user_id: 1,
+			user_id: null,
 			post_id: props.list === 'favs' ? props.post.post_id : (props.list === 'myposts' || props.list === 'userposts' || props.list === 'singlepost') ? props.post.id : props.post.postid,
 			fireRedirect: false,
 			likes: parseInt(props.post.notes),
-			username: props.user
+			username: props.user,
 		}
 	}
 
@@ -27,6 +27,15 @@ componentDidMount() {
 			username: resp.data.token.username,
 			isLoggedIn: resp.data.isLoggedIn
 		})
+		services.getUserID(this.state.username)
+			.then(response => {
+				this.setState({
+					user_id: response.data.data.user[0].id
+				})
+			})
+			.catch(err => {
+			console.log(err)
+			})
 	}, this.checkAllLikes())
 	.catch(err => {console.log(err)})
 }
@@ -84,7 +93,7 @@ addLike() {
 		return (
 			<div className='post mainPost'>
 				<img className="profilePic" alt='' src={this.props.post.pic} />
-				<h2 className="userPost" className='post'><a className="userLink" href={`/user/${this.state.username}`}>{this.state.username}</a></h2>
+				<h2 className="userPost" className='post'><a className="userLink" href={`/user/${this.props.post.user_name}`}>{this.props.post.user_name}</a></h2>
 				<div className="posts">{this.props.post.type === 'video' ? <ReactPlayer url={this.props.post.content} /> : this.props.post.type === 'photo' ? <img alt='' src={this.props.post.content} /> : this.props.post.type === 'link' ? <a href={this.props.post.content}>{this.props.post.content}</a> : this.props.post.content}</div>
 				<br/>
 				{this.props.list !== 'myposts' ? <Button className="rightAdj" className="like" className="btn btn-danger" bsStyle="info" onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</Button> : ''}

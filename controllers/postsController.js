@@ -3,7 +3,7 @@ const Posts = require('../models/postsDB');
 const postsController = {};
 
 postsController.feed = (req, res) => {
-  Posts.populateFeed()
+  Posts.populateFeed(req.params.id)
     .then(posts => {
       res.json({
         message: 'ok',
