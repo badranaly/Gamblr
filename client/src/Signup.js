@@ -1,23 +1,14 @@
 //LetsGetit
 
 import React, {Component} from 'react'
-import services from './services/apiServices'
-import {Redirect} from 'react-router-dom'
+import Userform from './Userform'
+import {Link} from 'react-router-dom'
 
 class Signup extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      user_name: '',
-      password: '',
-      pic: '' ,
-      bg: '',
-      blog_name: '',
-      blog_desc: '',
-      fireRedirect: false
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleOnChange = this.handleOnChange.bind(this)
+constructor(props){
+  super(props)
+  this.state = {
+    isLoggedIn: this.props.user
   }
 
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
+import TokenService from './services/TokenService'
 
 class Follower extends Component {
   constructor(props){
@@ -15,7 +16,18 @@ class Follower extends Component {
     this.getUserData = this.getUserData.bind(this);
   }
 
-  getUserData() {
+componentDidMount() {
+    services.checkLogin(TokenService.read())
+    .then(resp => {
+      this.setState({
+        isLoggedIn: resp.data.isLoggedIn,
+        username: resp.data.token.username
+      })
+    }, this.getUserData())
+    .catch(err => {console.log(err)})
+  }
+
+getUserData() {
     services.getUserID(this.props.user_name)
     .then(id => {
       services.checkFollowing(id.data.data.user[0].id)
@@ -35,7 +47,8 @@ class Follower extends Component {
     .catch(err => {
       console.log(err)
     })
-  }
+}
+
 
   componentDidMount() {
     this.getUserData();
@@ -101,6 +114,8 @@ class Follower extends Component {
   render(){
     return (
       <div>
+        {console.log('inside follower component -->', this.state)}
+      {/* } {this.state.fireRedirect ? <Redirect to='/following' /> : ''} */}
         {this.state.apiDataLoaded ? this.renderUser() : ''}
 
       </div>

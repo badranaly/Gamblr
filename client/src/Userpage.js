@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
+
 import services from './services/apiServices'
 import Post from './Post'
 import Header from './Header'
 import Footer from './Footer'
+import Userform from './Userform'
+import TokenService from './services/TokenService'
 
 class UserPage extends Component {
   constructor(props){
@@ -12,11 +15,24 @@ class UserPage extends Component {
       postDataLoaded: false,
       userData: null,
       postData: null,
-      fireRedirect: false
+      fireRedirect: false,
+      username: props.user,
+      isLoggedIn: props.check
     }
   }
 
-  componentDidMount() {
+  componentDidMount(){
+    services.checkLogin(TokenService.read())
+    .then(resp => {
+      this.setState({
+        username: resp.data.token.username,
+        isLoggedIn: resp.data.isLoggedIn
+      })
+    }, this.getStuff())
+    .catch(err => {console.log(err)})
+  }
+
+  getStuff() {
       console.log("giddy up",this.props.match)
       services.getUser(this.props.match.params.username).then(user => {
         console.log('userdata',user)
@@ -35,7 +51,7 @@ class UserPage extends Component {
         })
       }).catch(err => {
         console.log(err)
-      }) 
+      })
   }
 
   renderPage() {
@@ -52,15 +68,19 @@ class UserPage extends Component {
     )
   }
 
-
-
   render(){
     return (
       <div>
-        <Header />
-        {this.state.userDataLoaded && this.state.postDataLoaded ? this.renderPage() : ''}
-        <Footer />
-      </div>
+        {
+        this.state.isLoggedIn ?
+        <div>
+          <Header />
+          {this.state.userDataLoaded && this.state.postDataLoaded ? this.renderPage() : ''}
+          <Footer />
+        </div>
+        : <Userform />
+      }
+    </div>
     )
   }
 }

@@ -2,12 +2,15 @@ import React, {Component} from 'react'
 import services from './services/apiServices'
 import Header from './Header'
 import Footer from './Footer'
+import TokenService from './services/TokenService'
+import Userform from './Userform'
 
 class Appearance extends Component {
 constructor(props){
   super(props)
   this.state = {
-    user_name: '',
+    username: props.user,
+    isLoggedIn: props.check,
     pic: '',
     bg: '',
     blog_name: '',
@@ -15,6 +18,17 @@ constructor(props){
   }
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
+}
+
+componentDidMount(){
+  services.checkLogin(TokenService.read())
+  .then(resp => {
+    this.setState({
+      isLoggedIn: resp.data.isLoggedIn,
+      username: resp.data.token.username
+    })
+  })
+  .catch(err => {console.log(err)})
 }
 
 handleInputChange(e){
@@ -28,7 +42,7 @@ handleInputChange(e){
 
 handleSubmit(e){
   e.preventDefault()
-  services.updateAppearance(this.state, this.state.user_name)
+  services.updateAppearance(this.state, this.state.username)
   .then(info => {
     console.log('info updated')
   })
@@ -39,15 +53,21 @@ handleSubmit(e){
   render(){
     return (
       <div>
-        <Header />
-        <form onSubmit={this.handleSubmit}><br />
-          <p>username: </p><input type='text' name='user_name' onChange={this.handleInputChange} />
-          <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />
-          <p>background: </p><input type='text' name='bg' onChange={this.handleInputChange} />
-          <p>blog name: </p><input type='text' name='blog_name' onChange={this.handleInputChange} />
-          <p>blog description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
-          <input type='submit'/>
-        </form>
+      <Header />
+        {
+          this.state.isLoggedIn ?
+          <div>
+            <form onSubmit={this.handleSubmit}><br />
+            <p>username: </p><input type='text' name='username' onChange={this.handleInputChange} placeholder={this.state.username} />
+            <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />
+            <p>background: </p><input type='text' name='bg' onChange={this.handleInputChange} />
+            <p>blog name: </p><input type='text' name='blog_name' onChange={this.handleInputChange} />
+            <p>blog description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
+            <input type='submit'/>
+          </form>
+        </div>
+        : <Userform />
+        }
         <Footer />
       </div>
     )
