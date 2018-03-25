@@ -15,7 +15,8 @@ class SignupForm extends Component {
       isLoggedIn: props.check,
       user_name: '',
       password: '',
-      fireRedirect: false
+      fireRedirect: false,
+      success: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -32,10 +33,11 @@ class SignupForm extends Component {
   }
 
   renderError() {
+    console.log('inside render error for signup');
     return(
     <div className="alert">
       <span className="closebtn"></span>
-      Invalid Credentials -- please try again.
+      User Already Exists -- please choose a different Username.
     </div>
     )
   }
@@ -50,8 +52,7 @@ class SignupForm extends Component {
       })
     })
     .catch(err => {
-      console.log(err)
-      this.renderError()
+      console.log('user already exists -- msg from submit ', err)
     })
 }
 
@@ -82,6 +83,8 @@ onChange(e){
             <input type='submit' />
             <p>Already a user? Sign in <a href='/login'>here</a></p>
           </form>
+          {console.log('sucess status: ', this.state.success)}
+          {this.state.success ? '' : this.renderError()}
         </div>
         }
         {this.state.success ? <Redirect to='/appearance' /> : ''}
