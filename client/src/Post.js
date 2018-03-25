@@ -33,6 +33,7 @@ componentDidMount() {
 }
 
 checkAllLikes(){
+	console.log("like props", this.props.id)
 	services.checkLikes(this.props.id, this.state.post_id).then(posts => {
 				this.setState({
 						likeClicked: true
@@ -46,7 +47,7 @@ checkAllLikes(){
 }
 
 addLike() {
-		services.addLike(this.state).then(like => {
+		services.addLike(this.state, this.props.id).then(like => {
 			this.setState({
 				likeClicked: true,
 			})

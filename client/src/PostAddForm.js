@@ -33,6 +33,18 @@ componentDidMount(){
 				isLoggedIn: resp.data.isLoggedIn,
 				username: resp.data.token.username
 			})
+
+			services.getUserID(this.state.username)
+				.then(response => {
+					this.setState({
+						user_id: response.data.data.user[0].id
+					})
+				})
+				.catch(err => {
+				console.log(err)
+				})
+
+
 		})
 		.catch(err => console.log(err));
 	}

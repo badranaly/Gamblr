@@ -24,14 +24,14 @@ componentDidMount() {
         username: resp.data.token.username
       })
       this.getUserData();
-    }, this.getUserData())
+    })
     .catch(err => {console.log(err)})
   }
 
 getUserData() {
     services.getUserID(this.props.user_name)
     .then(id => {
-      services.checkFollowing(id.data.data.user[0].id)
+      services.checkFollowing(id.data.data.user[0].id, this.props.logged)
       .then(posts => {
          this.setState({
            apiDataLoaded: true,
@@ -55,7 +55,7 @@ getUserData() {
     e.stopPropagation();
     services.getUserID(e.target.name)
     .then(user => {
-      services.removeFollowing(user.data.data.user[0].id)
+      services.removeFollowing(user.data.data.user[0].id, this.props.logged)
       .then(user2 => {
         this.getUserData();
         })
@@ -73,7 +73,7 @@ getUserData() {
     e.stopPropagation();
     services.getUserID(e.target.name)
       .then(user => {
-        services.followNew(user)
+        services.followNew(user, this.props.logged)
           .then(user2 => {
               this.getUserData();
             })
