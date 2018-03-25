@@ -12,7 +12,7 @@ postRoutes.post('/', postsController.create);
 postRoutes.post('/like', postsController.addLike);
 postRoutes.delete('/like/:postId/:userId', postsController.removeLike);
 postRoutes.get('/checkLikes/:postId/:userId', postsController.checkLikes)
-postRoutes.get('/myPosts', postsController.myPosts);
+postRoutes.get('/myPosts/:id', postsController.myPosts);
 postRoutes.get('/singlePost/:id', postsController.singlePost);
 postRoutes.get('/getComments/:id', postsController.getComments);
 postRoutes.post('/comment/:id', postsController.addComment);

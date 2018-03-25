@@ -92,6 +92,7 @@ usersController.create = (req, res, next) => {
 },
 
 usersController.getUser = (req, res) => {
+  console.log("REQ", req.params)
   Users.findUser(req.params.username)
   .then(user => {
     res.json({
@@ -169,6 +170,7 @@ usersController.followNew = (req, res) => {
   console.log("inside usercontroller, follownew", req.params.id)
   let sendObj = {}
   sendObj.following_id = req.params.id
+  sendObj.follower_id = req.params.id2
   Users.followUser(sendObj)
   .then(output => {
     res.json({
@@ -200,7 +202,7 @@ usersController.unfollowUser = (req, res) => {
 },
 
 usersController.listFollowers = (req, res) => {
-  Users.listFollowers()
+  Users.listFollowers(req.params.id)
     .then(users => {
       res.json({
         message: 'ok',
@@ -246,6 +248,7 @@ usersController.checkFollowing = (req, res) => {
   console.log('inside checkfollowing CONTROLLER', req.params.id)
   let sendObj = {}
   sendObj.following_id = req.params.id
+  sendObj.follower_id = req.params.id2
   Users.checkFollowing(sendObj)
   .then(found => {
     res.json({

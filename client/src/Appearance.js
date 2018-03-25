@@ -17,7 +17,8 @@ constructor(props){
     bg: '',
     blog_name: '',
     blog_desc: '',
-    fireRedirect: false
+    fireRedirect: false,
+    loggedUserId: null
   }
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
@@ -30,6 +31,7 @@ componentDidMount(){
       isLoggedIn: resp.data.isLoggedIn,
       username: resp.data.token.username
     })
+
   })
   .catch(err => {console.log(err)})
 }

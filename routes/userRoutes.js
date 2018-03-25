@@ -6,9 +6,9 @@ const userRoutes = express.Router();
 
 userRoutes.delete('/follower/:id/:id2', usersController.unfollowUser);
 userRoutes.post('/follower/', usersController.followUser);
-userRoutes.post('/follower/:id', usersController.followNew);
+userRoutes.post('/follower/:id/:id2', usersController.followNew);
 userRoutes.get('/following/:id', usersController.listFollowing);
-userRoutes.get('/followers', usersController.listFollowers);
+userRoutes.get('/followers/:id', usersController.listFollowers);
 userRoutes.get('/user/:username', usersController.getUser);
 userRoutes.get('/login/:user/:pass', usersController.userLogin);
 userRoutes.post('/', usersController.create);
@@ -21,7 +21,7 @@ userRoutes.delete('/users/posts/:id', usersController.removePostsByUser)
 userRoutes.delete('/users/:un', usersController.deleteUser);
 // userRoutes.post('/login', usersController.authenticateUser);
 userRoutes.get('/lookup/:un', usersController.getID);
-userRoutes.get('/checkFollowing/:id', usersController.checkFollowing)
+userRoutes.get('/checkFollowing/:id/:id2', usersController.checkFollowing)
 
 //post functions using Auth
 userRoutes.post('/login', usersController.login, (req, res) => {

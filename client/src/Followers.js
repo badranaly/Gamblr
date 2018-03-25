@@ -16,14 +16,15 @@ class Followers extends Component {
       apiData: null,
       fireRedirect: false,
       user_name: props.user,
-      isLoggedIn: props.check
+      isLoggedIn: props.check,
+      loggedUserId: null
     }
 
   }
 //fuction to get a list of all users who follow a given logged in user
 
-getTheFollowers(){
-    services.getFollowers()
+getTheFollowers(input){
+    services.getFollowers(input)
     .then(users => {
       this.setState({
         apiDataLoaded: true,
@@ -39,9 +40,20 @@ componentDidMount() {
     .then(resp => {
       this.setState({
         isLoggedIn: resp.data.isLoggedIn,
-        username: resp.data.token.username
+        user_name: resp.data.token.username
       })
-    }, this.getTheFollowers())
+      services.getUserID(this.state.user_name)
+        .then(response => {
+          this.setState({
+            loggedUserId: response.data.data.user[0].id
+          })
+          this.getTheFollowers(this.state.loggedUserId)
+        })
+        .catch(err => {
+        console.log(err)
+        })
+
+    })
     .catch(err => {console.log(err)})
   }
   // uses the data retrieved from above to create an individual component rendered for each user who follows
@@ -49,10 +61,11 @@ componentDidMount() {
   renderUsers() {
     console.log('this is followers console -> ', this.state)
 		return this.state.apiData.map((el,i) => {
+      console.log("iside render users")
 
 			return (
         <div>
-          <Follower pic={el.pic} user_name={el.user_name} />
+          <Follower pic={el.pic} user_name={el.user_name} logged={this.state.loggedUserId}/>
       </div>
       )
 		})

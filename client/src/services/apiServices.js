@@ -86,6 +86,7 @@ services.updateAppearance = (things,username) => {
 		method: 'PUT',
 		url: `/api/users/${username}`,
 		data: {
+			username: username,
 	    pic: things.pic,
 	    blog_name: things.blog_name,
 	    blog_desc: things.blog_desc
@@ -130,20 +131,20 @@ services.createOnePost = (thing) => {
 	})
 }
 
-services.getAllMyPosts = () => {
-	return axios.get('/api/posts/myPosts')
+services.getAllMyPosts = (input) => {
+	return axios.get(`/api/posts/myPosts/${input}`)
 }
 
 //services.getAllLikes = () => {
 //	return axios.get('/api/posts/like')
 //}
 
-services.addLike = (thing) => {
+services.addLike = (thing, thing2) => {
 	return axios({
 		method: 'POST',
 		url: '/api/posts/like',
 		data: {
-			user_id: thing.user_id,
+			user_id: thing2,
 			post_id: thing.post_id
 		}
 	})
@@ -169,8 +170,8 @@ services.getFollowing = (input) => {
 	return axios.get(`/api/users/following/${input}`)
 }
 
-services.getFollowers = () => {
-	return axios.get(`/api/users/followers`)
+services.getFollowers = (input) => {
+	return axios.get(`/api/users/followers/${input}`)
 }
 
 services.getUserID = (user_name) => {
@@ -195,12 +196,15 @@ services.addFollowing = (user, logged) => {
 	})
 }
 
-services.followNew = (id) => {
+services.followNew = (id, two) => {
+	let helpObj = {}
+	helpObj.one = id.data.data.user[0].id
+	helpObj.two = two
 	return axios({
 		method: 'POST',
-		url: `/api/users/follower/${id.data.data.user[0].id}`,
+		url: `/api/users/follower/${id.data.data.user[0].id}/${two}`,
 		data: {
-			content: id,
+			content: helpObj,
 		}
 	})
 }
@@ -209,12 +213,13 @@ services.removeFollowing = (id, logged) => {
 	return axios.delete(`/api/users/follower/${id}/${logged}`)
 }
 
-services.checkFollowing = (id) => {
-	return axios.get(`/api/users/checkFollowing/${id}`)
+services.checkFollowing = (id, id2) => {
+	return axios.get(`/api/users/checkFollowing/${id}/${id2}`)
 }
 
 services.checkLikes = (user,id) => {
 	console.log("checking likes in services", user)
+	console.log("checking likes in services", id)
 	return axios.get(`/api/posts/checkLikes/${id}/${user}`)
 }
 
