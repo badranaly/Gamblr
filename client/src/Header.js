@@ -33,7 +33,7 @@ class Header extends Component {
 					</Navbar.Header>
 					<Navbar.Collapse>
 						<Nav>
-							<NavItem className="navItem" eventKey={1} href="\feed">Home </NavItem>
+							<NavItem className="navItem" eventKey={1} href="\feed">Home</NavItem>
 							<NavDropdown className="navItem" eventKey={3} title="Account " id="basic-nav-dropdown">
 								<MenuItem href='/favs' eventKey={3.1}>Likes</MenuItem>
 								<MenuItem href='/following' eventKey={3.2}>Following</MenuItem>
@@ -45,7 +45,7 @@ class Header extends Component {
 								<MenuItem href='/logout' eventKey={3.7}>Log Out</MenuItem>
 							</NavDropdown>
 							{this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
-							<NavItem className="postbtn" onClick={this.handleButtonClick} bssize="large" bsstyle="danger">New Post</NavItem>
+							<NavItem className="postbtn" onClick={this.handleButtonClick} active='true' eventKey={4} bssize="large" bsStyle="tabs" >New Post</NavItem>
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>

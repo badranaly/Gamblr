@@ -22,8 +22,9 @@ module.exports = {
     return db.many('SELECT user_name, blog_name, pic FROM followers INNER JOIN users ON following_id = users.id WHERE follower_id = $1', user)
   },
 
-  changePass(user){
-    return db.none(`UPDATE users SET password=$[password] WHERE user_name='testuser'`, user)
+  changePass(user, passwordDigest){
+    console.log('inside usersdb --> ', user)
+    return db.none(`UPDATE users SET password=$2 WHERE user_name=$1`, [user.username, passwordDigest, 0])
   },
 
   followUser(user) {
