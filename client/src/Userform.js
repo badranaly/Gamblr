@@ -58,7 +58,7 @@ render(){
         <form onSubmit={this.handleSubmit}>
           <input type='text' placeholder='Username' name='user_name' value={this.state.user_name} onChange={this.onChange}/>
           <input type='password' name='password' placeholder='******' value={this.state.password} onChange={this.onChange}/>
-          <input type='submit' /><br />
+          <input type='submit' value='login'/><br />
         </form>
         <Link to='/Signup'> <p>don't have an accout?</p> </Link>
       </div>

@@ -24,7 +24,7 @@ userRoutes.post('/login', usersController.login, (req, res) => {
     res.json({token: res.locals.token, user});
   }
 })
-userRoutes.post('/', usersController.create, (req, res) => {
+userRoutes.post('/signup', usersController.create, (req, res) => {
   res.json({token: res.locals.token, user: res.locals.user})
 });
 

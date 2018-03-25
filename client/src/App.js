@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import Userform from './Userform'
-import SignUp from './Signup'
+import SignupForm from './SignupForm'
 import Feed from './Feed'
 import Likes from './Likes'
 import Userpage from './Userpage'
@@ -30,20 +30,6 @@ class App extends Component {
     }
   }
 
-register(data) {
-  axios('http://localhost:3000/api/users/', {
-    method: "POST",
-    data
-  }).then(resp => {
-    TokenService.save(resp.data.token)
-  })
-  .catch(err => console.log(`err: ${err}`));
-}
-
-// same as above except route is login
-// as above, we are saving the token locally using
-// the TokenService
-
 logout() {
     TokenService.destroy();
     console.log('this is tokenservice of logout', TokenService)
@@ -59,7 +45,9 @@ render(){
           <Route exact path='/login' component={() => {
             return <Userform check={this.state.isLoggedIn} user={this.state.user_name} />
           }} />
-          <Route exact path='/signup' component={SignUp} check={this.state.isLoggedIn} />
+          <Route exact path='/signup' component={() => {
+            return <SignupForm check={this.state.isLoggedIn} />
+          }}  />
           <Route path='/feed' component={Feed} />
           <Route path='/followers' component={() => {
             return <Followers check={this.state.isLoggedIn} user={this.state.user_name}/>

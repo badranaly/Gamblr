@@ -44,6 +44,7 @@ usersController.deleteUser = (req, res) => {
 
 usersController.create = (req, res, next) => {
   const user = req.body
+  console.log('inside create function ->', req.body);
   const passwordDigest = bcrypt.hashSync(user.password, 10);
   db.one(
     'INSERT INTO users (user_name, password) VALUES ($1, $2) RETURNING *;', [user.user_name, passwordDigest, 0]
