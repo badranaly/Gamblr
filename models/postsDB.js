@@ -11,9 +11,9 @@ module.exports = {
                   WHERE followers.follower_id = 1 ORDER BY posts.id DESC`);
   },
   populateLikes() {
-    return db.any(`SELECT likes.user_id, post_id, type, content, notes, user_name, pic  FROM likes
+    return db.any(`SELECT posts.user_id, post_id, type, content, notes, user_name, pic  FROM likes
                   JOIN posts ON posts.id = likes.post_id
-                  JOIN users ON users.id = likes.user_id
+                  JOIN users ON users.id = posts.user_id
                   WHERE likes.user_id = 1`)
   },
 
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   subtractLike(input) {
-    console.log("input", input)
+    console.log("input to subtract", input)
     return db.none(`UPDATE posts SET notes=notes-1 WHERE id=$1`,input)
   },
 
