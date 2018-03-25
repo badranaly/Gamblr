@@ -30,8 +30,6 @@ class Post extends Component {
 						})
 					console.log(err)
 				})
-				console.log("mounted post_id", this.state.post_id)
-
 	}
 
 	addLike() {
