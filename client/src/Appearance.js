@@ -33,7 +33,7 @@ handleSubmit(e){
     console.log('info updated')
   })
   .catch(err => {
-    console.log('appearance got fucked up', err)
+    console.log(err)
     })
 }
   render(){
