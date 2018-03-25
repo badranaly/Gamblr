@@ -5,8 +5,8 @@ import PostList from './PostList'
 import Footer from './Footer'
 import services from './services/apiServices'
 import TokenService from './services/TokenService'
-import Login from './Login'
-import {Redirect} from 'react-router-dom'
+// import Login from './Login'
+// import {Redirect} from 'react-router-dom'
 import Userform from './Userform'
 
 class Feed extends Component {
