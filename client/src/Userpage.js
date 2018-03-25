@@ -46,6 +46,7 @@ class UserPage extends Component {
         <h1>{this.state.userData.blog_name}</h1>
         <h2>{this.state.userData.blog_desc}</h2>
         {this.state.postData.map((el,i) => {
+          console.log('singleuser',el)
           return <Post key={el.id} post={el} list='userposts' />
         })}
       </div>

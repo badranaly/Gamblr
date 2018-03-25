@@ -36,6 +36,7 @@ class Likes extends Component {
         return (
       		<div>
       			<Header />
+      			<h1>Liked Posts</h1>
     			{this.state.apiDataLoaded ? this.renderLikes() : ''}
       			<Footer />
       		</div>

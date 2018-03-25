@@ -27,6 +27,7 @@ class MyPosts extends Component {
 
 	renderPosts() {
 		return this.state.apiData.map((el,i) => {
+			console.log('eejflem',el)
 			return <Post key={el.id} post={el} list='myposts'/>
 		})
 	}
@@ -35,6 +36,7 @@ class MyPosts extends Component {
 		return (
 			<div className='mypostlist'>
 				<Header />
+				<h1>My Posts</h1>
 				{this.state.apiDataLoaded ? this.renderPosts() : ''}
 				<Footer />
 			</div>

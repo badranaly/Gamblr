@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import {Button} from 'react-bootstrap';
+import {Button, NavDropdown, MenuItem, Navbar, NavItem, Nav} from 'react-bootstrap';
 import './index.css';
 
 
@@ -24,23 +24,30 @@ class Header extends Component {
 	render(){
 		return (
 			<div>
-				<nav className="navbar navbar-inverse">
-					<div className="container-fluid">
-						<div className="navbar-header">
-							<a className="navbar-brand" href="/feed"><span className="GA">GA</span>mblr</a>
-						</div>
-						<ul className="nav navbar-nav">
-							<li className="active"><a href="/feed">Home</a></li>
-							<li className="active2"><a href="#">Account</a>
-								<ul className='dropdown'>
-
-								</ul>
-							</li>
-							  <Button onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
-							 {this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
-						</ul>
-					</div>
-				</nav>
+				<Navbar inverse collapseOnSelect>
+					<Navbar.Header>
+						<Navbar.Brand>
+						  	<a href="/feed"><span className="GA">GA</span>mblr</a>
+							</Navbar.Brand>
+						<Navbar.Toggle />
+					</Navbar.Header>
+					<Navbar.Collapse>
+						<Nav>
+							<NavItem eventKey={1} href="\feed">Home</NavItem>
+							<NavDropdown eventKey={3} title="Account" id="basic-nav-dropdown">
+								<MenuItem href='/favs' eventKey={3.1}>Likes</MenuItem>
+								<MenuItem href='/following' eventKey={3.2}>Following</MenuItem>
+								<MenuItem href='/myPosts' eventKey={3.3}>My Posts</MenuItem>
+								<MenuItem href='/followers' eventKey={3.4}>Followers</MenuItem>
+								<MenuItem divider />
+								<MenuItem href='/settings' eventKey={3.5}>Settings</MenuItem>
+								<MenuItem href='/Appearance' eventKey={3.6}>Appearance</MenuItem>
+							</NavDropdown>
+							<Button onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
+							{this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
 			</div>
 		)
 	}
