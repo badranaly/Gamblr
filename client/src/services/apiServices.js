@@ -9,6 +9,14 @@ services.getUser = (username) => {
 	return axios.get()
 }
 
+services.register = (things) => {
+	console.log('this is things -> ', things);
+	return axios('http://localhost:3000/api/users/signup', {
+    method: "POST",
+    data : things
+  })
+}
+
 services.getAllLikes = () => {
 	return axios.get('/api/posts/like')
 }
