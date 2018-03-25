@@ -53,6 +53,9 @@ class SignupForm extends Component {
     })
     .catch(err => {
       console.log('user already exists -- msg from submit ', err)
+      this.setState({
+        success: false
+      })
     })
 }
 
@@ -84,7 +87,7 @@ onChange(e){
             <p>Already a user? Sign in <a href='/login'>here</a></p>
           </form>
           {console.log('sucess status: ', this.state.success)}
-          {this.state.success ? '' : this.renderError()}
+          {/* {this.state.success ? '' : this.renderError()} */}
         </div>
         }
         {this.state.success ? <Redirect to='/appearance' /> : ''}
