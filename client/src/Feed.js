@@ -13,8 +13,8 @@ class Feed extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			isLoggedIn: props.check,
-			username: props.user,
+			isLoggedIn: false,
+			username: '',
 			fireRedirect: false
 		}
 		// this.checkLogin = this.checkLogin.bind(this)
@@ -39,10 +39,10 @@ componentDidMount(){
 	render() {
 		return (
 			<div className='feed'>
-
 				{
 				this.state.isLoggedIn ?
 				<div>
+					{console.log('inside feed component ---> ', this.state)}
 					<Header />
 					<PostList user={this.state.username}/>
 					<Footer />

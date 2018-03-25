@@ -62,10 +62,18 @@ render(){
           <Route exact path='/signup' component={SignUp} check={this.state.isLoggedIn} />
           <Route path='/feed' component={Feed} />
           <Route path='/followers' component={() => {
-            return <Followers check={this.state.isLoggedIn} />
+            return <Followers check={this.state.isLoggedIn} user={this.state.user_name}/>
           }} />
-            <Route path='/user/:username' component={Userpage} />
-            <Route path='/addPost' component={PostAddForm} />
+          {/********
+            everything above is complete with token auth
+            ********/}
+
+            <Route path='/user/:username' component={() => {
+              return <Userpage check={this.state.isLoggedIn} user={this.state.user_name} />
+            }} />
+            <Route path='/addPost' component={() => {
+              return <PostAddForm check={this.state.isLoggedIn} user={this.state.user_name} /> 
+            }} />
             <Route path='/favs' component={Likes} />
             <Route path='/following' component={Following} />
             <Route path='/settings' component={Settings} />

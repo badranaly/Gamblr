@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import Post from './Post'
+import TokenService from './services/TokenService'
 
 class PostList extends Component {
 	constructor(props) {
@@ -10,11 +11,22 @@ class PostList extends Component {
 		this.state = {
 			apiDataLoaded: false,
 			apiData: null,
-			username: props.user
+			username: ''
 		}
 	}
 
-	componentDidMount() {
+
+componentDidMount() {
+	services.checkLogin(TokenService.read())
+	.then(resp => {
+		this.setState({
+			username: resp.data.token.username
+		})
+	}, this.getPosts())
+	.catch(err => {console.log(err)})
+	}
+
+	getPosts(){
 		services.getAllPosts().then(post => {
 			console.log(post,'merp')
 			this.setState({
@@ -26,6 +38,7 @@ class PostList extends Component {
 		})
 	}
 
+
 	renderPosts() {
 		console.log('loaded data', this.state.username)
 		return this.state.apiData.map((el,i) => {
@@ -36,6 +49,7 @@ class PostList extends Component {
 	render() {
 		return (
 			<div className='post-list'>
+				{console.log('inside post list comp', this.state)}
 				{this.state.apiDataLoaded ? this.renderPosts() : ''}
 			</div>
 		)

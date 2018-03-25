@@ -2,11 +2,15 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import {Redirect} from 'react-router-dom'
+import TokenService from './services/TokenService'
+import Userform from './Userform'
 
 class PostAddForm extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
+			isLoggedIn: props.check,
+			username: props.user,
 			type: 'text',
 			content: '',
 			user_id: 1,
@@ -15,6 +19,17 @@ class PostAddForm extends Component {
 		}
 		this.handleInputChange = this.handleInputChange.bind(this)
 		this.handleFormSubmit = this.handleFormSubmit.bind(this)
+	}
+
+componentDidMount(){
+		services.checkLogin(TokenService.read())
+		.then(resp => {
+			this.setState({
+				isLoggedIn: resp.data.isLoggedIn,
+				username: resp.data.token.username
+			})
+		})
+		.catch(err => console.log(err));
 	}
 
 	handleInputChange(e) {
@@ -41,17 +56,23 @@ class PostAddForm extends Component {
 	render() {
 		return (
 			<div className='add-form'>
-				<form onSubmit={this.handlFormSubmit}>
-					<select name='type' onChange={this.handleInputChange}>
-						<option value='text'>Text</option>
-						<option value='photo'>Image</option>
-						<option value='link'>Link</option>
-						<option value='video'>Video</option>
-					</select>
-					<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder='Enter your stuff...'></textarea>
-					<input type='submit' value='Add Post!' />
-				</form>
-				{this.state.fireRedirect ? <Redirect to='/feed' /> : ''}
+				{
+					this.state.isLoggedIn ?
+					<div>
+						<form onSubmit={this.handlFormSubmit}>
+							<select name='type' onChange={this.handleInputChange}>
+								<option value='text'>Text</option>
+								<option value='photo'>Image</option>
+								<option value='link'>Link</option>
+								<option value='video'>Video</option>
+							</select>
+							<textarea name='content' rows='10' cols='30' onChange={this.handleInputChange} placeholder='Enter your stuff...'></textarea>
+							<input type='submit' value='Add Post!' />
+						</form>
+						{this.state.fireRedirect ? <Redirect to='/feed' /> : ''}
+				 </div>
+				 : <Userform />
+			 }
 			</div>
 		)
 	}

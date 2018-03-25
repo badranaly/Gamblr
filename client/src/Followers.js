@@ -11,7 +11,7 @@ class Followers extends Component {
       apiDataLoaded: false,
       apiData: null,
       fireRedirect: false,
-      user_name: '',
+      user_name: props.user,
       isLoggedIn: props.check
     }
 
@@ -46,8 +46,9 @@ class Followers extends Component {
   } */
 
   renderUsers() {
+    console.log('this is followers console -> ', this.state)
 		return this.state.apiData.map((el,i) => {
-      console.log('this is followers console -> ', this.state.isLoggedIn)
+
 			return (
         <div>
           <Follower pic={el.pic} user_name={el.user_name} />

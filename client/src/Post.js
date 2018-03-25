@@ -12,11 +12,12 @@ class Post extends Component {
 	}
 
 	addLike() {
-
 	}
+
 	render() {
 		return (
 			<div className='post'>
+				{console.log('inside post js', this.state)}
 				<img alt='' src='#' />
 				<h2>{this.state.username}</h2>
 				<p>{this.props.post.content}  - Notes: {this.props.post.notes}</p>
