@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import TokenService from './services/TokenService'
 import services from './services/apiServices'
-import Userform from './Userform'
-import Header from './Header'
-import Footer from './Footer'
+// import Userform from './Userform'
+// import Header from './Header'
+// import Footer from './Footer'
 import Feed from './Feed'
 import {Redirect} from 'react-router-dom'
 

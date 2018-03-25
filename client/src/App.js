@@ -1,13 +1,13 @@
 //Lillian
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 import './App.css';
 import './Chris.css'
 import './index.css';
 import Userform from './Userform'
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
 import './App.css';
-import axios from 'axios'
+// import axios from 'axios'
 import SignupForm from './SignupForm'
 import Feed from './Feed'
 import Likes from './Likes'
@@ -18,10 +18,9 @@ import Followers from './Followers'
 import Settings from './Settings'
 import Appearance from './Appearance'
 import MyPosts from './MyPosts'
-import SinglePost from './SinglePost'
-import TokenService from './services/TokenService'
-import createHistory from 'history/createBrowserHistory'
-import services from './services/apiServices'
+// import SinglePost from './SinglePost'
+// import TokenService from './services/TokenService'
+// import services from './services/apiServices'
 import Logout from './Logout'
 
 

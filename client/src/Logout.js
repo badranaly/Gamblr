@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import TokenService from './services/TokenService'
-import Userform from './Userform'
+// import Userform from './Userform'
 import {Redirect} from 'react-router-dom'
 
 class Logout extends Component{

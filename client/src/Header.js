@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import {Button, NavDropdown, MenuItem, Navbar, NavItem, Nav} from 'react-bootstrap';
+import {NavDropdown, MenuItem, Navbar, NavItem, Nav} from 'react-bootstrap';
 import './index.css';
 
 
@@ -44,8 +44,8 @@ class Header extends Component {
 								<MenuItem href='/Appearance' eventKey={3.6}>Appearance</MenuItem>
 								<MenuItem href='/logout' eventKey={3.7}>Log Out</MenuItem>
 							</NavDropdown>
-							<Button className="postbtn" onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
 							{this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
+							<NavItem className="postbtn" onClick={this.handleButtonClick} bssize="large" bsstyle="danger">New Post</NavItem>
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>

@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import TokenService from './services/TokenService'
-import {Redirect, BrowserRouter, Link} from 'react-router-dom'
+// import {BrowserRouter, Link} from 'react-router-dom'
 import Feed from './Feed'
-import Header from './Header'
+// import Header from './Header'
 import Footer from './Footer'
 
 class Userform extends Component {
