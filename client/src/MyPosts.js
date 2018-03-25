@@ -7,8 +7,8 @@ import TokenService from './services/TokenService'
 import Userform from './Userform'
 
 class MyPosts extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			apiDataLoaded: false,
 			apiData: null,

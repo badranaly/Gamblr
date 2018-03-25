@@ -42,6 +42,7 @@ class Header extends Component {
 								<MenuItem divider />
 								<MenuItem href='/settings' eventKey={3.5}>Settings</MenuItem>
 								<MenuItem href='/Appearance' eventKey={3.6}>Appearance</MenuItem>
+								<MenuItem href='/logout' eventKey={3.7}>Log Out</MenuItem>
 							</NavDropdown>
 							<Button onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
 							{this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}

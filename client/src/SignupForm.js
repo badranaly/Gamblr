@@ -31,13 +31,17 @@ class SignupForm extends Component {
     .catch(err => {console.log(err)})
   }
 
+  renderError() {
+    return(
+    <div className="alert">
+      <span className="closebtn"></span>
+      Invalid Credentials -- please try again.
+    </div>
+    )
+  }
+
   handleSubmit(data){
     data.preventDefault()
-    services.checkExistingUser(this.state.user_name)
-    .then(response => {
-      console.log("User Name already exists")
-    })
-    .catch(err => {
     services.register(this.state)
     .then(resp => {
       TokenService.save(resp.data.token)
@@ -45,8 +49,10 @@ class SignupForm extends Component {
         success: true
       })
     })
-    .catch(err => console.log(`err: ${err}`));
-  })
+    .catch(err => {
+      console.log(err)
+      this.renderError()
+    })
 }
 
 onChange(e){

@@ -3,6 +3,8 @@ import services from './services/apiServices'
 import TokenService from './services/TokenService'
 import {Redirect, BrowserRouter, Link} from 'react-router-dom'
 import Feed from './Feed'
+import Header from './Header'
+import Footer from './Footer'
 
 class Userform extends Component {
   constructor(props){
@@ -60,6 +62,7 @@ render(){
       {console.log('this is props for username inside userform', this.state.user_name)}
       {this.state.isLoggedIn ? <Feed check={this.state.isLoggedIn} user={this.state.username}/> :
       <div>
+        <Header />
         <form onSubmit={this.handleSubmit}>
           <form class="form-signin">
             <h2 class="form-signin-heading">Please login</h2>
@@ -70,6 +73,7 @@ render(){
           </form>
           {this.state.failedLogin ? this.renderError(): ''}
         </form>
+        <Footer />
       </div>
       }
       {/* {this.state.isLoggedIn ? <Redirect to='/feed' /> : console.log('isloggedin for login component', this.state)} */}

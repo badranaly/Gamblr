@@ -53,10 +53,10 @@ handleSubmit(e){
   render(){
     return (
       <div>
-      <Header />
         {
           this.state.isLoggedIn ?
           <div>
+            <Header />
             <form onSubmit={this.handleSubmit}><br />
             <p>username: </p><input type='text' name='username' onChange={this.handleInputChange} placeholder={this.state.username} />
             <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />
@@ -65,10 +65,10 @@ handleSubmit(e){
             <p>blog description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
             <input type='submit'/>
           </form>
+          <Footer />
         </div>
         : <Userform />
         }
-        <Footer />
       </div>
     )
   }

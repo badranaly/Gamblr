@@ -135,10 +135,10 @@ updateData() {
   render(){
     return (
       <div>
-      <Header />
         {
           this.state.isLoggedIn ?
           <div>
+            <Header />
             {console.log('inside following comp', this.state)}
             <h1>Users currently being followed:</h1>
             <form onSubmit={this.handleFormSubmit}>
@@ -147,12 +147,12 @@ updateData() {
             </form>
             {this.state.noUser ? this.renderError(): ''}
             {this.state.apiDataLoaded ? this.renderUsers() : ''}
+            <Footer />
           </div>
          :
         <Userform />
         }
 
-        <Footer />
       </div>
     )
   }

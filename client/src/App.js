@@ -22,6 +22,7 @@ import SinglePost from './SinglePost'
 import TokenService from './services/TokenService'
 import createHistory from 'history/createBrowserHistory'
 import services from './services/apiServices'
+import Logout from './Logout'
 
 
 class App extends Component {
@@ -35,17 +36,12 @@ class App extends Component {
     }
   }
 
-logout() {
-    TokenService.destroy();
-    console.log('this is tokenservice of logout', TokenService)
-}
-
 
 render(){
     return (
       <Router>
         <div className="App">
-          <a href='/login'><button onClick={this.logout.bind(this)}>Logout</button></a>
+          {/* <a href='/login'><button onClick={this.logout.bind(this)}>Logout</button></a> */}
           <Route exact path='/' component={Feed} />
           <Route exact path='/login' component={() => {
             return <Userform check={this.state.isLoggedIn} user={this.state.user_name} />
@@ -53,6 +49,7 @@ render(){
           <Route exact path='/signup' component={() => {
             return <SignupForm check={this.state.isLoggedIn} />
           }}  />
+          <Route exact path='/logout' component={Logout} />
           <Route path='/feed' component={Feed} />
           <Route path='/followers' component={() => {
             return <Followers check={this.state.isLoggedIn} user={this.state.user_name}/>
