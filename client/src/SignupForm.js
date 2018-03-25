@@ -76,21 +76,25 @@ onChange(e){
         :
         <div>
           {console.log(this.state.user_name)}
-          <form onSubmit={this.handleSubmit}>
-            <input type='text' placeholder='Username' name='user_name' onChange={this.onChange}/>
-            <input type='password' name='password' placeholder='******' onChange={this.onChange}/>
+          <h1><span className="GA GAlogin">GA</span><span className="mblr">mblr</span></h1>
+          <form className="form-signin loginForm" onSubmit={this.handleSubmit}>
+            <div className='wrapper'>
+              <h2 className="loginForm form-signin-heading">Sign up</h2>
+            <input type='text' className="form-control" placeholder='Username' name='user_name' onChange={this.onChange}/><br />
+            <input type='password' className="form-control" name='password' placeholder='******' onChange={this.onChange}/><br />
             <input type='hidden'  name='pic' onChange={this.onChange}/>
             <input type='hidden' name='bg' onChange={this.onChange}/>
             <input type='hidden'  name='blog_name' onChange={this.onChange}/>
             <input type='hidden' name='blog_desc'  onChange={this.onChange}/>
-            <input type='submit' />
+            <button className="loginbtn btn btn-lg btn-danger btn-block" type="submit">Signup</button>
             <p>Already a user? Sign in <a href='/login'>here</a></p>
+          </div>
           </form>
           {console.log('sucess status: ', this.state.success)}
           {/* {this.state.success ? '' : this.renderError()} */}
         </div>
         }
-        {this.state.success ? <Redirect to='/login' /> : ''}
+        {this.state.success ? <Redirect to='/appearance' /> : ''}
       </div>
     )
   }
