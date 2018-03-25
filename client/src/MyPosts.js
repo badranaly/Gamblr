@@ -11,7 +11,9 @@ class MyPosts extends Component {
 		super()
 		this.state = {
 			apiDataLoaded: false,
-			apiData: null
+			apiData: null,
+			isLoggedIn: props.check,
+			username: props.user
 		}
 	}
 
@@ -41,6 +43,7 @@ componentDidMount() {
 	renderPosts() {
 		console.log('inside myposts ', this.state)
 		return this.state.apiData.map((el,i) => {
+			console.log('eejflem',el)
 			return <Post key={el.id} post={el} list='myposts' user={this.state.username}/>
 		})
 	}
@@ -52,6 +55,7 @@ componentDidMount() {
 				 this.state.isLoggedIn ?
 					<div>
 						<Header />
+						<h1>My Posts</h1>
 						{this.state.apiDataLoaded ? this.renderPosts() : console.log('im false in myposts')}
 						<Footer />
 					</div>

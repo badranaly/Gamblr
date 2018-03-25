@@ -12,7 +12,7 @@ class Post extends Component {
 		this.state = {
 			likeClicked: false,
 			user_id: 1,
-			post_id: props.list === 'favs' ? props.post.post_id : props.post.postid,
+			post_id: props.list === 'favs' ? props.post.post_id : (props.list === 'myposts' || props.list === 'userposts' || props.list === 'singlepost') ? props.post.id : props.post.postid,
 			fireRedirect: false,
 			likes: parseInt(props.post.notes),
 			username: props.user
@@ -33,15 +33,15 @@ componentDidMount() {
 
 checkAllLikes(){
 	services.checkLikes(this.state.user_id, this.state.post_id).then(posts => {
-		this.setState({
-			likeClicked: true
-		})
-	}).catch(err => {
-		this.setState({
-			likeClicked: false
-		})
-		console.log(err)
-	})
+				this.setState({
+						likeClicked: true
+				})
+			}).catch(err => {
+					this.setState({
+						likeClicked: false
+					})
+				console.log(err)
+			})
 }
 
 addLike() {
@@ -57,6 +57,7 @@ addLike() {
 				likes: post.data.data.post.notes
 			})
 		})
+		window.location.reload()
 	}
 
 	removeLike() {
@@ -77,10 +78,10 @@ addLike() {
 				likes: post.data.data.post.notes
 			})
 		})
+		window.location.reload()
 	}
 
 	render() {
-		let link = "/post/" + this.state.post_id
 		return (
 			<div className='post mainPost'>
 				<img className="profilePic" alt='' src={this.props.post.pic} />
@@ -89,7 +90,8 @@ addLike() {
 				<br/>
 				{this.props.list !== 'myposts' ? <Button className="rightAdj" className="like" className="btn btn-danger" bsStyle="info" onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</Button> : ''}
 				<p className="rightAdj likes">Likes: {this.state.likes}</p>
-				<p className="leftAdj viewPost"><a href={link}>View Post</a></p>
+				<p className="leftAdj viewPost"><a href={`/post/${this.state.post_id}`}>View Post</a></p>
+				{/*View Post works but loads really...really slow when in myposts page*/}
 				<br/>
 				<br/>
 

@@ -51,11 +51,11 @@ module.exports = {
   },
 
   myPosts(user) {
-    return db.any('SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.user_id = 1 ORDER BY posts.id DESC')
+    return db.any('SELECT posts.id, type, content, user_id, notes, user_name, pic FROM posts INNER JOIN users ON posts.user_id=users.id WHERE posts.user_id = 1 ORDER BY posts.id DESC')
   },
 
   singlePost(id) {
-    return db.any(`SELECT users.user_name, users.blog_name, users.pic, posts.type, posts.content, posts.notes
+    return db.any(`SELECT posts.id, users.user_name, users.blog_name, users.pic, posts.type, posts.content, posts.notes
                   FROM posts
                   INNER JOIN users ON users.id = posts.user_id
                   WHERE posts.id = $[id]`, id)

@@ -53,6 +53,7 @@ class Likes extends Component {
             this.state.isLoggedIn ?
             <div>
               <Header />
+							<h1>Liked Posts</h1>
               {this.state.apiDataLoaded ? this.renderLikes() : ''}
               <Footer />
             </div>

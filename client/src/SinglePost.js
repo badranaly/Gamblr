@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import services from './services/apiServices'
 import Header from './Header'
 import Footer from './Footer'
+import Post from './Post'
 
 class SinglePost extends Component {
   constructor(props){
@@ -21,7 +22,7 @@ class SinglePost extends Component {
   componentDidMount() {
     services.singlePost(this.props.match.params.id)
     .then(data => {
-      console.log('postdata',data.data.data.post[0])
+      console.log('postdata',data.data.data.post)
       this.setState({
         postDataLoaded: true,
         postData: data.data.data.post[0]
@@ -74,19 +75,17 @@ class SinglePost extends Component {
     .catch(err => {
       console.log(err)
     })
+    window.location.reload()
   }
 
   renderPage() {
 
           return (
             <div>
-              <h1>Post</h1>
-              <h2>{this.state.postData.user_name}</h2>
-              <p>{this.state.postData.content}</p>
-              <h4>Likes: {this.state.postData.notes}</h4>
+              <Post post={this.state.postData} list='singlepost' />
               <p>Add Comment:</p>
               <form onSubmit={this.handleFormSubmit}>
-              <textarea name="comment" onChange={this.handleInputChange} placeholder="Enter Comment"></textarea>
+                <textarea name="comment" onChange={this.handleInputChange} placeholder="Enter Comment"></textarea>
                 <input type="submit"></input>
               </form>
 
@@ -110,3 +109,7 @@ class SinglePost extends Component {
 }
 
 export default SinglePost
+              // <h1>Post</h1>
+              // <h2>{this.state.postData.user_name}</h2>
+              // <p>{this.state.postData.content}</p>
+              // <h4>Likes: {this.state.postData.notes}</h4>
