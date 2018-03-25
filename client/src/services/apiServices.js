@@ -55,9 +55,7 @@ services.updateAppearance = (things,username) => {
 		method: 'PUT',
 		url: `/api/users/${username}`,
 		data: {
-	    user_name: things.user_name,
 	    pic: things.pic,
-	    bg: things.bg,
 	    blog_name: things.blog_name,
 	    blog_desc: things.blog_desc
 	  },

@@ -2,16 +2,19 @@ import React, {Component} from 'react'
 import services from './services/apiServices'
 import Header from './Header'
 import Footer from './Footer'
+import {Redirect} from 'react-router-dom'
+
 
 class Appearance extends Component {
 constructor(props){
   super(props)
   this.state = {
-    user_name: '',
+    user_name: 'chris',
     pic: '',
     bg: '',
     blog_name: '',
-    blog_desc: ''
+    blog_desc: '',
+    fireRedirect: false
   }
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
@@ -30,6 +33,9 @@ handleSubmit(e){
   e.preventDefault()
   services.updateAppearance(this.state, this.state.user_name)
   .then(info => {
+    this.setState({
+      fireRedirect: true
+    })
     console.log('info updated')
   })
   .catch(err => {
@@ -42,13 +48,12 @@ handleSubmit(e){
         <Header />
         <h1> Profile Settings </h1>
         <form onSubmit={this.handleSubmit}><br />
-          <p>username: </p><input type='text' name='user_name' onChange={this.handleInputChange} />
-          <p>pic: </p><input type='text' name='pic' onChange={this.handleInputChange} />
-          <p>background: </p><input type='text' name='bg' onChange={this.handleInputChange} />
-          <p>blog name: </p><input type='text' name='blog_name' onChange={this.handleInputChange} />
-          <p>blog description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
+          <p>Profile Picture (link): </p><input type='text' name='pic' onChange={this.handleInputChange} />
+          <p>Blog Title: </p><input type='text' name='blog_name' onChange={this.handleInputChange} />
+          <p>Blog Description: </p><input type='text' name='blog_desc' onChange={this.handleInputChange} /><br />
           <input type='submit'/>
         </form>
+        {this.state.fireRedirect ? <Redirect to={`/user/`+this.state.user_name} /> : ''}
         <Footer />
       </div>
     )
