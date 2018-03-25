@@ -8,8 +8,6 @@ import TokenService from './services/TokenService'
 import Userform from './Userform'
 import {Redirect} from 'react-router-dom'
 
-import {Redirect} from 'react-router-dom'
-
 
 class Settings extends Component {
 constructor(props){

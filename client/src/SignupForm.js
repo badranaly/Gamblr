@@ -74,15 +74,6 @@ onChange(e){
   })
 }
 
-renderError() {
-  return(
-  <div className="alert">
-    <span className="closebtn"></span>
-    Invalid Credentials -- please try again.
-  </div>
-  )
-}
-
   render(){
     return (
       <div>
