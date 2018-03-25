@@ -150,6 +150,15 @@ h2 {
   width: 372px;
 }
 
+.postbtn {
+  position: absolute;
+  right: 0;
+}
+
+.navItem {
+  margin: 0 150px 0 150px;
+}
+
 .centerAddButton {
   margin: 0 245px 0 0;
 }

@@ -33,8 +33,8 @@ class Header extends Component {
 					</Navbar.Header>
 					<Navbar.Collapse>
 						<Nav>
-							<NavItem eventKey={1} href="\feed">Home</NavItem>
-							<NavDropdown eventKey={3} title="Account" id="basic-nav-dropdown">
+							<NavItem className="navItem" eventKey={1} href="\feed">Home </NavItem>
+							<NavDropdown className="navItem" eventKey={3} title="Account " id="basic-nav-dropdown">
 								<MenuItem href='/favs' eventKey={3.1}>Likes</MenuItem>
 								<MenuItem href='/following' eventKey={3.2}>Following</MenuItem>
 								<MenuItem href='/myPosts' eventKey={3.3}>My Posts</MenuItem>
@@ -43,7 +43,7 @@ class Header extends Component {
 								<MenuItem href='/settings' eventKey={3.5}>Settings</MenuItem>
 								<MenuItem href='/Appearance' eventKey={3.6}>Appearance</MenuItem>
 							</NavDropdown>
-							<Button onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
+							<Button className="postbtn" onClick={this.handleButtonClick} bsSize="large" bsStyle="danger">New Post</Button>
 							{this.state.fireRedirect ? <Redirect to='/addPost' /> : ''}
 						</Nav>
 					</Navbar.Collapse>
