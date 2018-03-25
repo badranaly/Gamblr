@@ -3,8 +3,7 @@ const db = require('../db/config');
 module.exports = {
 
   createUser(user) {
-    return db.one(`INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc)
-                    VALUES ($[user_name], $[password], $[pic], $[bg], $[blog_name], $[blog_desc]) RETURNING *`, user);
+    return db.one(`INSERT INTO users (user_name, password) VALUES ($[user_name], $[password]) RETURNING *`, [user.user_name, user.passwordDigest, 0]);
   },
 
   findUser(username){

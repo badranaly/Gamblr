@@ -3,17 +3,32 @@ import services from './services/apiServices'
 import Post from './Post'
 import Header from './Header'
 import Footer from './Footer'
+import TokenService from './services/TokenService'
+import Userform from './Userform'
 
 class MyPosts extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			apiDataLoaded: false,
-			apiData: null
+			apiData: null,
+			isLoggedIn: props.check,
+			username: props.user
 		}
 	}
 
-	componentDidMount() {
+componentDidMount() {
+	services.checkLogin(TokenService.read())
+	.then(resp => {
+		this.setState({
+			isLoggedIn: resp.data.isLoggedIn,
+			username: resp.data.token.username
+		})
+	}, this.getAllPosts())
+	.catch(err => {console.log(err)})
+	}
+
+	getAllPosts(){
 		services.getAllMyPosts().then(post => {
 			console.log(post,'hehe')
 			this.setState({
@@ -26,19 +41,28 @@ class MyPosts extends Component {
 	}
 
 	renderPosts() {
+		console.log('inside myposts ', this.state)
 		return this.state.apiData.map((el,i) => {
 			console.log('eejflem',el)
-			return <Post key={el.id} post={el} list='myposts'/>
+			return <Post key={el.id} post={el} list='myposts' user={this.state.username}/>
 		})
 	}
 
 	render() {
 		return (
 			<div className='mypostlist'>
-				<Header />
-				<h1>My Posts</h1>
-				{this.state.apiDataLoaded ? this.renderPosts() : ''}
-				<Footer />
+				{
+				 this.state.isLoggedIn ?
+					<div>
+						<Header />
+						<h1>My Posts</h1>
+						{this.state.apiDataLoaded ? this.renderPosts() : console.log('im false in myposts')}
+						<Footer />
+					</div>
+				 :
+				 <Userform />
+
+			}
 			</div>
 		)
 	}

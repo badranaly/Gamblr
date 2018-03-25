@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import services from './services/apiServices'
 import Header from './Header'
 import Footer from './Footer'
+import { Redirect } from 'react-router-dom';
+import TokenService from './services/TokenService'
+import Userform from './Userform'
+
 
 class Following extends Component {
   constructor(props){
@@ -11,7 +15,9 @@ class Following extends Component {
       apiData: null,
       fireRedirect: false,
       user_name: '',
-      noUser: false
+      noUser: false,
+      username: props.user,
+      isLoggedIn: props.check
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -20,11 +26,18 @@ class Following extends Component {
   }
 
   componentDidMount() {
-    this.updateData()
-  }
+    services.checkLogin(TokenService.read())
+    .then(resp => {
+      this.setState({
+        username: resp.data.token.username,
+        isLoggedIn: resp.data.isLoggedIn
+      })
+    }, this.updateData())
+    .catch(err => {console.log(err)})
+    }
   // functionality that is called when component mounts
   // also called by component methods to trigger a reload of the page as needed
-  updateData() {
+updateData() {
     services.getFollowing().then(posts => {
       this.setState({
         apiDataLoaded: true,
@@ -122,15 +135,24 @@ class Following extends Component {
   render(){
     return (
       <div>
-        <Header />
-        <h1>Users currently being followed:</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
-          <input type='submit' value="Enter User Name"/>
-        </form>
-      {this.state.noUser ? this.renderError(): ''}
-        {this.state.apiDataLoaded ? this.renderUsers() : ''}
-        <Footer />
+        {
+          this.state.isLoggedIn ?
+          <div>
+            <Header />
+            {console.log('inside following comp', this.state)}
+            <h1>Users currently being followed:</h1>
+            <form onSubmit={this.handleFormSubmit}>
+              <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
+              <input type='submit' value="Enter User Name"/>
+            </form>
+            {this.state.noUser ? this.renderError(): ''}
+            {this.state.apiDataLoaded ? this.renderUsers() : ''}
+            <Footer />
+          </div>
+         :
+        <Userform />
+        }
+
       </div>
     )
   }

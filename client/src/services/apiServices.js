@@ -1,5 +1,7 @@
 //Lillian
 import axios from 'axios'
+import TokenService from './TokenService'
+
 const services = {}
 
 services.getUser = (username) => {
@@ -9,6 +11,34 @@ services.getUser = (username) => {
 services.getPost = (id) => {
 	return axios.get(`/api/posts/post/${id}`)
 }
+
+services.register = (things) => {
+	console.log('this is things -> ', things);
+	return axios('http://localhost:3000/api/users/signup', {
+    method: "POST",
+    data : things
+  })
+}
+
+services.getAllLikes = () => {
+	return axios.get('/api/posts/like')
+}
+
+services.login = (things) => {
+	return axios('http://localhost:3000/api/users/login', {
+    method: "POST",
+    data : things
+  })
+}
+
+services.checkLogin = (token) => {
+	return axios('http://localhost:3000/isLoggedIn', {
+    headers: {
+      Authorization: `Bearer ${TokenService.read()}`
+			}
+    })
+}
+
 
 services.createUser = (things) => {
 	return axios({
@@ -69,6 +99,7 @@ services.deleteUser = (username) => {
 }
 
 services.authenticateUser = (things) => {
+	console.log('inside services...')
     return axios({
         method: 'POST',
         url: `/api/users/login`,

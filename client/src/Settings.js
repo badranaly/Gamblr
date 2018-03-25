@@ -4,17 +4,32 @@ import React, {Component} from 'react'
 import services from './services/apiServices'
 import Header from './Header'
 import Footer from './Footer'
+import TokenService from './services/TokenService'
+import Userform from './Userform'
 
 class Settings extends Component {
 constructor(props){
   super(props)
   this.state = {
+    isLoggedIn: props.check,
+    username: props.user,
     password: '',
     fireRedirect: false
   }
   this.handleSubmit = this.handleSubmit.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
   this.handleDelete = this.handleDelete.bind(this)
+}
+
+componentDidMount(){
+  services.checkLogin(TokenService.read())
+  .then(resp => {
+    this.setState({
+      username: resp.data.token.username,
+      isLoggedIn: resp.data.isLoggedIn
+    })
+  })
+  .catch(err => {console.log(err)})
 }
 
 handleSubmit(e){
@@ -42,7 +57,7 @@ handleInputChange(e){
 
 handleDelete(e){
   //REPLACE THIS WITH USER NAME FROM SESSION
-  services.getUserID("chris")
+  services.getUserID(this.state.username)
   .then(id => {
     services.removeLikesByUser(id.data.data.user[0].id)
     .then(likes => {
@@ -76,7 +91,7 @@ handleDelete(e){
   .catch(err => {
     console.log(err)
   })
-  services.deleteUser("chris")
+  services.deleteUser(this.state.username)
   .then(user => {
     console.log(user)
   })
@@ -89,19 +104,25 @@ handleDelete(e){
   render(){
     return (
       <div>
-        <Header />
-        <h1> Account Settings </h1>
-        <br/>
-        <br/>
-        <br/>
-        <form onSubmit={this.handleSubmit}>
-        new password: <input type='text' value={this.state.password} name='password' onChange={this.handleInputChange}/>
-        <input type='submit' />
-        </form>
-        <br/>
-        <br/>
-        <button onClick={this.handleDelete}>Delete Account</button>
-        <Footer />
+        {this.state.isLoggedIn ?
+        <div>
+          <h1> Account Settings </h1>
+          <Header />
+          <br/>
+          <br/>
+          <br/>
+          <form onSubmit={this.handleSubmit}>
+            new password: <input type='text' value={this.state.password} name='password' onChange={this.handleInputChange}/>
+            <input type='submit' />
+          </form>
+          <br/>
+          <br/>
+          <button onClick={this.handleDelete}>Delete Account</button>
+          <Footer />
+        </div>
+        :
+        <Userform />
+      }
       </div>
     )
   }
