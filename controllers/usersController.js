@@ -89,7 +89,7 @@ usersController.create = (req, res, next) => {
       }).catch(next); // call next with error object
 
   }).catch(err => {
-    console.log(`User Create failed: ${err}`)
+    res.status(400).json({message: '400', err})
     next();
   });
 },

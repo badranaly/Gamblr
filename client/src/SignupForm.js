@@ -57,7 +57,7 @@ class SignupForm extends Component {
     .catch(err => {
       console.log('user already exists -- msg from submit ', err)
       this.setState({
-        success: false,
+        // success: false,
         failure: true
       })
     })
@@ -82,7 +82,6 @@ onChange(e){
         <Feed />
         :
         <div>
-          {console.log(this.state.user_name)}
           <h1><span className="GA GAlogin">GA</span><span className="mblr">mblr</span></h1>
           <form className="form-signin loginForm" onSubmit={this.handleSubmit}>
             <div className='wrapper'>
@@ -97,9 +96,7 @@ onChange(e){
             <p>Already a user? Sign in <a href='/login'>here</a></p>
           </div>
           </form>
-          {console.log('sucess status: ', this.state.success)}
-          {/* {this.state.success ? '' : this.renderError()} */}
-        </div>
+          </div>
         }
         {this.state.success ? <Redirect to='/appearance' /> : ''}
         {this.state.failure ? this.renderError() : ''}
