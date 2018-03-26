@@ -26,3 +26,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.centerAddButton {
+  margin: 0 675px 0 0 ;
+}

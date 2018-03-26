@@ -23,30 +23,39 @@ class Following extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.refresher = this.refresher.bind(this);
+
   }
 
   componentDidMount() {
-    services.checkLogin(TokenService.read())
-    .then(resp => {
-      this.setState({
-        username: resp.data.token.username,
-        isLoggedIn: resp.data.isLoggedIn
+    this.refresher();
+    }
+
+    refresher() {
+      services.checkLogin(TokenService.read())
+      .then(resp => {
+        this.setState({
+          username: resp.data.token.username,
+          isLoggedIn: resp.data.isLoggedIn
+        })
+
+        services.getUserID(this.state.username)
+          .then(response => {
+            this.setState({
+              loggedUserId: response.data.data.user[0].id
+            })
+            this.updateData(response.data.data.user[0].id)
+          })
+          .catch(err => {
+          console.log(err)
+          }
+      )})
+      .catch(err => {
+        console.log(err)
       })
 
-      services.getUserID(this.state.username)
-        .then(response => {
-          this.setState({
-            loggedUserId: response.data.data.user[0].id
-          })
-          this.updateData(response.data.data.user[0].id)
-        })
-        .catch(err => {
-        console.log(err)
-        })
+  }
 
-    }, this.updateData())
-    .catch(err => {console.log(err)})
-    }
   // functionality that is called when component mounts
   // also called by component methods to trigger a reload of the page as needed
 updateData(input) {
@@ -69,6 +78,7 @@ updateData(input) {
       services.removeFollowing(user.data.data.user[0].id, this.state.loggedUserId)
       .then(user2 => {
         this.updateData();
+        this.refresher();
         console.log(user2)
         })
       .catch(err=> {
@@ -130,6 +140,7 @@ updateData(input) {
         services.addFollowing(user.data.data.user, this.state.loggedUserId)
         .then(user2 => {
           console.log(user2)
+          this.refresher(); 
       //    this.updateData();
         })
         .catch(err=> {

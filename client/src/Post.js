@@ -32,6 +32,8 @@ componentDidMount() {
 	.catch(err => {console.log(err)})
 }
 
+
+
 checkAllLikes(){
 	console.log("like props", this.props.id)
 	services.checkLikes(this.props.id, this.state.post_id).then(posts => {

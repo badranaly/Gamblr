@@ -1,7 +1,7 @@
 \c gamblr
 
 INSERT INTO users (user_name, password, pic, bg, blog_name, blog_desc) VALUES
-  ('jace', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'bca', 'Ace Blog', 'Tennis and life'),
+  ('jace', '123', 'https://thumbs.dreamstime.com/b/tennis-ball-icon-16492142.jpg', 'bca', 'Ace Blog', 'Tennis and life'),
   ('taka', '123', 'https://d30y9cdsu7xlg0.cloudfront.net/png/37047-200.png', 'jhf', 'Taka Pensamiento', 'Stepping through the array'),
   ('bell', '123', 'https://cdn2.iconfinder.com/data/icons/social-media-8/512/bell.png', 'lko', 'The Hog Pit', 'PBR? Yes please!'),
   ('aly', '123', 'https://crunchbase-production-res.cloudinary.com/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1397187054/a828b608270067b84d6eaa4611f21a7b.jpg', 'lko', 'Stuck on a bus', 'No, seriously...'),
