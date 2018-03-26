@@ -4,6 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import TokenService from './services/TokenService'
 import Userform from './Userform'
+import {Button, Input} from 'semantic-ui-react'
 
 
 class Following extends Component {
@@ -98,7 +99,7 @@ updateData(input) {
       let link = "/user/" + el.user_name
 			return (
         <div>
-        <p><img src={el.pic} alt="Pic"/> <a href={link}>{el.user_name}</a><button name={el.user_name} onClick={this.handleRemove}>-</button></p>
+        <p><img className='userLink' src={el.pic} alt="Pic"/><a href={link}>{el.user_name}</a><br /><Button color='red' size='tiny' name={el.user_name} onClick={this.handleRemove}>Unfollow</Button></p>
       </div>
       )
 		})
@@ -140,7 +141,7 @@ updateData(input) {
         services.addFollowing(user.data.data.user, this.state.loggedUserId)
         .then(user2 => {
           console.log(user2)
-          this.refresher(); 
+          this.refresher();
       //    this.updateData();
         })
         .catch(err=> {
@@ -165,8 +166,8 @@ updateData(input) {
             {console.log('inside following comp', this.state)}
             <h1>Users currently being followed:</h1>
             <form onSubmit={this.handleFormSubmit}>
-              <input type='text' name='user_name' onChange={this.handleInputChange} placeholder='Enter User Name' />
-              <input type='submit' value="Enter User Name"/>
+              <Input autoFocus className='input' type='text' name='user_name' size='mini' onChange={this.handleInputChange} placeholder='Search...' />
+              <Button type='submit' size='mini' color='red'>Follow User</Button>
             </form>
             {this.state.noUser ? this.renderError(): ''}
             {this.state.apiDataLoaded ? this.renderUsers() : ''}

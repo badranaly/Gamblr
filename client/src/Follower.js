@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import services from './services/apiServices'
 import TokenService from './services/TokenService'
+import {Button} from 'semantic-ui-react'
 
 class Follower extends Component {
   constructor(props){
@@ -92,14 +93,14 @@ getUserData() {
       if(this.state.isFollower === true) {
 			     return (
              <div>
-               <p><img src={this.props.pic} alt="Pic"/><a href={link}>{this.props.user_name}</a><button name={this.props.user_name} onClick={this.handleRemove}>Unfollow</button></p>
+               <p><img src={this.props.pic} alt="Pic"/><a href={link}>{this.props.user_name}</a><br /><br /><Button color='red' size='mini' name={this.props.user_name} onClick={this.handleRemove}>Unfollow</Button><br /><br /></p>
              </div>
            )
       }
       else {
           return (
             <div>
-              <p><img src={this.props.pic} alt="Pic"/><a href={link}>{this.props.user_name}</a><button name={this.props.user_name} onClick={this.handleAdd}>Follow</button></p>
+              <p><img className='unfollow' src={this.props.pic} alt="Pic"/><a href={link}>{this.props.user_name}</a><br /><br /><Button color='red' size='mini' name={this.props.user_name} onClick={this.handleAdd}>Follow</Button><br /><br /></p>
             </div>
           )
       }

@@ -1,10 +1,11 @@
 //Lillian
 import React, {Component} from 'react'
 import services from './services/apiServices'
-import {Button} from 'react-bootstrap'
+// import {Button} from 'react-bootstrap'
 import ReactPlayer from 'react-player'
 import TokenService from './services/TokenService'
 import './index.css';
+import {Card, Icon, Button, Image} from 'semantic-ui-react'
 
 class Post extends Component {
 	constructor(props) {
@@ -86,19 +87,24 @@ addLike() {
 
 	render() {
 		return (
-			<div className='post mainPost'>
-				<img className="profilePic" alt='' src={this.props.post.pic} />
-				<h2 className="userPost" className='post'><a className="userLink" href={`/user/${this.props.post.user_name}`}>{this.props.post.user_name}</a></h2>
-				<div className="posts">{this.props.post.type === 'video' ? <ReactPlayer url={this.props.post.content} /> : this.props.post.type === 'photo' ? <img alt='' src={this.props.post.content} /> : this.props.post.type === 'link' ? <a href={this.props.post.content}>{this.props.post.content}</a> : this.props.post.content}</div>
-				<br/>
-				{this.props.list !== 'myposts' ? <Button className="rightAdj" className="like" className="btn btn-danger" bsStyle="info" onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}>{this.state.likeClicked ? 'Unlike' : 'Like'}</Button> : ''}
-				<p className="rightAdj likes">Likes: {this.state.likes}</p>
-				<p className="leftAdj viewPost"><a href={`/post/${this.state.post_id}`}>View Post</a></p>
-				{/*View Post works but loads really...really slow when in myposts page*/}
-				<br/>
-				<br/>
-
-
+			<div className='card'>
+								<Card color='red' centered='true' fluid='true'>
+							    <Card.Content className='header' textAlign='left'><a href={`/user/${this.props.post.user_name}`} className='header'>{this.props.post.user_name}</a></Card.Content>
+									<Image className='profilepic' src={this.props.post.pic} />
+							    <Card.Content description={this.props.post.type === 'video' ? <ReactPlayer width='500' controls='true' url={this.props.post.content} /> : this.props.post.type === 'photo' ? <img alt='' src={this.props.post.content} /> : this.props.post.type === 'link' ? <a href={this.props.post.content}>{this.props.post.content}</a> : this.props.post.content} />
+							    <Card.Content extra className='view'>
+										{this.props.list !== 'myposts' ?
+										<Button
+										onClick={this.state.likeClicked ? this.removeLike.bind(this) : this.addLike.bind(this)}
+										 className='like'
+										 color='red'
+										 content={this.state.likeClicked ? 'Unlike' : 'Like'}
+										 icon='heart'
+										 label={{ basic: true, color: 'red', pointing: 'left', content: this.state.likes }}
+									 /> : ''}
+							      <a href={`/post/${this.state.post_id}`}><h3>View Post</h3></a>
+							    </Card.Content>
+				  			</Card>
 			</div>
 		)
 	}

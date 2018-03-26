@@ -27,3 +27,35 @@ img {
   width: 50px;
   height: 50px;
 }
+
+.card {
+  width: 600px;
+  margin: auto;
+  margin-bottom: 45px;
+  font-family: 'Anton', sans-serif;
+}
+
+.view {
+  text-align: left;
+}
+
+.like{
+  float:right;
+}
+
+.profilepic {
+  float: left;
+  margin-top: -50px;
+}
+
+.header{
+  float: right;
+}
+
+.input {
+  margin-right: 5px;
+}
+
+.userLink {
+  margin-top: 20px;
+}

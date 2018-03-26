@@ -7,6 +7,7 @@ import Footer from './Footer'
 import TokenService from './services/TokenService'
 import Userform from './Userform'
 import {Redirect} from 'react-router-dom'
+import {Input} from 'semantic-ui-react'
 
 
 class Settings extends Component {
