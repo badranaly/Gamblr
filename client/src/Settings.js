@@ -7,7 +7,7 @@ import Footer from './Footer'
 import TokenService from './services/TokenService'
 import Userform from './Userform'
 import {Redirect} from 'react-router-dom'
-import {Input} from 'semantic-ui-react'
+import {Input, Form, Button} from 'semantic-ui-react'
 
 
 class Settings extends Component {
@@ -118,13 +118,16 @@ handleDelete(e){
           <br/>
           <br/>
           <br/>
-          <form onSubmit={this.handleSubmit}>
-            new password: <input type='text' value={this.state.password} name='password' onChange={this.handleInputChange}/>
-            <input type='submit' />
-          </form>
+          <Form size='small' onSubmit={this.handleSubmit}>
+          <Form.Field inline >
+            <label>New Password: </label>
+            <Input type='text' value={this.state.password} name='password' onChange={this.handleInputChange}/>
+            <Button type='submit'>Change</Button>
+          </Form.Field>
+          </Form>
           <br/>
           <br/>
-          <button onClick={this.handleDelete}>Delete Account</button>
+          <Button color='red' onClick={this.handleDelete}>Delete Account</Button>
           <Footer />
           {this.state.fireRedirect ? <Redirect to={'/login'} /> : ''}
         </div>
