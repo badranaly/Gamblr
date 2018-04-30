@@ -1,5 +1,8 @@
 # Gamblr Proposal
 
+## Deployment
+Deployed on Heroku: https://ga-mblr.herokuapp.com
+
 ## What is Gamblr?
 
 Gamblr is a mock tumblr. It is a social media app in which users can post content, follow other users, comment on user's posts, and like the posts as well.  
